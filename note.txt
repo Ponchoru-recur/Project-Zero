@@ -1,0 +1,4 @@
+go inside build file and do this
+
+cmake -G "MinGW Makefiles" ..
+mingw32-make

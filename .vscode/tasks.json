@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Build SDL3 App",
+            "command": "C:/MinGW/mingw64/bin/g++.exe",
+            "args": [
+                "-g",
+                "-std=c++17",
+                "-I${workspaceFolder}/include",
+                "-I${workspaceFolder}/include/SDL3",
+                "-I${workspaceFolder}/headers",
+                "-L${workspaceFolder}/lib",
+                "${workspaceFolder}/src/*.cpp",
+                "-lSDL3",
+                "-o",
+                "${workspaceFolder}/bin/game.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+CMakeFiles/game.dir/src/character.cpp.obj: \
+ C:\Users\Sam\Desktop\PlayThrough\src\character.cpp \
+ C:/Users/Sam/Desktop/PlayThrough/headers/character.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_rect.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_stdinc.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_platform_defines.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/stdarg.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_stdarg.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/vadefs.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdint.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/stdint.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/crtdefs.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/stddef.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/string.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/wchar.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt_wstdlib.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_off_t.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_stat64.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/swprintf.inl \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/wchar_s.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_begin_code.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_close_code.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_error.h
