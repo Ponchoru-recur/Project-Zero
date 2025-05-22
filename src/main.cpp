@@ -69,7 +69,6 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event) {
     return SDL_APP_CONTINUE;
 }
 float ball_direction = -1;
-bool collided = false;
 
 float x, y = 0;
 
@@ -97,31 +96,32 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
     }
 
     // Ball logic
-    // float ball_speed = 100.0f * deltaTime;
+    float ball_speed = 100.0f * deltaTime;
 
-    // if ((ball.x + ball.w) >= w_window || (ball.x) < 0) {
-    //     ball.x = w_window / 2;
-    // }
-    // ball.x += (ball_speed * ball_direction);
-
-    // for (SDL_FRect &wall : walls) {
-    //     if (wall.x + wall.w >= ball.x) {
-    //         std::cout << "Passed\n";
-    //         ball_direction = -1;
-    //         break;
-    //     }
-    // }
-
-    ball.x = x;
-    ball.y = y;
-    // This took me an embarassing amount of time
-    if ((walls[0].x + walls[0].w >= ball.x &&
-         walls[0].y <= ball.y + ball.h &&
-         walls[0].y + walls[0].h >= ball.y &&
-         walls[0].x <= ball.x + ball.w)) {
-        std::cout << "Passed\n";
-        // ball_direction *= -1;
+    if ((ball.x + ball.w) >= w_window || (ball.x) < 0) {
+        ball.x = w_window / 2;
     }
+    ball.x += (ball_speed * ball_direction);
+
+    // ball.x = x;
+    // ball.y = y;
+    bool collided = false;
+    // This took me an embarassing amount of time
+    for (SDL_FRect wall : walls) {
+        if ((wall.x + wall.w >= ball.x &&
+             wall.y <= ball.y + ball.h &&
+             wall.y + wall.h >= ball.y &&
+             wall.x <= ball.x + ball.w)) {
+            collided = true;
+            break;
+        }
+    }
+
+    if (collided) {
+        ball_direction *= -1;
+        std::cout << "direction :" << ball_direction << "\n";
+    }
+    collided = false;
 
     SDL_SetRenderDrawColor(renderer, 255, 100, 100, 255);
     SDL_RenderClear(renderer);
