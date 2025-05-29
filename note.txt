@@ -2,3 +2,28 @@ go inside build file and do this
 
 cmake -G "MinGW Makefiles" ..
 mingw32-make
+
+ // switch (event->type) {
+    //     case SDL_EVENT_QUIT:
+    //         return SDL_APP_SUCCESS;
+    //         break;
+    //     default:
+    //         break;
+    // }
+
+using Clock = std::chrono::steady_clock;
+using TimePoint = std::chrono::time_point<Clock>;
+
+TimePoint LastExecution = Clock::now();
+
+bool exe_once_reach(float cooldownSecond_Milliseconds = 0.5f) {
+    TimePoint now = Clock::now();
+    std::chrono::duration<float> elapsed = now - LastExecution;
+
+    if (elapsed.count() >= cooldownSecond_Milliseconds) {
+        std::cout << "Executed at " << elapsed.count() << '\n';
+        LastExecution = Clock::now();
+        return true;
+    }
+    return false;
+}

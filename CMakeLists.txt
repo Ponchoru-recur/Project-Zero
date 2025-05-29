@@ -15,12 +15,14 @@ include_directories(
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 
 # Your source files
-set(SOURCES
-    src/main.cpp
-    src/character.cpp
-)
+#   set(SOURCES
+#    src/main.cpp
+#    src/GameScene.cpp
+# )
+file(GLOB_RECURSE HEADERS "${PROJECT_SOURCE_DIR}/headers/*.h" "${PROJECT_SOURCE_DIR}/headers/*.hpp" "${PROJECT_SOURCE_DIR}/components/*.hpp" "${PROJECT_SOURCE_DIR}/components/*.h")
+file(GLOB_RECURSE SOURCES "${PROJECT_SOURCE_DIR}/src/*.cpp")
 
-add_executable(game ${SOURCES})
+add_executable(game ${SOURCES} ${HEADERS})
 
 # Link SDL3 static library (change filename if needed)
 

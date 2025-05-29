@@ -128,29 +128,77 @@ game/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/build
 .PHONY : game/fast
 
-src/character.obj: src/character.cpp.obj
-.PHONY : src/character.obj
+src/Entity.obj: src/Entity.cpp.obj
+.PHONY : src/Entity.obj
 
 # target to build an object file
-src/character.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/character.cpp.obj
-.PHONY : src/character.cpp.obj
+src/Entity.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/Entity.cpp.obj
+.PHONY : src/Entity.cpp.obj
 
-src/character.i: src/character.cpp.i
-.PHONY : src/character.i
+src/Entity.i: src/Entity.cpp.i
+.PHONY : src/Entity.i
 
 # target to preprocess a source file
-src/character.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/character.cpp.i
-.PHONY : src/character.cpp.i
+src/Entity.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/Entity.cpp.i
+.PHONY : src/Entity.cpp.i
 
-src/character.s: src/character.cpp.s
-.PHONY : src/character.s
+src/Entity.s: src/Entity.cpp.s
+.PHONY : src/Entity.s
 
 # target to generate assembly for a file
-src/character.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/character.cpp.s
-.PHONY : src/character.cpp.s
+src/Entity.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/Entity.cpp.s
+.PHONY : src/Entity.cpp.s
+
+src/GameScene.obj: src/GameScene.cpp.obj
+.PHONY : src/GameScene.obj
+
+# target to build an object file
+src/GameScene.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/GameScene.cpp.obj
+.PHONY : src/GameScene.cpp.obj
+
+src/GameScene.i: src/GameScene.cpp.i
+.PHONY : src/GameScene.i
+
+# target to preprocess a source file
+src/GameScene.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/GameScene.cpp.i
+.PHONY : src/GameScene.cpp.i
+
+src/GameScene.s: src/GameScene.cpp.s
+.PHONY : src/GameScene.s
+
+# target to generate assembly for a file
+src/GameScene.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/GameScene.cpp.s
+.PHONY : src/GameScene.cpp.s
+
+src/WindowRenderer.obj: src/WindowRenderer.cpp.obj
+.PHONY : src/WindowRenderer.obj
+
+# target to build an object file
+src/WindowRenderer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/WindowRenderer.cpp.obj
+.PHONY : src/WindowRenderer.cpp.obj
+
+src/WindowRenderer.i: src/WindowRenderer.cpp.i
+.PHONY : src/WindowRenderer.i
+
+# target to preprocess a source file
+src/WindowRenderer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/WindowRenderer.cpp.i
+.PHONY : src/WindowRenderer.cpp.i
+
+src/WindowRenderer.s: src/WindowRenderer.cpp.s
+.PHONY : src/WindowRenderer.s
+
+# target to generate assembly for a file
+src/WindowRenderer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/WindowRenderer.cpp.s
+.PHONY : src/WindowRenderer.cpp.s
 
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
@@ -185,9 +233,15 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... game
-	@echo ... src/character.obj
-	@echo ... src/character.i
-	@echo ... src/character.s
+	@echo ... src/Entity.obj
+	@echo ... src/Entity.i
+	@echo ... src/Entity.s
+	@echo ... src/GameScene.obj
+	@echo ... src/GameScene.i
+	@echo ... src/GameScene.s
+	@echo ... src/WindowRenderer.obj
+	@echo ... src/WindowRenderer.i
+	@echo ... src/WindowRenderer.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
