@@ -13,7 +13,6 @@ void App::init() {
     // Generate a buffer for information of the triangle
     glGenBuffers(1, &vertexBufferID);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
-    // std::cout << "ArrowShape.getvertices_size() : " << ArrowShape.getvertices_size() << "\n";
     glBufferData(GL_ARRAY_BUFFER, ArrowShape.getvertices_size(), ArrowShape.vertices, GL_STATIC_DRAW);
 
     // Describe data (position = 0) then (color = 1)
@@ -79,7 +78,6 @@ void App::update() {
     }
 
     glUseProgram(shaderProgram);
-    glm::mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), static_cast<float>(window.getWidth()) / static_cast<float>(window.getHeight()), 1.0f, 10.0f);
     // First arrow
     glm::mat4 fullMatrixProjection = projectionMatrix * camera.getWorldToViewMatrix() * glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, +0.0f, -2.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(60.0f), glm::vec3(1.0f, 0.0f, 0.0f));
     glm::mat4 fullTransforms[] = {
