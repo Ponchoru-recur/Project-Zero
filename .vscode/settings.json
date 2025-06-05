@@ -125,6 +125,7 @@
     "netfwd": "cpp",
     "timer": "cpp",
     "future": "cpp",
-    "mutex": "cpp"
+    "mutex": "cpp",
+    "cstring": "cpp"
 }
 }

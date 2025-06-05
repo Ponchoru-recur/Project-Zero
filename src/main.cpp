@@ -1,49 +1,40 @@
 #define SDL_MAIN_USE_CALLBACKS 1
 
 // Libraries
-#include <iostream>
-#include <SDL3/SDL.h>
-#include <SDL3/SDL_image.h>
-#include <SDL3/SDL_main.h>
-#include <memory>
 
-// Header files
-#include "WindowRenderer.hpp"
-#include "GameScene.hpp"
-#include "Entity.hpp"
+#include <SDL3/SDL_main.h>
+#include <SDL3/SDL.h>
+#include <memory>
+#include <thread>
+#include <chrono>
+
+// Headers
+
+#include "window.hpp"
+#include "app.hpp"
 
 #define w_window 900
 #define h_window 700
 #define FRAME_DELAY (1000 / 60)
 
-Animation player;
-
-// Checks Elapsed time between frames
-Uint64 last = 0;
-float deltaTime = 0.0f;
-
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[]) {
-    last = SDL_GetPerformanceCounter();
+    glEnable(GL_DEPTH_TEST);
+    // glEnable(GL_BLEND);
+    // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    player.addImage("../assets/images/wuh.png", 7, 1);
-    player.rowSlice("walk", 0, 0, 0, 7);
+    std::unique_ptr<App> app = std::make_unique<App>();
+    app->init();
 
-    player.addImage("../assets/images/attack.png", 22, 1);
-    player.rowSlice("attack", 0, 0, 0, 22);
-    player.play("walk");
-
-    player.addImage("../assets/images/FreePack.png", 5, 3);
-    player.rowSlice("Testing", 0, 3, 0, 5);
-    player.rowSlice("Testing2", 1, 1, 0, 5);
-
-    player.modTiming(100);
-
-    player.play("Testing2");
+    // release the raw pointer to appstate.
+    // This is equivalent to *appstate = new App();
+    *appstate = app.release();
 
     return SDL_APP_CONTINUE;
 }
 
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event) {
+    SDL_PumpEvents();
+    static_cast<App *>(appstate)->handleEvent(*event);
     switch (event->type) {
         case SDL_EVENT_QUIT:
             return SDL_APP_SUCCESS;
@@ -53,6 +44,9 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event) {
                 case SDLK_ESCAPE:
                     std::cout << "Bitch it works\n";
                     return SDL_APP_SUCCESS;
+                case SDLK_N:
+                    std::cout << "Banana\n";
+                    return SDL_APP_CONTINUE;
                 default:
                     break;
             }
@@ -63,31 +57,36 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event) {
     return SDL_APP_CONTINUE;
 }
 
+const float TargetFPS = 60;
+const float TargetFrameTIme = (1000.0f / TargetFPS);
+
 SDL_AppResult SDL_AppIterate(void *appstate) {
-    Uint64 now = SDL_GetPerformanceCounter();
-    deltaTime = (float)(now - last) / SDL_GetPerformanceFrequency();
-    last = now;
+    glViewport(0, 0, window.getWidth(), window.getHeight());
+    auto StartFrame = std::chrono::steady_clock::now();
 
-    // Logic for game
-    player.update(deltaTime);
+    // Logic
+    static_cast<App *>(appstate)->update();
 
-    SDL_SetRenderDrawColor(game.getRenderer(), 255, 100, 100, 255);
-    SDL_RenderClear(game.getRenderer());
-    // START RENDER HERE
+    // Start renderering below this
+    glClearColor(0.2f, 0.3f, 0.5f, 1.0f);  // RGB blueish
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+    static_cast<App *>(appstate)->render();
+    SDL_GL_SwapWindow(window.getWindow());
 
-    player.render();
+    auto EndFrame = std::chrono::steady_clock::now();
 
-    SDL_RenderPresent(game.getRenderer());
+    auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(EndFrame - StartFrame);
 
-    float deltaMS = deltaTime * 1000;
-    if (deltaMS < FRAME_DELAY) {
-        SDL_Delay((Uint64)FRAME_DELAY - deltaMS);
+    if (elapsed.count() < TargetFrameTIme) {
+        SDL_Delay((TargetFrameTIme - elapsed.count()));
     }
 
     return SDL_APP_CONTINUE;
 }
 
 void SDL_AppQuit(void *appstate, SDL_AppResult result) {
-    game.clean();
+    static_cast<App *>(appstate)->cleanup();
+    delete static_cast<App *>(appstate);
+    window.clean();
     std::cout << "Exited.\n";
 }

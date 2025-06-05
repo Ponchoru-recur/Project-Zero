@@ -128,77 +128,77 @@ game/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/build
 .PHONY : game/fast
 
-src/Entity.obj: src/Entity.cpp.obj
-.PHONY : src/Entity.obj
+src/app.obj: src/app.cpp.obj
+.PHONY : src/app.obj
 
 # target to build an object file
-src/Entity.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/Entity.cpp.obj
-.PHONY : src/Entity.cpp.obj
+src/app.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/app.cpp.obj
+.PHONY : src/app.cpp.obj
 
-src/Entity.i: src/Entity.cpp.i
-.PHONY : src/Entity.i
+src/app.i: src/app.cpp.i
+.PHONY : src/app.i
 
 # target to preprocess a source file
-src/Entity.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/Entity.cpp.i
-.PHONY : src/Entity.cpp.i
+src/app.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/app.cpp.i
+.PHONY : src/app.cpp.i
 
-src/Entity.s: src/Entity.cpp.s
-.PHONY : src/Entity.s
+src/app.s: src/app.cpp.s
+.PHONY : src/app.s
 
 # target to generate assembly for a file
-src/Entity.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/Entity.cpp.s
-.PHONY : src/Entity.cpp.s
+src/app.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/app.cpp.s
+.PHONY : src/app.cpp.s
 
-src/GameScene.obj: src/GameScene.cpp.obj
-.PHONY : src/GameScene.obj
+src/camera.obj: src/camera.cpp.obj
+.PHONY : src/camera.obj
 
 # target to build an object file
-src/GameScene.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/GameScene.cpp.obj
-.PHONY : src/GameScene.cpp.obj
+src/camera.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/camera.cpp.obj
+.PHONY : src/camera.cpp.obj
 
-src/GameScene.i: src/GameScene.cpp.i
-.PHONY : src/GameScene.i
+src/camera.i: src/camera.cpp.i
+.PHONY : src/camera.i
 
 # target to preprocess a source file
-src/GameScene.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/GameScene.cpp.i
-.PHONY : src/GameScene.cpp.i
+src/camera.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/camera.cpp.i
+.PHONY : src/camera.cpp.i
 
-src/GameScene.s: src/GameScene.cpp.s
-.PHONY : src/GameScene.s
+src/camera.s: src/camera.cpp.s
+.PHONY : src/camera.s
 
 # target to generate assembly for a file
-src/GameScene.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/GameScene.cpp.s
-.PHONY : src/GameScene.cpp.s
+src/camera.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/camera.cpp.s
+.PHONY : src/camera.cpp.s
 
-src/WindowRenderer.obj: src/WindowRenderer.cpp.obj
-.PHONY : src/WindowRenderer.obj
+src/glad.obj: src/glad.c.obj
+.PHONY : src/glad.obj
 
 # target to build an object file
-src/WindowRenderer.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/WindowRenderer.cpp.obj
-.PHONY : src/WindowRenderer.cpp.obj
+src/glad.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/glad.c.obj
+.PHONY : src/glad.c.obj
 
-src/WindowRenderer.i: src/WindowRenderer.cpp.i
-.PHONY : src/WindowRenderer.i
+src/glad.i: src/glad.c.i
+.PHONY : src/glad.i
 
 # target to preprocess a source file
-src/WindowRenderer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/WindowRenderer.cpp.i
-.PHONY : src/WindowRenderer.cpp.i
+src/glad.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/glad.c.i
+.PHONY : src/glad.c.i
 
-src/WindowRenderer.s: src/WindowRenderer.cpp.s
-.PHONY : src/WindowRenderer.s
+src/glad.s: src/glad.c.s
+.PHONY : src/glad.s
 
 # target to generate assembly for a file
-src/WindowRenderer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/WindowRenderer.cpp.s
-.PHONY : src/WindowRenderer.cpp.s
+src/glad.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/glad.c.s
+.PHONY : src/glad.c.s
 
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
@@ -224,6 +224,102 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/shaders.obj: src/shaders.cpp.obj
+.PHONY : src/shaders.obj
+
+# target to build an object file
+src/shaders.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/shaders.cpp.obj
+.PHONY : src/shaders.cpp.obj
+
+src/shaders.i: src/shaders.cpp.i
+.PHONY : src/shaders.i
+
+# target to preprocess a source file
+src/shaders.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/shaders.cpp.i
+.PHONY : src/shaders.cpp.i
+
+src/shaders.s: src/shaders.cpp.s
+.PHONY : src/shaders.s
+
+# target to generate assembly for a file
+src/shaders.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/shaders.cpp.s
+.PHONY : src/shaders.cpp.s
+
+src/shapeData.obj: src/shapeData.cpp.obj
+.PHONY : src/shapeData.obj
+
+# target to build an object file
+src/shapeData.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/shapeData.cpp.obj
+.PHONY : src/shapeData.cpp.obj
+
+src/shapeData.i: src/shapeData.cpp.i
+.PHONY : src/shapeData.i
+
+# target to preprocess a source file
+src/shapeData.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/shapeData.cpp.i
+.PHONY : src/shapeData.cpp.i
+
+src/shapeData.s: src/shapeData.cpp.s
+.PHONY : src/shapeData.s
+
+# target to generate assembly for a file
+src/shapeData.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/shapeData.cpp.s
+.PHONY : src/shapeData.cpp.s
+
+src/shapeGenerator.obj: src/shapeGenerator.cpp.obj
+.PHONY : src/shapeGenerator.obj
+
+# target to build an object file
+src/shapeGenerator.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/shapeGenerator.cpp.obj
+.PHONY : src/shapeGenerator.cpp.obj
+
+src/shapeGenerator.i: src/shapeGenerator.cpp.i
+.PHONY : src/shapeGenerator.i
+
+# target to preprocess a source file
+src/shapeGenerator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/shapeGenerator.cpp.i
+.PHONY : src/shapeGenerator.cpp.i
+
+src/shapeGenerator.s: src/shapeGenerator.cpp.s
+.PHONY : src/shapeGenerator.s
+
+# target to generate assembly for a file
+src/shapeGenerator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/shapeGenerator.cpp.s
+.PHONY : src/shapeGenerator.cpp.s
+
+src/window.obj: src/window.cpp.obj
+.PHONY : src/window.obj
+
+# target to build an object file
+src/window.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/window.cpp.obj
+.PHONY : src/window.cpp.obj
+
+src/window.i: src/window.cpp.i
+.PHONY : src/window.i
+
+# target to preprocess a source file
+src/window.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/window.cpp.i
+.PHONY : src/window.cpp.i
+
+src/window.s: src/window.cpp.s
+.PHONY : src/window.s
+
+# target to generate assembly for a file
+src/window.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/window.cpp.s
+.PHONY : src/window.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -233,18 +329,30 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... game
-	@echo ... src/Entity.obj
-	@echo ... src/Entity.i
-	@echo ... src/Entity.s
-	@echo ... src/GameScene.obj
-	@echo ... src/GameScene.i
-	@echo ... src/GameScene.s
-	@echo ... src/WindowRenderer.obj
-	@echo ... src/WindowRenderer.i
-	@echo ... src/WindowRenderer.s
+	@echo ... src/app.obj
+	@echo ... src/app.i
+	@echo ... src/app.s
+	@echo ... src/camera.obj
+	@echo ... src/camera.i
+	@echo ... src/camera.s
+	@echo ... src/glad.obj
+	@echo ... src/glad.i
+	@echo ... src/glad.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... src/shaders.obj
+	@echo ... src/shaders.i
+	@echo ... src/shaders.s
+	@echo ... src/shapeData.obj
+	@echo ... src/shapeData.i
+	@echo ... src/shapeData.s
+	@echo ... src/shapeGenerator.obj
+	@echo ... src/shapeGenerator.i
+	@echo ... src/shapeGenerator.s
+	@echo ... src/window.obj
+	@echo ... src/window.i
+	@echo ... src/window.s
 .PHONY : help
 
 
