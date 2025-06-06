@@ -14,8 +14,8 @@ class ShapeData {
     GLushort *indices;
 
     // Calculates the amount of bytes space needed for buffers
-    GLsizei getvertices_size() const;
-    GLsizei getindices_size() const;
+    size_t getVerticeBufferSize() const;
+    size_t getIndiceBufferSize() const;
 
     GLsizei num_vertices;
     GLsizei num_indices;

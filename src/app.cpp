@@ -5,47 +5,44 @@ void App::init() {
     GLuint vertShader = Shader::compileShader(vertexShaderSource, GL_VERTEX_SHADER);
     GLuint fragShader = Shader::compileShader(fragmentShaderSource, GL_FRAGMENT_SHADER);
     shaderProgram = Shader::linkProgram(vertShader, fragShader);
-
-    // Important! make this first to make opengl remember how you described the data.
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-
     // Generate a buffer for information of the triangle
-    glGenBuffers(1, &vertexBufferID);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
-    glBufferData(GL_ARRAY_BUFFER, ArrowShape.getvertices_size(), ArrowShape.vertices, GL_STATIC_DRAW);
+    glGenBuffers(1, &theVertexBufferID);
+    glGenBuffers(1, &theIndexBufferID);
+    // Important! make this first to make opengl remember how you described the data.
+    glGenVertexArrays(1, &cubeVertexArrayID);
+    glGenVertexArrays(1, &ArrowVertexArrayID);
+    // Describe how big the data
+    glBindBuffer(GL_ARRAY_BUFFER, theVertexBufferID);
+    glBufferData(GL_ARRAY_BUFFER, (CubeShape.getVerticeBufferSize() + ArrowShape.getVerticeBufferSize()), 0, GL_STATIC_DRAW);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, CubeShape.getVerticeBufferSize(), CubeShape.vertices);
+    glBufferSubData(GL_ARRAY_BUFFER, CubeShape.getVerticeBufferSize(), ArrowShape.getVerticeBufferSize(), ArrowShape.vertices);
 
-    // Describe data (position = 0) then (color = 1)
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (void*)0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (void*)(sizeof(GLfloat) * 3));
-
-    glGenBuffers(1, &indexBufferID);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, ArrowShape.getindices_size(), ArrowShape.indices, GL_STATIC_DRAW);
-    // Enable the pipelines
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theIndexBufferID);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, (CubeShape.getIndiceBufferSize() + ArrowShape.getIndiceBufferSize()), 0, GL_STATIC_DRAW);
+    glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, CubeShape.getIndiceBufferSize(), CubeShape.indices);
+    glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, CubeShape.getIndiceBufferSize(), ArrowShape.getIndiceBufferSize(), ArrowShape.indices);
+    // Tell Opengl to store how it reads the data : FOR CUBE
+    glBindVertexArray(cubeVertexArrayID);
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
-
-    glGenBuffers(1, &fullTransformationMatrixBufferID);
-    glBindBuffer(GL_ARRAY_BUFFER, fullTransformationMatrixBufferID);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(glm::mat4) * 2, 0, GL_DYNAMIC_DRAW);
-
-    glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(float) * 0));
-    glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(float) * 4));
-    glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(float) * 8));
-    glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(float) * 12));
-
-    glEnableVertexAttribArray(2);
-    glEnableVertexAttribArray(3);
-    glEnableVertexAttribArray(4);
-    glEnableVertexAttribArray(5);
-
-    glVertexAttribDivisor(2, 1);
-    glVertexAttribDivisor(3, 1);
-    glVertexAttribDivisor(4, 1);
-    glVertexAttribDivisor(5, 1);
+    glBindBuffer(GL_ARRAY_BUFFER, theVertexBufferID);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, 0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (void*)(sizeof(GLfloat) * 3));
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theIndexBufferID);
+    // Tell Opengl to store how it reads the data : FOR CUBE
+    glBindVertexArray(ArrowVertexArrayID);
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+    glBindBuffer(GL_ARRAY_BUFFER, theVertexBufferID);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (void*)(CubeShape.getVerticeBufferSize()));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (void*)(CubeShape.getVerticeBufferSize() + sizeof(GLfloat) * 3));
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theIndexBufferID);
 
     glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+    // Enable the pipelines
 
     std::cout << "Game initialzied.\n";
 }
@@ -76,25 +73,33 @@ void App::update() {
     } else if (keyboardstate[SDL_SCANCODE_Q]) {
         camera.moveDown();
     }
-
-    glUseProgram(shaderProgram);
-    // First arrow
-    glm::mat4 fullMatrixProjection = projectionMatrix * camera.getWorldToViewMatrix() * glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, +0.0f, -2.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(60.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    glm::mat4 fullTransforms[] = {
-        projectionMatrix * camera.getWorldToViewMatrix() * glm::translate(glm::mat4(1.0f), glm::vec3(-1.5f, +0.0f, -2.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(60.0f), glm::vec3(1.0f, 0.0f, 0.0f)),
-        projectionMatrix * camera.getWorldToViewMatrix() * glm::translate(glm::mat4(1.0f), glm::vec3(+1.5f, +0.0f, -2.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(160.0f), glm::vec3(0.0f, 1.0f, 0.0f))};
-    glBindBuffer(GL_ARRAY_BUFFER, fullTransformationMatrixBufferID);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(fullTransforms), fullTransforms, GL_DYNAMIC_DRAW);
 }
 
 void App::render() {
-    glBindVertexArray(VAO);
+    glUseProgram(shaderProgram);
+    GLuint getFullMatrixTransformLocation = glGetUniformLocation(shaderProgram, "FullMatrixTransform");
+
+    // Cube
+    glBindVertexArray(cubeVertexArrayID);
+    glm::mat4 MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * glm::translate(glm::mat4(1.0f), glm::vec3(-1.5f, +0.0f, -2.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(60.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    glUniformMatrix4fv(getFullMatrixTransformLocation, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
+    glDrawElements(GL_TRIANGLES, CubeShape.num_indices, GL_UNSIGNED_SHORT, 0);
+
+    glBindVertexArray(cubeVertexArrayID);
+    MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * glm::translate(glm::mat4(1.0f), glm::vec3(-3.5f, +0.0f, -2.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(60.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    glUniformMatrix4fv(getFullMatrixTransformLocation, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
+    glDrawElements(GL_TRIANGLES, CubeShape.num_indices, GL_UNSIGNED_SHORT, 0);
+
+    // Arrow
+    glBindVertexArray(ArrowVertexArrayID);
+    MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * glm::translate(glm::mat4(1.0f), glm::vec3(-5.5f, +0.0f, -2.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(60.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    glUniformMatrix4fv(getFullMatrixTransformLocation, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
+    glDrawElements(GL_TRIANGLES, ArrowShape.num_indices, GL_UNSIGNED_SHORT, (void*)(CubeShape.getIndiceBufferSize()));
+
     GLenum err;
     while ((err = glGetError()) != GL_NO_ERROR) {
         std::cerr << "OpenGL Error: " << err << std::endl;
     }
-
-    glDrawElementsInstanced(GL_TRIANGLES, ArrowShape.num_indices, GL_UNSIGNED_SHORT, 0, 2);
 
     glBindVertexArray(0);
 }
@@ -102,9 +107,10 @@ void App::render() {
 void App::cleanup() {
     // ArrowShape.cleanup();
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &vertexBufferID);
-    glDeleteBuffers(1, &indexBufferID);
+    glDeleteVertexArrays(1, &cubeVertexArrayID);
+    glDeleteVertexArrays(1, &ArrowVertexArrayID);
+    glDeleteBuffers(1, &theVertexBufferID);
+    glDeleteBuffers(1, &theIndexBufferID);
     glDeleteProgram(shaderProgram);
     std::cout << "Cleanup done.\n";
 }

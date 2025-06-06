@@ -1,10 +1,10 @@
 #include "shapeData.hpp"
 
-GLsizei ShapeData::getvertices_size() const {
+size_t ShapeData::getVerticeBufferSize() const {
     return num_vertices * sizeof(Vertex);
 }
 
-GLsizei ShapeData::getindices_size() const {
+size_t ShapeData::getIndiceBufferSize() const {
     return num_indices * sizeof(GLushort);
 }
 

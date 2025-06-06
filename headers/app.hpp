@@ -13,8 +13,6 @@
 #include "camera.hpp"
 #include "shapeGenerator.hpp"
 
-#define num_array_elements(a) sizeof(a) / sizeof(*a)
-
 class App {
    public:
     App() = default;
@@ -26,20 +24,19 @@ class App {
     ~App() = default;
 
    private:
-    struct Vertex {
-        glm::vec3 position;
-        glm::vec3 color;
-    };
+    // VAOS
+    GLuint cubeVertexArrayID;
+    GLuint ArrowVertexArrayID;
+    // BUFFERS
+    GLuint theVertexBufferID;
+    GLuint theIndexBufferID;
 
-    GLuint VAO;
-    GLuint vertexBufferID;
-    GLuint indexBufferID;
-    GLuint fullTransformationMatrixBufferID;
     GLuint shaderProgram;
 
     // Class instances
     Camera camera;
     ShapeData ArrowShape = ShapeGenerator::makeArrow();
-    //
+    ShapeData CubeShape = ShapeGenerator::makeCube();
+    // The pov basically
     glm::mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), static_cast<float>(window.getWidth()) / static_cast<float>(window.getHeight()), 1.0f, 10.0f);
 };

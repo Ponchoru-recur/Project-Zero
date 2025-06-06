@@ -7,13 +7,14 @@ inline const char *vertexShaderSource = R"(
     #version 460
     layout (location = 0) in vec3 pos;
     layout (location = 1) in vec3 vertexColor;
-    layout (location = 2) in mat4 fullMat;
+
+    uniform mat4 FullMatrixTransform;
 
     out vec3 theColor;
 
     void main() {
 
-       gl_Position = fullMat * vec4(pos, 1.0f);
+       gl_Position = FullMatrixTransform * vec4(pos, 1.0f);
        theColor = vertexColor;
     };
 )";
