@@ -7,11 +7,19 @@
 #include <glad/glad.h>
 #include <iostream>
 #include <memory>
+#include <vector>
+
+// Assimp testing
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
 #include "window.hpp"
 #include "shaders.hpp"
 #include "camera.hpp"
 #include "shapeGenerator.hpp"
+
+
 
 class App {
    public:
@@ -26,10 +34,12 @@ class App {
    private:
     // VAOS
     GLuint cubeVertexArrayID;
-    GLuint ArrowVertexArrayID;
+    GLuint arrowVertexArrayID;
+    GLuint normalVertexArrayID;
     // BUFFERS
     GLuint theVertexBufferID;
     GLuint theIndexBufferID;
+    GLuint normalBufferID;
 
     GLuint shaderProgram;
 
@@ -38,5 +48,9 @@ class App {
     ShapeData ArrowShape = ShapeGenerator::makeArrow();
     ShapeData CubeShape = ShapeGenerator::makeCube();
     // The pov basically
-    glm::mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), static_cast<float>(window.getWidth()) / static_cast<float>(window.getHeight()), 1.0f, 10.0f);
+    glm::mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), static_cast<float>(window.getWidth()) / static_cast<float>(window.getHeight()), 1.0f, 20.0f);
+    // Vectors
+    std::vector<glm::vec3> normals;
+    // temporary variables
+    float move_straight = 0;
 };

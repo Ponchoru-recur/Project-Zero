@@ -19,7 +19,8 @@ class ShapeData {
 
     GLsizei num_vertices;
     GLsizei num_indices;
-    ~ShapeData();
+    GLsizei num_normals;
+    void cleanup();
 
    private:
 };

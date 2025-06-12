@@ -8,7 +8,7 @@ size_t ShapeData::getIndiceBufferSize() const {
     return num_indices * sizeof(GLushort);
 }
 
-ShapeData::~ShapeData() {
+void ShapeData::cleanup() {
     delete[] vertices;
     delete[] indices;
 }

@@ -29,6 +29,7 @@ target_link_libraries(game PRIVATE OpenGL::GL)
 
 # SDL3 libs
 target_link_libraries(game PRIVATE
+    "${PROJECT_SOURCE_DIR}/lib/libassimp.dll.a"
     "${PROJECT_SOURCE_DIR}/lib/libSDL3.dll.a"
     "${PROJECT_SOURCE_DIR}/lib/libSDL3_image.dll.a"
     "${PROJECT_SOURCE_DIR}/lib/libSDL2_mixer.dll.a"

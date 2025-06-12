@@ -6,6 +6,7 @@ class ShapeGenerator {
    public:
     static ShapeData makeArrow();
     static ShapeData makeCube();
+    static ShapeData makePlatform();
 
    private:
 };

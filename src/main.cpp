@@ -1,15 +1,14 @@
 #define SDL_MAIN_USE_CALLBACKS 1
 
 // Libraries
-
 #include <SDL3/SDL_main.h>
 #include <SDL3/SDL.h>
 #include <memory>
 #include <thread>
 #include <chrono>
 
-// Headers
 
+// Headers
 #include "window.hpp"
 #include "app.hpp"
 
@@ -19,6 +18,7 @@
 
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[]) {
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
     // glEnable(GL_BLEND);
     // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 

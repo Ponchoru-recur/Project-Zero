@@ -214,6 +214,7 @@ C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/shapeData
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/shapeGenerator.cpp.obj
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/window.cpp.obj
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/build.make
+C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: C:/Users/Sam/Desktop/PlayThrough/lib/libassimp.dll.a
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: C:/Users/Sam/Desktop/PlayThrough/lib/libSDL3.dll.a
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: C:/Users/Sam/Desktop/PlayThrough/lib/libSDL3_image.dll.a
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: C:/Users/Sam/Desktop/PlayThrough/lib/libSDL2_mixer.dll.a
