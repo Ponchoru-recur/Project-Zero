@@ -6,8 +6,74 @@ const int VERTEX_BYTE_SIZE = 9;
     BUFFER OVERVIEW GL_ELEMENT_ARRAY_BUFFER : CUBEINDICESIZE | ARROWINDICESIZE
 */
 
+ObjectGenerator generateObject;
+
+void App::processMesh(aiMesh* mesh) {
+    for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
+        // Position
+        vertices.push_back(mesh->mVertices[i].x);
+        vertices.push_back(mesh->mVertices[i].y);
+        vertices.push_back(mesh->mVertices[i].z);
+
+        // Normals (optional)
+        if (mesh->HasNormals()) {
+            vertices.push_back(mesh->mNormals[i].x);
+            vertices.push_back(mesh->mNormals[i].y);
+            vertices.push_back(mesh->mNormals[i].z);
+        } else {
+            vertices.push_back(0.0f);  // Fallback normal
+            vertices.push_back(0.0f);
+            vertices.push_back(1.0f);
+        }
+
+        // Vertex Colors (optional)
+        if (mesh->HasVertexColors(0)) {
+            vertices.push_back(mesh->mColors[0][i].r);
+            vertices.push_back(mesh->mColors[0][i].g);
+            vertices.push_back(mesh->mColors[0][i].b);
+            // Optional alpha
+            // vertices.push_back(mesh->mColors[0][i].a);
+        } else {
+            vertices.push_back(1.0f);  // Fallback white
+            vertices.push_back(1.0f);
+            vertices.push_back(1.0f);
+        }
+    }
+    for (unsigned int i = 0; i < mesh->mNumFaces; i++) {
+        aiFace face = mesh->mFaces[i];
+        for (unsigned int j = 0; j < face.mNumIndices; j++) {
+            indices.push_back(face.mIndices[j]);
+        }
+    }
+}
+
+void App::processNode(aiNode* node, const aiScene* scene) {
+    // Process all the node’s meshes
+    for (unsigned int i = 0; i < node->mNumMeshes; i++) {
+        aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+        processMesh(mesh);
+    }
+
+    // Recursively process children
+    for (unsigned int i = 0; i < node->mNumChildren; i++) {
+        processNode(node->mChildren[i], scene);
+    }
+}
+
 void App::init() {
+    Assimp::Importer importer;
+    const aiScene* scene = importer.ReadFile("../assets/objects/platform.obj", aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_GenNormals);
+    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
+        std::cerr << "Assimp error: " << importer.GetErrorString() << std::endl;
+    }
+
+    processNode(scene->mRootNode, scene);
+
+    generateObject.uploadObj("../assets/objects/kan.obj");
+
     // Important! Init the shaders first!
+    std::string vertexShaderSource = Shader::LoadShaderFileSource("../shaders/vertexShader.vs");
+    std::string fragmentShaderSource = Shader::LoadShaderFileSource("../shaders/fragmentShader.fs");
     GLuint vertShader = Shader::compileShader(vertexShaderSource, GL_VERTEX_SHADER);
     GLuint fragShader = Shader::compileShader(fragmentShaderSource, GL_FRAGMENT_SHADER);
     shaderProgram = Shader::linkProgram(vertShader, fragShader);
@@ -52,33 +118,26 @@ void App::init() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theIndexBufferID);
 
     // TESTING
-    glGenVertexArrays(1, &normalVertexArrayID);
-    glBindVertexArray(normalVertexArrayID);
+    glGenVertexArrays(1, &SceneVertexArrayID);
+    glBindVertexArray(SceneVertexArrayID);
 
-    glGenBuffers(1, &normalBufferID);
-    glBindBuffer(GL_ARRAY_BUFFER, normalBufferID);
-
-    for (size_t i = 0; i < 24; i++) {
-        glm::vec3 pos = CubeShape.vertices[i].position;
-        glm::vec3 norm = CubeShape.vertices[i].normal;
-
-        normals.push_back(pos);
-        normals.push_back(pos + norm * 1.0f);
-    }
-    glBufferData(GL_ARRAY_BUFFER, (normals.size() * sizeof(glm::vec3)), normals.data(), GL_STATIC_DRAW);
+    glGenBuffers(1, &SceneVertexBufferID);
+    glGenBuffers(1, &SceneElementBufferID);
+    glBindBuffer(GL_ARRAY_BUFFER, SceneVertexBufferID);
+    glBufferData(GL_ARRAY_BUFFER, (vertices.size() * sizeof(GLfloat)), vertices.data(), GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
+    glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 9, 0);                             // Position
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 9, (void*)(sizeof(GLfloat) * 6));  // Color
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 9, (void*)(sizeof(GLfloat) * 3));  // Normals
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, SceneElementBufferID);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, (indices.size() * sizeof(GLuint)), indices.data(), GL_STATIC_DRAW);
+    // END
 
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-    Assimp::Importer importer;
-    const aiScene* scene = importer.ReadFile("../assets/objects/testing.obj", aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
-    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
-        std::cerr << "Assimp error: " << importer.GetErrorString() << std::endl;
-        
-    }
 
     std::cout << "Game initialzied.\n";
 }
@@ -107,46 +166,69 @@ void App::update() {
     } else if (keyboardstate[SDL_SCANCODE_Q]) {
         camera.moveDown();
     } else if (keyboardstate[SDL_SCANCODE_UP]) {
-        move_straight += 0.5f;
+        move_straight -= 0.5f;
         std::cout << "move : " << move_straight << "\n";
     } else if (keyboardstate[SDL_SCANCODE_DOWN]) {
-        move_straight -= 0.5f;
+        move_straight += 0.5f;
         std::cout << "move : " << move_straight << "\n";
     }
     glUseProgram(shaderProgram);
     GLuint getAmbientLightUniformLocation = glGetUniformLocation(shaderProgram, "ambientLight");
-    glm::vec3 ambientLight = glm::vec3(0.7f, 0.7f, 0.7f);
-    glUniform3fv(getAmbientLightUniformLocation, 1, glm::value_ptr(ambientLight));
+    glm::vec4 ambientLight(0.15f, 0.15f, 0.15f, 1.0f);
+    glUniform4fv(getAmbientLightUniformLocation, 1, glm::value_ptr(ambientLight));
 
     GLuint getLightPositionUniformLocation = glGetUniformLocation(shaderProgram, "lightPosition");
-    glm::vec3 lightPosition = glm::vec3(0.0f, 3.0f, move_straight);
+    glm::vec3 lightPosition(0.0f, 2.0f, move_straight);
     glUniform3fv(getLightPositionUniformLocation, 1, glm::value_ptr(lightPosition));
+
+    GLuint getEyePositionWorldLocation = glGetUniformLocation(shaderProgram, "eyePositionWorld");
+    glUniform3fv(getEyePositionWorldLocation, 1, glm::value_ptr(camera.getPosition()));
+
+    GLuint getscaleTheModelLocation = glGetUniformLocation(shaderProgram, "scaleTheModel");
+    glUniform1f(getscaleTheModelLocation, 1);
 }
 
 void App::render() {
-    GLuint getFullMatrixTransformLocation = glGetUniformLocation(shaderProgram, "FullMatrixTransform");
+    GLuint getModelToWorldProjectionMatrix = glGetUniformLocation(shaderProgram, "modelToWorldProjectionMatrix");
+    GLuint getmodelToWorldTransformationMatrix = glGetUniformLocation(shaderProgram, "modelToWorldTransformMatrix");
 
     // Cube
-    glBindVertexArray(cubeVertexArrayID);
-    glm::mat4 MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * glm::translate(glm::mat4(1.0f), glm::vec3(3.5f, +0.0f, -2.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    glUniformMatrix4fv(getFullMatrixTransformLocation, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
-    glDrawElements(GL_TRIANGLES, CubeShape.num_indices, GL_UNSIGNED_SHORT, 0);
+    // glBindVertexArray(cubeVertexArrayID);
+    glm::mat4 cubeToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(3.5f, +0.0f, -2.0f));
+    glm::mat4 MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * cubeToWorldMatrix;
+    // glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
+    // glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(cubeToWorldMatrix));
+    // glDrawElements(GL_TRIANGLES, CubeShape.num_indices, GL_UNSIGNED_SHORT, 0);
 
-    glBindVertexArray(cubeVertexArrayID);
-    MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * glm::translate(glm::mat4(1.0f), glm::vec3(-3.5f, +0.0f, -2.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    glUniformMatrix4fv(getFullMatrixTransformLocation, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
-    glDrawElements(GL_TRIANGLES, CubeShape.num_indices, GL_UNSIGNED_SHORT, 0);
+    // glBindVertexArray(cubeVertexArrayID);
+    // cubeToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-3.5f, +0.0f, -2.0f));
+    // MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * cubeToWorldMatrix;
+    // glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
+    // glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(cubeToWorldMatrix));
+    // glDrawElements(GL_TRIANGLES, CubeShape.num_indices, GL_UNSIGNED_SHORT, 0);
 
-    // Arrow
-    glBindVertexArray(arrowVertexArrayID);
-    MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * glm::translate(glm::mat4(1.0f), glm::vec3(-6.5f, +0.0f, -2.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    glUniformMatrix4fv(getFullMatrixTransformLocation, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
-    glDrawElements(GL_TRIANGLES, ArrowShape.num_indices, GL_UNSIGNED_SHORT, (void*)(CubeShape.getIndiceBufferSize()));
+    // // Arrow
+    // glBindVertexArray(arrowVertexArrayID);
+    // glm::mat4 arrowToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-6.5f, +0.0f, -2.0f));
+    // MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * arrowToWorldMatrix;
+    // glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
+    // glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(arrowToWorldMatrix));
+    // glDrawElements(GL_TRIANGLES, ArrowShape.num_indices, GL_UNSIGNED_SHORT, (void*)(CubeShape.getIndiceBufferSize()));
 
-    glBindVertexArray(normalBufferID);
-    MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * glm::translate(glm::mat4(1.0f), glm::vec3(3.5f, +0.0f, -2.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    glUniformMatrix4fv(getFullMatrixTransformLocation, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
-    glDrawArrays(GL_LINES, 0, normals.size());
+    glBindVertexArray(SceneVertexArrayID);
+    glm::mat4 sceneToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(+0.0f, -2.0f, +0.0f));
+    MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * sceneToWorldMatrix;
+    glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
+    glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(sceneToWorldMatrix));
+    glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+
+    for (int i = 0; i < generateObject.getinfo().size(); ++i) {
+        glBindVertexArray(generateObject.getinfo()[i].VAO);
+        glm::mat4 pos = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, +5.0f, 0.0f));
+        glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
+        glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(pos));
+        glDrawElements(GL_TRIANGLES, generateObject.getinfo()[i].indexCount, GL_UNSIGNED_SHORT, 0);
+    }
 
     GLenum err;
     while ((err = glGetError()) != GL_NO_ERROR) {

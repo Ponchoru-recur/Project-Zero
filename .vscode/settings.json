@@ -126,6 +126,10 @@
     "timer": "cpp",
     "future": "cpp",
     "mutex": "cpp",
-    "cstring": "cpp"
+    "cstring": "cpp",
+    "map": "cpp",
+    "set": "cpp",
+    "unordered_set": "cpp",
+    "fstream": "cpp"
 }
 }

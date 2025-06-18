@@ -224,6 +224,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/objectGenerator.obj: src/objectGenerator.cpp.obj
+.PHONY : src/objectGenerator.obj
+
+# target to build an object file
+src/objectGenerator.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/objectGenerator.cpp.obj
+.PHONY : src/objectGenerator.cpp.obj
+
+src/objectGenerator.i: src/objectGenerator.cpp.i
+.PHONY : src/objectGenerator.i
+
+# target to preprocess a source file
+src/objectGenerator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/objectGenerator.cpp.i
+.PHONY : src/objectGenerator.cpp.i
+
+src/objectGenerator.s: src/objectGenerator.cpp.s
+.PHONY : src/objectGenerator.s
+
+# target to generate assembly for a file
+src/objectGenerator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/objectGenerator.cpp.s
+.PHONY : src/objectGenerator.cpp.s
+
 src/shaders.obj: src/shaders.cpp.obj
 .PHONY : src/shaders.obj
 
@@ -341,6 +365,9 @@ help:
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... src/objectGenerator.obj
+	@echo ... src/objectGenerator.i
+	@echo ... src/objectGenerator.s
 	@echo ... src/shaders.obj
 	@echo ... src/shaders.i
 	@echo ... src/shaders.s

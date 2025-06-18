@@ -10,6 +10,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/game.dir/src/glad.c.obj.d"
   "CMakeFiles/game.dir/src/main.cpp.obj"
   "CMakeFiles/game.dir/src/main.cpp.obj.d"
+  "CMakeFiles/game.dir/src/objectGenerator.cpp.obj"
+  "CMakeFiles/game.dir/src/objectGenerator.cpp.obj.d"
   "CMakeFiles/game.dir/src/shaders.cpp.obj"
   "CMakeFiles/game.dir/src/shaders.cpp.obj.d"
   "CMakeFiles/game.dir/src/shapeData.cpp.obj"

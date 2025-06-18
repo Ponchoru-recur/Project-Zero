@@ -487,7 +487,15 @@ CMakeFiles/game.dir/src/app.cpp.obj: \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/postprocess.h \
  C:/Users/Sam/Desktop/PlayThrough/headers/window.hpp \
  C:/Users/Sam/Desktop/PlayThrough/headers/shaders.hpp \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/fstream \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/codecvt.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/basic_file.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/c++io.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fstream.tcc \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/sstream \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/sstream.tcc \
  C:/Users/Sam/Desktop/PlayThrough/headers/camera.hpp \
  C:/Users/Sam/Desktop/PlayThrough/headers/shapeGenerator.hpp \
  C:/Users/Sam/Desktop/PlayThrough/headers/ShapeData.hpp \
- C:/Users/Sam/Desktop/PlayThrough/headers/vertex.hpp
+ C:/Users/Sam/Desktop/PlayThrough/headers/vertex.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/headers/objectGenerator.hpp

@@ -1,19 +1,6 @@
-CMakeFiles/game.dir/src/shaders.cpp.obj: \
- C:\Users\Sam\Desktop\PlayThrough\src\shaders.cpp \
- C:/Users/Sam/Desktop/PlayThrough/headers/shaders.hpp \
- C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h \
- C:/Users/Sam/Desktop/PlayThrough/include/KHR/khrplatform.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdint.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/stdint.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/crtdefs.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/vadefs.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/stddef.h \
+CMakeFiles/game.dir/src/objectGenerator.cpp.obj: \
+ C:\Users\Sam\Desktop\PlayThrough\src\objectGenerator.cpp \
+ C:/Users/Sam/Desktop/PlayThrough/headers/objectGenerator.hpp \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iostream \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/requires_hosted.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -28,6 +15,12 @@ CMakeFiles/game.dir/src/shaders.cpp.obj: \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/postypes.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cwchar \
  C:/MinGW/mingw64/x86_64-w64-mingw32/include/wchar.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/vadefs.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
  C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
  C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt_wstdlib.h \
  C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_off_t.h \
@@ -40,6 +33,9 @@ CMakeFiles/game.dir/src/shaders.cpp.obj: \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/exception_ptr.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/exception_defines.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/cxxabi_init_exception.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/stddef.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/crtdefs.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/typeinfo \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/hash_bytes.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/new \
@@ -149,10 +145,77 @@ CMakeFiles/game.dir/src/shaders.cpp.obj: \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ostream.tcc \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/istream \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/istream.tcc \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/fstream \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/codecvt.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/basic_file.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/c++io.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fstream.tcc \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/sstream \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/sstream.tcc
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/vector \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_uninitialized.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_vector.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_bvector.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/vector.tcc \
+ C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/KHR/khrplatform.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdint.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/stdint.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/Importer.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/types.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/string.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/defs.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/config.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector2.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cmath \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/math.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/specfun.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/limits \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/gamma.tcc \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/special_function_util.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/bessel_function.tcc \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/beta_function.tcc \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/ell_integral.tcc \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/exp_integral.tcc \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/hypergeometric.tcc \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/legendre_function.tcc \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/modified_bessel_func.tcc \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/poly_hermite.tcc \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/poly_laguerre.tcc \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/riemann_zeta.tcc \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector3.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/color4.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/matrix3x3.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/matrix4x4.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/quaternion.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cstring \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector2.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector3.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/color4.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/matrix3x3.inl \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/algorithm \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_algo.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/algorithmfwd.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_heap.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/uniform_int_dist.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_tempbuf.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/pstl/glue_algorithm_defs.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/pstl/execution_defs.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/matrix4x4.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/MathFunctions.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/quaternion.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/scene.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/texture.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/Compiler/pushpack1.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/Compiler/poppack1.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/mesh.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/aabb.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/unordered_set \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/unordered_set.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/hashtable.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/hashtable_policy.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/aligned_buffer.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/enable_special_members.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/node_handle.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/erase_if.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/light.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/camera.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/material.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/material.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/anim.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/metadata.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/postprocess.h

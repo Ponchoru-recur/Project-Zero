@@ -131,11 +131,26 @@ CMakeFiles/game.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/main.cpp.s"
 	C:\MinGW\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Sam\Desktop\PlayThrough\src\main.cpp -o CMakeFiles\game.dir\src\main.cpp.s
 
+CMakeFiles/game.dir/src/objectGenerator.cpp.obj: CMakeFiles/game.dir/flags.make
+CMakeFiles/game.dir/src/objectGenerator.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
+CMakeFiles/game.dir/src/objectGenerator.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/objectGenerator.cpp
+CMakeFiles/game.dir/src/objectGenerator.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Sam\Desktop\PlayThrough\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/game.dir/src/objectGenerator.cpp.obj"
+	C:\MinGW\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/objectGenerator.cpp.obj -MF CMakeFiles\game.dir\src\objectGenerator.cpp.obj.d -o CMakeFiles\game.dir\src\objectGenerator.cpp.obj -c C:\Users\Sam\Desktop\PlayThrough\src\objectGenerator.cpp
+
+CMakeFiles/game.dir/src/objectGenerator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/game.dir/src/objectGenerator.cpp.i"
+	C:\MinGW\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Sam\Desktop\PlayThrough\src\objectGenerator.cpp > CMakeFiles\game.dir\src\objectGenerator.cpp.i
+
+CMakeFiles/game.dir/src/objectGenerator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/objectGenerator.cpp.s"
+	C:\MinGW\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Sam\Desktop\PlayThrough\src\objectGenerator.cpp -o CMakeFiles\game.dir\src\objectGenerator.cpp.s
+
 CMakeFiles/game.dir/src/shaders.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/shaders.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
 CMakeFiles/game.dir/src/shaders.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/shaders.cpp
 CMakeFiles/game.dir/src/shaders.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Sam\Desktop\PlayThrough\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/game.dir/src/shaders.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Sam\Desktop\PlayThrough\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/game.dir/src/shaders.cpp.obj"
 	C:\MinGW\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/shaders.cpp.obj -MF CMakeFiles\game.dir\src\shaders.cpp.obj.d -o CMakeFiles\game.dir\src\shaders.cpp.obj -c C:\Users\Sam\Desktop\PlayThrough\src\shaders.cpp
 
 CMakeFiles/game.dir/src/shaders.cpp.i: cmake_force
@@ -150,7 +165,7 @@ CMakeFiles/game.dir/src/shapeData.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/shapeData.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
 CMakeFiles/game.dir/src/shapeData.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/shapeData.cpp
 CMakeFiles/game.dir/src/shapeData.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Sam\Desktop\PlayThrough\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/game.dir/src/shapeData.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Sam\Desktop\PlayThrough\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/game.dir/src/shapeData.cpp.obj"
 	C:\MinGW\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/shapeData.cpp.obj -MF CMakeFiles\game.dir\src\shapeData.cpp.obj.d -o CMakeFiles\game.dir\src\shapeData.cpp.obj -c C:\Users\Sam\Desktop\PlayThrough\src\shapeData.cpp
 
 CMakeFiles/game.dir/src/shapeData.cpp.i: cmake_force
@@ -165,7 +180,7 @@ CMakeFiles/game.dir/src/shapeGenerator.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/shapeGenerator.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
 CMakeFiles/game.dir/src/shapeGenerator.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/shapeGenerator.cpp
 CMakeFiles/game.dir/src/shapeGenerator.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Sam\Desktop\PlayThrough\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/game.dir/src/shapeGenerator.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Sam\Desktop\PlayThrough\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/game.dir/src/shapeGenerator.cpp.obj"
 	C:\MinGW\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/shapeGenerator.cpp.obj -MF CMakeFiles\game.dir\src\shapeGenerator.cpp.obj.d -o CMakeFiles\game.dir\src\shapeGenerator.cpp.obj -c C:\Users\Sam\Desktop\PlayThrough\src\shapeGenerator.cpp
 
 CMakeFiles/game.dir/src/shapeGenerator.cpp.i: cmake_force
@@ -180,7 +195,7 @@ CMakeFiles/game.dir/src/window.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/window.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
 CMakeFiles/game.dir/src/window.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/window.cpp
 CMakeFiles/game.dir/src/window.cpp.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Sam\Desktop\PlayThrough\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/game.dir/src/window.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Sam\Desktop\PlayThrough\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/game.dir/src/window.cpp.obj"
 	C:\MinGW\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/game.dir/src/window.cpp.obj -MF CMakeFiles\game.dir\src\window.cpp.obj.d -o CMakeFiles\game.dir\src\window.cpp.obj -c C:\Users\Sam\Desktop\PlayThrough\src\window.cpp
 
 CMakeFiles/game.dir/src/window.cpp.i: cmake_force
@@ -197,6 +212,7 @@ game_OBJECTS = \
 "CMakeFiles/game.dir/src/camera.cpp.obj" \
 "CMakeFiles/game.dir/src/glad.c.obj" \
 "CMakeFiles/game.dir/src/main.cpp.obj" \
+"CMakeFiles/game.dir/src/objectGenerator.cpp.obj" \
 "CMakeFiles/game.dir/src/shaders.cpp.obj" \
 "CMakeFiles/game.dir/src/shapeData.cpp.obj" \
 "CMakeFiles/game.dir/src/shapeGenerator.cpp.obj" \
@@ -209,6 +225,7 @@ C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/app.cpp.o
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/camera.cpp.obj
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/glad.c.obj
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/main.cpp.obj
+C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/objectGenerator.cpp.obj
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/shaders.cpp.obj
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/shapeData.cpp.obj
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/shapeGenerator.cpp.obj
@@ -222,7 +239,7 @@ C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: C:/Users/Sam/Desktop/PlayThrough/
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/linkLibs.rsp
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/objects1.rsp
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Sam\Desktop\PlayThrough\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable C:\Users\Sam\Desktop\PlayThrough\bin\game.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Sam\Desktop\PlayThrough\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable C:\Users\Sam\Desktop\PlayThrough\bin\game.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\game.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

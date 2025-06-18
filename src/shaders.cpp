@@ -1,8 +1,21 @@
 #include "shaders.hpp"
 
-GLuint Shader::compileShader(const char* source, GLenum type) {
+std::string Shader::LoadShaderFileSource(const std::string& filepath) {
+    std::ifstream file(filepath);
+
+    if (!file.is_open()) {
+        std::cerr << "Failed to open shader file : " << filepath << "\n";
+        return "";
+    }
+    std::stringstream buffer;
+    buffer << file.rdbuf();
+    return buffer.str();
+}
+
+GLuint Shader::compileShader(std::string& source, GLenum type) {
+    const char* convertSource = source.c_str();
     GLuint shader = glCreateShader(type);
-    glShaderSource(shader, 1, &source, NULL);
+    glShaderSource(shader, 1, &convertSource, NULL);
     glCompileShader(shader);
 
     int success;
@@ -37,7 +50,7 @@ GLuint Shader::linkProgram(GLuint vertexShader, GLuint fragmentShader) {
     return program;
 }
 
-GLuint Shader::loadShaderProgram(const char* vertSource, const char* fragSource) {
+GLuint Shader::loadShaderProgram(std::string& vertSource, std::string& fragSource) {
     GLuint vs = compileShader(vertSource, GL_VERTEX_SHADER);    // Compile vertex shader
     GLuint fs = compileShader(fragSource, GL_FRAGMENT_SHADER);  // Compile fragment shader
     return linkProgram(vs, fs);                                 // Link both into a program

@@ -18,8 +18,7 @@
 #include "shaders.hpp"
 #include "camera.hpp"
 #include "shapeGenerator.hpp"
-
-
+#include "objectGenerator.hpp"
 
 class App {
    public:
@@ -32,14 +31,20 @@ class App {
     ~App() = default;
 
    private:
+    // Private functions | TESTING |
+    void processMesh(aiMesh* mesh);
+    void processNode(aiNode* node, const aiScene* scene);
     // VAOS
     GLuint cubeVertexArrayID;
     GLuint arrowVertexArrayID;
     GLuint normalVertexArrayID;
+    GLuint SceneVertexArrayID;
     // BUFFERS
     GLuint theVertexBufferID;
     GLuint theIndexBufferID;
     GLuint normalBufferID;
+    GLuint SceneVertexBufferID;
+    GLuint SceneElementBufferID;
 
     GLuint shaderProgram;
 
@@ -48,9 +53,11 @@ class App {
     ShapeData ArrowShape = ShapeGenerator::makeArrow();
     ShapeData CubeShape = ShapeGenerator::makeCube();
     // The pov basically
-    glm::mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), static_cast<float>(window.getWidth()) / static_cast<float>(window.getHeight()), 1.0f, 20.0f);
+    glm::mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), static_cast<float>(window.getWidth()) / static_cast<float>(window.getHeight()), 1.0f, 40.0f);
     // Vectors
     std::vector<glm::vec3> normals;
+    std::vector<GLfloat> vertices;  // TESTING
+    std::vector<GLuint> indices;    // TESTING
     // temporary variables
     float move_straight = 0;
 };

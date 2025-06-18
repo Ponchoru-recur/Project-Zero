@@ -1,6 +1,6 @@
 #include "window.hpp"
 
-Window window("2DWindow!", 900, 700);
+Window window("2DWindow!", 1024, 1024);
 
 Window::Window(const char* name, int w, int h) : window_width(w), window_height(h) {
     if (w <= 0 || h <= 0) {
@@ -15,7 +15,6 @@ Window::Window(const char* name, int w, int h) : window_width(w), window_height(
     // Setting opengl version
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
-
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
     window = SDL_CreateWindow("Opengl + SDL3", w, h, SDL_WINDOW_OPENGL);

@@ -8,6 +8,7 @@ class Camera {
     Camera();
     void mouseUpdate(const glm::vec2 &newMousePosition);
     glm::mat4 getWorldToViewMatrix() const;
+    glm::vec3 getPosition();
 
     void moveForward();
     void moveBackward();
