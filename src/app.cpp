@@ -70,6 +70,7 @@ void App::init() {
     processNode(scene->mRootNode, scene);
 
     generateObject.uploadObj("../assets/objects/kan.obj");
+    // generateObject.uploadObj("../assets/objects/platform.obj");
 
     // Important! Init the shaders first!
     std::string vertexShaderSource = Shader::LoadShaderFileSource("../shaders/vertexShader.vs");
@@ -193,41 +194,42 @@ void App::render() {
     GLuint getmodelToWorldTransformationMatrix = glGetUniformLocation(shaderProgram, "modelToWorldTransformMatrix");
 
     // Cube
-    // glBindVertexArray(cubeVertexArrayID);
+    glBindVertexArray(cubeVertexArrayID);
     glm::mat4 cubeToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(3.5f, +0.0f, -2.0f));
     glm::mat4 MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * cubeToWorldMatrix;
-    // glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
-    // glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(cubeToWorldMatrix));
-    // glDrawElements(GL_TRIANGLES, CubeShape.num_indices, GL_UNSIGNED_SHORT, 0);
+    glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
+    glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(cubeToWorldMatrix));
+    glDrawElements(GL_TRIANGLES, CubeShape.num_indices, GL_UNSIGNED_SHORT, 0);
 
-    // glBindVertexArray(cubeVertexArrayID);
-    // cubeToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-3.5f, +0.0f, -2.0f));
-    // MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * cubeToWorldMatrix;
-    // glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
-    // glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(cubeToWorldMatrix));
-    // glDrawElements(GL_TRIANGLES, CubeShape.num_indices, GL_UNSIGNED_SHORT, 0);
+    glBindVertexArray(cubeVertexArrayID);
+    cubeToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-3.5f, +0.0f, -2.0f));
+    MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * cubeToWorldMatrix;
+    glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
+    glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(cubeToWorldMatrix));
+    glDrawElements(GL_TRIANGLES, CubeShape.num_indices, GL_UNSIGNED_SHORT, 0);
 
-    // // Arrow
-    // glBindVertexArray(arrowVertexArrayID);
-    // glm::mat4 arrowToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-6.5f, +0.0f, -2.0f));
-    // MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * arrowToWorldMatrix;
-    // glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
-    // glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(arrowToWorldMatrix));
-    // glDrawElements(GL_TRIANGLES, ArrowShape.num_indices, GL_UNSIGNED_SHORT, (void*)(CubeShape.getIndiceBufferSize()));
+    // Arrow
+    glBindVertexArray(arrowVertexArrayID);
+    glm::mat4 arrowToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-6.5f, +0.0f, -2.0f));
+    MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * arrowToWorldMatrix;
+    glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
+    glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(arrowToWorldMatrix));
+    glDrawElements(GL_TRIANGLES, ArrowShape.num_indices, GL_UNSIGNED_SHORT, (void*)(CubeShape.getIndiceBufferSize()));
 
     glBindVertexArray(SceneVertexArrayID);
-    glm::mat4 sceneToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(+0.0f, -2.0f, +0.0f));
+    glm::mat4 sceneToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(+0.0f, -5.0f, +0.0f));
     MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * sceneToWorldMatrix;
     glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
     glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(sceneToWorldMatrix));
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 
-    for (int i = 0; i < generateObject.getinfo().size(); ++i) {
-        glBindVertexArray(generateObject.getinfo()[i].VAO);
-        glm::mat4 pos = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, +5.0f, 0.0f));
+    for (const auto& object : generateObject.getinfo()) {
+        glBindVertexArray(object.VAO);
+        glm::mat4 objectToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(+0.0f, +2.0f, +0.0f));
+        MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * objectToWorldMatrix;
         glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
-        glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(pos));
-        glDrawElements(GL_TRIANGLES, generateObject.getinfo()[i].indexCount, GL_UNSIGNED_SHORT, 0);
+        glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(objectToWorldMatrix));
+        glDrawElements(GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT, 0);
     }
 
     GLenum err;

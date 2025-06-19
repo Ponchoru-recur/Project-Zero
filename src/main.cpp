@@ -7,7 +7,6 @@
 #include <thread>
 #include <chrono>
 
-
 // Headers
 #include "window.hpp"
 #include "app.hpp"

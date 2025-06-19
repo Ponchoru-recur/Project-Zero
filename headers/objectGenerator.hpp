@@ -11,7 +11,7 @@
 
 struct Mesh {
     GLuint VAO, VBO, EBO;  // Vertex Array Object, Vertex Buffer Object, Element Buffer Object.
-    GLushort indexCount;   // Amount of indices.
+    GLsizei indexCount;    // Amount of indices.
 };
 
 class ObjectGenerator {

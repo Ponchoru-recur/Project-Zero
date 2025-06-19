@@ -55,7 +55,7 @@ class App {
     // The pov basically
     glm::mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), static_cast<float>(window.getWidth()) / static_cast<float>(window.getHeight()), 1.0f, 40.0f);
     // Vectors
-    std::vector<glm::vec3> normals;
+
     std::vector<GLfloat> vertices;  // TESTING
     std::vector<GLuint> indices;    // TESTING
     // temporary variables
