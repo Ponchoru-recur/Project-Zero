@@ -69,8 +69,12 @@ void App::init() {
 
     processNode(scene->mRootNode, scene);
 
-    generateObject.uploadObj("../assets/objects/kan.obj");
-    // generateObject.uploadObj("../assets/objects/platform.obj");
+    generateObject.uploadObj("../assets/objects/kan.obj", GL_STATIC_DRAW);
+    // generateObject.transform(0, glm::vec3(+0.0f, +5.0f, +0.0f));
+    // generateObject.uploadObj("../assets/objects/platform.obj", GL_DYNAMIC_DRAW);
+    // generateObject.transform(1, glm::vec3(+0.0f, -5.0f, +0.0f));
+
+    generateObject.process();
 
     // Important! Init the shaders first!
     std::string vertexShaderSource = Shader::LoadShaderFileSource("../shaders/vertexShader.vs");
@@ -103,8 +107,8 @@ void App::init() {
     glEnableVertexAttribArray(2);
     glBindBuffer(GL_ARRAY_BUFFER, theVertexBufferID);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * VERTEX_BYTE_SIZE, 0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * VERTEX_BYTE_SIZE, (void*)(sizeof(GLfloat) * 3));
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * VERTEX_BYTE_SIZE, (void*)(sizeof(GLfloat) * 6));
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * VERTEX_BYTE_SIZE, (void*)(sizeof(GLfloat) * 3));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * VERTEX_BYTE_SIZE, (void*)(sizeof(GLfloat) * 6));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theIndexBufferID);
     // Tell Opengl to store how it reads the data : FOR ARROW
     currentBufferSize += CubeShape.getVerticeBufferSize();
@@ -114,8 +118,8 @@ void App::init() {
     glEnableVertexAttribArray(2);
     glBindBuffer(GL_ARRAY_BUFFER, theVertexBufferID);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * VERTEX_BYTE_SIZE, (void*)(currentBufferSize));
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * VERTEX_BYTE_SIZE, (void*)(currentBufferSize + sizeof(GLfloat) * 3));
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * VERTEX_BYTE_SIZE, (void*)(currentBufferSize + sizeof(GLfloat) * 6));
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * VERTEX_BYTE_SIZE, (void*)(currentBufferSize + sizeof(GLfloat) * 3));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * VERTEX_BYTE_SIZE, (void*)(currentBufferSize + sizeof(GLfloat) * 6));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theIndexBufferID);
 
     // TESTING
@@ -126,12 +130,12 @@ void App::init() {
     glGenBuffers(1, &SceneElementBufferID);
     glBindBuffer(GL_ARRAY_BUFFER, SceneVertexBufferID);
     glBufferData(GL_ARRAY_BUFFER, (vertices.size() * sizeof(GLfloat)), vertices.data(), GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
-    glEnableVertexAttribArray(2);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 9, 0);                             // Position
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 9, (void*)(sizeof(GLfloat) * 6));  // Color
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 9, (void*)(sizeof(GLfloat) * 3));  // Normals
+    glEnableVertexAttribArray(0);  // Position
+    glEnableVertexAttribArray(1);  // Normals
+    glEnableVertexAttribArray(2);  // Color
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 9, 0);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 9, (void*)(sizeof(GLfloat) * 6));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 9, (void*)(sizeof(GLfloat) * 3));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, SceneElementBufferID);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, (indices.size() * sizeof(GLuint)), indices.data(), GL_STATIC_DRAW);
     // END
@@ -216,20 +220,30 @@ void App::render() {
     glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(arrowToWorldMatrix));
     glDrawElements(GL_TRIANGLES, ArrowShape.num_indices, GL_UNSIGNED_SHORT, (void*)(CubeShape.getIndiceBufferSize()));
 
-    glBindVertexArray(SceneVertexArrayID);
-    glm::mat4 sceneToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(+0.0f, -5.0f, +0.0f));
-    MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * sceneToWorldMatrix;
-    glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
-    glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(sceneToWorldMatrix));
-    glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+    // glBindVertexArray(SceneVertexArrayID);
+    // glm::mat4 sceneToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(+0.0f, -5.0f, +0.0f));
+    // MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * sceneToWorldMatrix;
+    // glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
+    // glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(sceneToWorldMatrix));
+    // glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 
-    for (const auto& object : generateObject.getinfo()) {
-        glBindVertexArray(object.VAO);
-        glm::mat4 objectToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(+0.0f, +2.0f, +0.0f));
+    // for (const auto& object : generateObject.getDynamicMeshes()) {
+    //     glBindVertexArray(object.VAO);
+    //     glm::mat4 objectToWorldMatrix = object.transform_matrix;
+    //     MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * objectToWorldMatrix;
+    //     glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
+    //     glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(objectToWorldMatrix));
+    //     glDrawElements(GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT, 0);
+    // }
+
+    glBindVertexArray(generateObject.getStaticVao());
+
+    for (auto& object : generateObject.getStaticMeshes()) {
+        glm::mat4 objectToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(+0.0f, +3.0f, +0.0f));
         MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * objectToWorldMatrix;
         glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
         glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(objectToWorldMatrix));
-        glDrawElements(GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT, 0);
+        glDrawElementsBaseVertex(GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT, (void*)(object.baseIndex * sizeof(GLuint)), object.baseVertex);
     }
 
     GLenum err;
@@ -241,6 +255,7 @@ void App::render() {
 }
 
 void App::cleanup() {
+    generateObject.cleanup();
     CubeShape.cleanup();
     ArrowShape.cleanup();
     glBindBuffer(GL_ARRAY_BUFFER, 0);

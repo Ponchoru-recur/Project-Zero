@@ -4,21 +4,46 @@
 #include <vector>
 #include <glad/glad.h>
 #include <string>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/glm.hpp>
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
 struct Mesh {
-    GLuint VAO, VBO, EBO;  // Vertex Array Object, Vertex Buffer Object, Element Buffer Object.
-    GLsizei indexCount;    // Amount of indices.
+    GLuint VAO = 0, VBO = 0, EBO = 0;  // Vertex Array Object, Vertex Buffer Object, Element Buffer Object.
+    glm::mat4 transform_matrix;
+    GLsizei indexCount = 0;
+};
+
+struct StaticMeshInfo {
+    GLsizei indexCount;
+    GLuint baseIndex;
+    GLint baseVertex;
 };
 
 class ObjectGenerator {
    public:
-    void uploadObj(std::string filepath);
-    std::vector<Mesh>& getinfo();
+    void uploadObj(std::string filepath, GLenum usage = GL_STATIC_DRAW);
+    void transform(short index, glm::vec3 translate, glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f));
+    void process();
+    const std::vector<Mesh>& getDynamicMeshes() const;
+    const std::vector<StaticMeshInfo>& getStaticMeshes() const;
+    GLuint getStaticVao();
+    void cleanup();
 
    private:
-    std::vector<Mesh> ObjectStorage;
+    // Static Objects
+    GLuint s_vao = 0;
+    GLuint s_vbo = 0;
+    GLuint s_ebo = 0;
+    GLsizei currIndexSize = 0;
+    GLsizei currVertexSize = 0;
+
+    std::vector<GLfloat> s_verticesAndNormals;
+    std::vector<GLfloat> s_color;
+    std::vector<GLuint> s_indices;
+    std::vector<Mesh> Meshes;
+    std::vector<StaticMeshInfo> s_meshes;
 };
