@@ -69,10 +69,11 @@ void App::init() {
 
     processNode(scene->mRootNode, scene);
 
-    generateObject.uploadObj("../assets/objects/kan.obj", GL_STATIC_DRAW);
-    // generateObject.transform(0, glm::vec3(+0.0f, +5.0f, +0.0f));
-    // generateObject.uploadObj("../assets/objects/platform.obj", GL_DYNAMIC_DRAW);
-    // generateObject.transform(1, glm::vec3(+0.0f, -5.0f, +0.0f));
+    glm::vec2 kan = generateObject.uploadObj("../assets/objects/kan.obj", GL_STATIC_DRAW);
+    generateObject.transform(kan, glm::vec3(+0.0f, -2.0f, +0.0f));
+
+    glm::vec2 platform = generateObject.uploadObj("../assets/objects/platform.obj", GL_DYNAMIC_DRAW);
+    generateObject.transform(platform, glm::vec3(+0.0f, -5.0f, +0.0f));
 
     generateObject.process();
 
@@ -227,14 +228,14 @@ void App::render() {
     // glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(sceneToWorldMatrix));
     // glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 
-    // for (const auto& object : generateObject.getDynamicMeshes()) {
-    //     glBindVertexArray(object.VAO);
-    //     glm::mat4 objectToWorldMatrix = object.transform_matrix;
-    //     MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * objectToWorldMatrix;
-    //     glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
-    //     glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(objectToWorldMatrix));
-    //     glDrawElements(GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT, 0);
-    // }
+    for (const auto& object : generateObject.getDynamicMeshes()) {
+        glBindVertexArray(object.VAO);
+        glm::mat4 objectToWorldMatrix = object.transform_matrix;
+        MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * objectToWorldMatrix;
+        glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
+        glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(objectToWorldMatrix));
+        glDrawElements(GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT, 0);
+    }
 
     glBindVertexArray(generateObject.getStaticVao());
 

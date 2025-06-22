@@ -57,7 +57,7 @@ void objectProcess::processMesh(aiMesh* mesh, std::vector<GLfloat>& vertsNorms, 
     }
 }
 
-void ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
+glm::vec2 ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
     Assimp::Importer importer;
     const aiScene* scene = importer.ReadFile(filepath, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_GenNormals);
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
@@ -104,6 +104,7 @@ void ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
         s_color.insert(s_color.end(), localColors.begin(), localColors.end());
         s_verticesAndNormals.insert(s_verticesAndNormals.end(), localVertsNormals.begin(), localVertsNormals.end());
         s_indices.insert(s_indices.end(), localIndices.begin(), localIndices.end());
+        obj.transform_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
         s_meshes.push_back(obj);
 
         currIndexSize += localIndices.size();
@@ -117,11 +118,16 @@ void ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
     }
 
     std::cout << "Uploaded to buffers!\n";
+    return usage == GL_DYNAMIC_DRAW ? glm::vec2(Meshes.size() - 1, 1) : glm::vec2(s_meshes.size() - 1, 2);
 }
 
-void ObjectGenerator::transform(short index, glm::vec3 translate, glm::vec3 rotate) {
+void ObjectGenerator::transform(glm::vec2& object_index, glm::vec3 translate, glm::vec3 rotate) {
     glm::mat4 transform = glm::translate(glm::mat4(1.0f), translate) * glm::rotate(glm::mat4(1.0f), glm::radians(rotate.x), glm::vec3(1.0f, 0.0f, 0.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(rotate.y), glm::vec3(0.0f, 1.0f, 0.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(rotate.z), glm::vec3(0.0f, 0.0f, 1.0f));
-    Meshes[index].transform_matrix = transform;
+    if (static_cast<int>(object_index.y) == 1) {
+        Meshes[object_index.x].transform_matrix = transform;
+    } else {
+        s_meshes[object_index.x].transform_matrix = transform;
+    }
 }
 
 void ObjectGenerator::process() {
