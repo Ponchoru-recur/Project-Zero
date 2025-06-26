@@ -73,7 +73,7 @@ void App::init() {
 
     // | TEST OBJECT |
 
-    SDL_Surface* surface1 = IMG_Load("../assets/images/subaru1.jpg");
+    SDL_Surface* surface1 = IMG_Load("../assets/images/container2.png");
     if (!surface1) {
         SDL_Log("Couldn't load img Error : %s", SDL_GetError());
     }
@@ -81,7 +81,7 @@ void App::init() {
     SDL_Surface* formatted1 = SDL_ConvertSurface(surface1, SDL_PIXELFORMAT_RGBA32);
     SDL_DestroySurface(surface1);
 
-    SDL_Surface* surface2 = IMG_Load("../assets/images/awesomeface.png");
+    SDL_Surface* surface2 = IMG_Load("../assets/images/container2_specular.png");
     if (!surface2) {
         SDL_Log("Couldn't load img Error : %s", SDL_GetError());
     }
@@ -89,21 +89,46 @@ void App::init() {
     SDL_Surface* formatted2 = SDL_ConvertSurface(surface2, SDL_PIXELFORMAT_RGBA32);
     SDL_DestroySurface(surface2);
 
-    glm::vec3 verts[] = {// position | color
-                         glm::vec3(0.0f, 1.0f, +0.0f), glm::vec3(0.0f, 0.0f, 0.0f),
-                         glm::vec3(-1.0f, -1.0f, +0.0f), glm::vec3(1.0f, 0.0f, 0.0f),
-                         glm::vec3(1.0f, -1.0f, +0.0f), glm::vec3(0.5f, 1.0f, 1.0f)};
+    SDL_Surface* surface3 = IMG_Load("../assets/images/lighting_maps_specular_color.png");
+    if (!surface2) {
+        SDL_Log("Couldn't load img Error : %s", SDL_GetError());
+    }
 
-    glm::vec2 textCoords[]{
-        glm::vec2(1.0f, 1.0f),
-        glm::vec2(1.0f, 0.0f),
-        glm::vec2(0.0f, 0.0f),
-        glm::vec2(0.0f, 1.0f)};
+    SDL_Surface* formatted3 = SDL_ConvertSurface(surface3, SDL_PIXELFORMAT_RGBA32);
+    SDL_DestroySurface(surface3);
+
+    glm::vec3 verts[] = {
+        // position
+        glm::vec3(+1.0f, +1.0f, +0.0f),
+        glm::vec3(-1.0f, -1.0f, +0.0f),
+        glm::vec3(+1.0f, -1.0f, +0.0f),
+
+        glm::vec3(+1.0f, +1.0f, +0.0f),
+        glm::vec3(-1.0f, -1.0f, +0.0f),
+        glm::vec3(-1.0f, +1.0f, +0.0f)};
+
     glm::vec3 normals[] = {glm::vec3(+0.0f, +0.0f, +1.0f),
                            glm::vec3(+0.0f, +0.0f, +1.0f),
-                           glm::vec3(+0.0f, +0.0f, +1.0f)};
+                           glm::vec3(+0.0f, +0.0f, +1.0f),
+                           glm::vec3(+0.0f, +0.0f, +1.0f),
+                           glm::vec3(+0.0f, +0.0f, +1.0f),
+                           glm::vec3(+0.0f, +0.0f, +1.0f)
 
-    GLuint indices[] = {0, 1, 2};
+    };
+
+    glm::vec2 textCoords[]{
+        glm::vec2(+1.0f, +1.0f),
+        glm::vec2(-0.0f, -0.0f),
+        glm::vec2(+1.0f, -0.0f),
+
+        glm::vec2(+1.0f, +1.0f),
+        glm::vec2(-0.0f, -0.0f),
+        glm::vec2(-0.0f, +1.0f)};
+
+    glm::vec3 colors[] = {glm::vec3(1.0f, 1.0f, 1.0f)};
+
+    GLuint indices[] = {0, 1, 2,
+                        5, 4, 3};
 
     glGenVertexArrays(1, &testVertexArray);
     glBindVertexArray(testVertexArray);
@@ -112,18 +137,18 @@ void App::init() {
     glGenBuffers(1, &testIndiceBufferObj);
 
     glBindBuffer(GL_ARRAY_BUFFER, testVertBufferObj);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(verts) + sizeof(textCoords) + sizeof(normals), 0, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(verts) + sizeof(normals) + sizeof(textCoords) + sizeof(colors), 0, GL_STATIC_DRAW);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(verts), verts);
-    glBufferSubData(GL_ARRAY_BUFFER, sizeof(verts), sizeof(textCoords), textCoords);
-    glBufferSubData(GL_ARRAY_BUFFER, sizeof(verts) + sizeof(textCoords), sizeof(normals), normals);
+    glBufferSubData(GL_ARRAY_BUFFER, sizeof(verts), sizeof(normals), normals);
+    glBufferSubData(GL_ARRAY_BUFFER, sizeof(verts) + sizeof(normals), sizeof(textCoords), textCoords);
     glEnableVertexAttribArray(0);  // Position
-    glEnableVertexAttribArray(1);  // Color
+    glEnableVertexAttribArray(1);  // normals
     glEnableVertexAttribArray(2);  // Texture Coordinates
-    glEnableVertexAttribArray(3);  // normals
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (void*)(0));
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (void*)(sizeof(GLfloat) * 3));
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(verts)));
-    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(verts) + sizeof(textCoords)));
+    // glEnableVertexAttribArray(3);  // Color
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)(0));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(verts)));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(verts) + sizeof(normals)));
+    // glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(verts) + sizeof(textCoords) + sizeof(colors)));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, testIndiceBufferObj);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
@@ -152,6 +177,18 @@ void App::init() {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, formatted2->w, formatted2->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, formatted2->pixels);
     glGenerateMipmap(GL_TEXTURE_2D);
     SDL_DestroySurface(formatted2);
+
+    glGenTextures(1, &testTexture3);
+    glBindTexture(GL_TEXTURE_2D, testTexture3);
+    // set the texture wrapping / filtering options(on the currently bound texture object) glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, formatted3->w, formatted3->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, formatted3->pixels);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    SDL_DestroySurface(formatted3);
 
     glBindTexture(GL_TEXTURE_2D, 0);
 
@@ -269,31 +306,31 @@ void App::render() {
 
     /* | TESTING | */
 
-    glm::vec3 lightPos(+0.0f, +1.0f, move_straight);
-    glm::vec3 lightColor(+1.0f, +1.0f, +1.0f);
-
     glUseProgram(testShaders);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, testTexture1);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, testTexture2);
+    glActiveTexture(GL_TEXTURE2);
+    glBindTexture(GL_TEXTURE_2D, testTexture3);
+
     glBindVertexArray(testVertexArray);
-    glm::mat4 modelTransformMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)) * glm::scale(glm::mat4(1.0f), glm::vec3(10.0f, 10.0f, 10.0f));
+    glm::mat4 modelTransformMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)) * glm::scale(glm::mat4(1.0f), glm::vec3(5.0f, 5.0f, 5.0f));
     glm::mat4 modelToWorldMatrix = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * modelTransformMatrix;
 
     glUniformMatrix4fv(glGetUniformLocation(testShaders, "modelToWorldProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(modelToWorldMatrix));
     glUniformMatrix4fv(glGetUniformLocation(testShaders, "modelToWorldTransformation"), 1, GL_FALSE, glm::value_ptr(modelTransformMatrix));
-    glUniform3fv(glGetUniformLocation(testShaders, "material.ambient"), 1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 0.31f)));
-    glUniform3fv(glGetUniformLocation(testShaders, "material.diffuse"), 1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 0.31f)));
-    glUniform3fv(glGetUniformLocation(testShaders, "material.specular"), 1, glm::value_ptr(glm::vec3(0.5f, 0.5f, 0.5f)));
-    glUniform1f(glGetUniformLocation(shaderProgram, "material.shininess"), 32.0f);
+    glUniform1i(glGetUniformLocation(testShaders, "material.diffuse"), 0);
+    glUniform1i(glGetUniformLocation(testShaders, "material.specular"), 1);
+    glUniform1i(glGetUniformLocation(testShaders, "emissionMap"), 2);
+    glUniform1f(glGetUniformLocation(testShaders, "material.shininess"), 32.0f);
+    glUniform3fv(glGetUniformLocation(testShaders, "light.position"), 1, glm::value_ptr(glm::vec3(-0.2f, -1.0f, move_straight)));
+    glUniform3fv(glGetUniformLocation(testShaders, "light.ambient"), 1, glm::value_ptr(glm::vec3(0.2f, 0.2f, 0.2f)));
+    glUniform3fv(glGetUniformLocation(testShaders, "light.diffuse"), 1, glm::value_ptr(glm::vec3(0.5f, 0.5f, 0.5f)));
+    glUniform3fv(glGetUniformLocation(testShaders, "light.specular"), 1, glm::value_ptr(glm::vec3(1.0f, 1.0f, 1.0f)));
     glUniform3fv(glGetUniformLocation(testShaders, "viewPosition"), 1, glm::value_ptr(camera.getPosition()));
-    glUniform3fv(glGetUniformLocation(testShaders, "lightPos"), 1, glm::value_ptr(lightPos));
-    glUniform3fv(glGetUniformLocation(testShaders, "lightColor"), 1, glm::value_ptr(lightColor));
-    glUniform1i(glGetUniformLocation(testShaders, "texture1"), 0);
-    glUniform1i(glGetUniformLocation(testShaders, "texture2"), 1);
-    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, (void*)(0));
 
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)(0));
     GLenum err;
     while ((err = glGetError()) != GL_NO_ERROR) {
         std::cerr << "OpenGL Error: " << err << std::endl;

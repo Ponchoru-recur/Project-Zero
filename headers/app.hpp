@@ -51,7 +51,7 @@ class App {
     // Vectors
 
     // temporary variables
-    float move_straight = 0;
+    float move_straight = -0.3f;
     GLfloat fov = 60;
 
     // TODO: TEST OBJECTS | CAUTION MUST DELETE AFTER |
@@ -60,4 +60,5 @@ class App {
     GLuint testIndiceBufferObj;
     GLuint testTexture1;
     GLuint testTexture2;
+    GLuint testTexture3;
 };

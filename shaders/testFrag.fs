@@ -2,41 +2,57 @@
 
 out vec4 FragColor;
 
+struct Material {
+    sampler2D diffuse;
+    sampler2D specular;
+    float shininess;
+};
+
+struct Light {
+    vec3 position;
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
+
 in vec2 texCoords;
 in vec3 objColor;
 
-in vec3 vertexPositionWorld;
-in vec3 normalWorld;
+in vec3 vertexPositionWorld;  // Position of the object with transform
+in vec3 normalWorld;          // Normals of the object with transform
+uniform vec3 viewPosition;    // Camera Position
 
-uniform vec3 lightPos;
-uniform vec3 lightColor;
-uniform vec3 viewPosition;
+uniform Material material;
+uniform Light light;
 
-uniform sampler2D texture1;
-uniform sampler2D texture2;
+uniform sampler2D emissionMap;
+
+// TODO: DONT FORGET TO ADD VALUES TO THE LIGHTS AND CHANGE LightColor
 
 void main() {
     // Texture
     vec2 flipped = vec2(texCoords.x, 1.0 - texCoords.y);
 
     // Ambient
-    float ambientStrength = 0.5;
-    vec3 ambient = ambientStrength * vec3(1.0, 1.0, 1.0);
+
+    vec3 emission = texture(emissionMap, flipped).rgb * 1.0;
+
+    vec3 ambient = light.ambient * vec3(texture(material.diffuse, flipped));
 
     vec3 norm = normalize(normalWorld);
     // vector that points toward the light
-    vec3 lightDir = normalize(lightPos - vertexPositionWorld);
+    vec3 lightDir = normalize(light.position - vertexPositionWorld);
     float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = diff * lightColor;
+    vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, flipped));
 
     // Specular
-    float specularStrength = 0.5;
+
     vec3 viewDir = normalize(viewPosition - vertexPositionWorld);
     vec3 reflectorDir = reflect(-lightDir, norm);
-    float spec = pow(max(dot(viewDir, reflectorDir), 0.0), 32);
-    vec3 specular = specularStrength * spec * lightColor;
+    float spec = pow(max(dot(viewDir, reflectorDir), 0.0), material.shininess);
+    vec3 specular = light.specular * spec * vec3(texture(material.specular, flipped));
 
     // ambient + diffuse * texture
-    vec3 result = (ambient + diffuse + specular) ;
-    FragColor = vec4(result, 1.0) * texture(texture1, flipped);
+    vec3 result = (ambient + diffuse + specular + emission);
+    FragColor = vec4(result, 1.0);
 }
