@@ -8,69 +8,9 @@ const int VERTEX_BYTE_SIZE = 9;
 
 ObjectGenerator generateObject;
 
-void App::processMesh(aiMesh* mesh) {
-    for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
-        // Position
-        vertices.push_back(mesh->mVertices[i].x);
-        vertices.push_back(mesh->mVertices[i].y);
-        vertices.push_back(mesh->mVertices[i].z);
-
-        // Normals (optional)
-        if (mesh->HasNormals()) {
-            vertices.push_back(mesh->mNormals[i].x);
-            vertices.push_back(mesh->mNormals[i].y);
-            vertices.push_back(mesh->mNormals[i].z);
-        } else {
-            vertices.push_back(0.0f);  // Fallback normal
-            vertices.push_back(0.0f);
-            vertices.push_back(1.0f);
-        }
-
-        // Vertex Colors (optional)
-        if (mesh->HasVertexColors(0)) {
-            vertices.push_back(mesh->mColors[0][i].r);
-            vertices.push_back(mesh->mColors[0][i].g);
-            vertices.push_back(mesh->mColors[0][i].b);
-            // Optional alpha
-            // vertices.push_back(mesh->mColors[0][i].a);
-        } else {
-            vertices.push_back(1.0f);  // Fallback white
-            vertices.push_back(1.0f);
-            vertices.push_back(1.0f);
-        }
-    }
-    for (unsigned int i = 0; i < mesh->mNumFaces; i++) {
-        aiFace face = mesh->mFaces[i];
-        for (unsigned int j = 0; j < face.mNumIndices; j++) {
-            indices.push_back(face.mIndices[j]);
-        }
-    }
-}
-
-void App::processNode(aiNode* node, const aiScene* scene) {
-    // Process all the node’s meshes
-    for (unsigned int i = 0; i < node->mNumMeshes; i++) {
-        aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-        processMesh(mesh);
-    }
-
-    // Recursively process children
-    for (unsigned int i = 0; i < node->mNumChildren; i++) {
-        processNode(node->mChildren[i], scene);
-    }
-}
-
 void App::init() {
-    Assimp::Importer importer;
-    const aiScene* scene = importer.ReadFile("../assets/objects/platform.obj", aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_GenNormals);
-    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
-        std::cerr << "Assimp error: " << importer.GetErrorString() << std::endl;
-    }
-
-    processNode(scene->mRootNode, scene);
-
     glm::vec2 kan = generateObject.uploadObj("../assets/objects/kan.obj", GL_STATIC_DRAW);
-    generateObject.transform(kan, glm::vec3(+0.0f, -2.0f, +0.0f));
+    generateObject.transform(kan, glm::vec3(+0.0f, +2.0f, -4.0f));
 
     glm::vec2 platform = generateObject.uploadObj("../assets/objects/platform.obj", GL_DYNAMIC_DRAW);
     generateObject.transform(platform, glm::vec3(+0.0f, -5.0f, +0.0f));
@@ -83,6 +23,14 @@ void App::init() {
     GLuint vertShader = Shader::compileShader(vertexShaderSource, GL_VERTEX_SHADER);
     GLuint fragShader = Shader::compileShader(fragmentShaderSource, GL_FRAGMENT_SHADER);
     shaderProgram = Shader::linkProgram(vertShader, fragShader);
+
+    // Important! | TEST SHADERS |
+    std::string testVertSource = Shader::LoadShaderFileSource("../shaders/testVert.vs");
+    std::string testFragSource = Shader::LoadShaderFileSource("../shaders/testFrag.fs");
+    GLuint testVert = Shader::compileShader(testVertSource, GL_VERTEX_SHADER);
+    GLuint testFrag = Shader::compileShader(testFragSource, GL_FRAGMENT_SHADER);
+    testShaders = Shader::linkProgram(testVert, testFrag);
+
     // Generate a buffer for information of the triangle
     glGenBuffers(1, &theVertexBufferID);
     glGenBuffers(1, &theIndexBufferID);
@@ -123,23 +71,89 @@ void App::init() {
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * VERTEX_BYTE_SIZE, (void*)(currentBufferSize + sizeof(GLfloat) * 6));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theIndexBufferID);
 
-    // TESTING
-    glGenVertexArrays(1, &SceneVertexArrayID);
-    glBindVertexArray(SceneVertexArrayID);
+    // | TEST OBJECT |
 
-    glGenBuffers(1, &SceneVertexBufferID);
-    glGenBuffers(1, &SceneElementBufferID);
-    glBindBuffer(GL_ARRAY_BUFFER, SceneVertexBufferID);
-    glBufferData(GL_ARRAY_BUFFER, (vertices.size() * sizeof(GLfloat)), vertices.data(), GL_STATIC_DRAW);
+    SDL_Surface* surface1 = IMG_Load("../assets/images/subaru1.jpg");
+    if (!surface1) {
+        SDL_Log("Couldn't load img Error : %s", SDL_GetError());
+    }
+
+    SDL_Surface* formatted1 = SDL_ConvertSurface(surface1, SDL_PIXELFORMAT_RGBA32);
+    SDL_DestroySurface(surface1);
+
+    SDL_Surface* surface2 = IMG_Load("../assets/images/awesomeface.png");
+    if (!surface2) {
+        SDL_Log("Couldn't load img Error : %s", SDL_GetError());
+    }
+
+    SDL_Surface* formatted2 = SDL_ConvertSurface(surface2, SDL_PIXELFORMAT_RGBA32);
+    SDL_DestroySurface(surface2);
+
+    glm::vec3 verts[] = {// position | color
+                         glm::vec3(0.0f, 1.0f, +0.0f), glm::vec3(0.0f, 0.0f, 0.0f),
+                         glm::vec3(-1.0f, -1.0f, +0.0f), glm::vec3(1.0f, 0.0f, 0.0f),
+                         glm::vec3(1.0f, -1.0f, +0.0f), glm::vec3(0.5f, 1.0f, 1.0f)};
+
+    glm::vec2 textCoords[]{
+        glm::vec2(1.0f, 1.0f),
+        glm::vec2(1.0f, 0.0f),
+        glm::vec2(0.0f, 0.0f),
+        glm::vec2(0.0f, 1.0f)};
+    glm::vec3 normals[] = {glm::vec3(+0.0f, +0.0f, +1.0f),
+                           glm::vec3(+0.0f, +0.0f, +1.0f),
+                           glm::vec3(+0.0f, +0.0f, +1.0f)};
+
+    GLuint indices[] = {0, 1, 2};
+
+    glGenVertexArrays(1, &testVertexArray);
+    glBindVertexArray(testVertexArray);
+
+    glGenBuffers(1, &testVertBufferObj);
+    glGenBuffers(1, &testIndiceBufferObj);
+
+    glBindBuffer(GL_ARRAY_BUFFER, testVertBufferObj);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(verts) + sizeof(textCoords) + sizeof(normals), 0, GL_STATIC_DRAW);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(verts), verts);
+    glBufferSubData(GL_ARRAY_BUFFER, sizeof(verts), sizeof(textCoords), textCoords);
+    glBufferSubData(GL_ARRAY_BUFFER, sizeof(verts) + sizeof(textCoords), sizeof(normals), normals);
     glEnableVertexAttribArray(0);  // Position
-    glEnableVertexAttribArray(1);  // Normals
-    glEnableVertexAttribArray(2);  // Color
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 9, 0);
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 9, (void*)(sizeof(GLfloat) * 6));
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 9, (void*)(sizeof(GLfloat) * 3));
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, SceneElementBufferID);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, (indices.size() * sizeof(GLuint)), indices.data(), GL_STATIC_DRAW);
-    // END
+    glEnableVertexAttribArray(1);  // Color
+    glEnableVertexAttribArray(2);  // Texture Coordinates
+    glEnableVertexAttribArray(3);  // normals
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (void*)(0));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (void*)(sizeof(GLfloat) * 3));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(verts)));
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(verts) + sizeof(textCoords)));
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, testIndiceBufferObj);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+    glGenTextures(1, &testTexture1);
+    glBindTexture(GL_TEXTURE_2D, testTexture1);
+    // set the texture wrapping / filtering options(on the currently bound texture object) glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, formatted1->w, formatted1->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, formatted1->pixels);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    SDL_DestroySurface(formatted1);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    glGenTextures(1, &testTexture2);
+    glBindTexture(GL_TEXTURE_2D, testTexture2);
+    // set the texture wrapping / filtering options(on the currently bound texture object) glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, formatted2->w, formatted2->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, formatted2->pixels);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    SDL_DestroySurface(formatted2);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
 
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -149,6 +163,26 @@ void App::init() {
 }
 
 void App::handleEvent(const SDL_Event& event) {
+    switch (event.type) {
+        case SDL_EVENT_MOUSE_WHEEL:
+
+            if (event.wheel.y > 0) {
+                fov -= 5.0f;
+
+            } else if (event.wheel.y < 0) {
+                fov += 5.0f;
+            }
+            if (fov > 120) {
+                fov = 120;
+            }
+            if (fov <= 1) {
+                fov = 1;
+            }
+            camera.changefov(fov);
+            break;
+        default:
+            break;
+    }
     glm::vec2 mouse;
     SDL_GetRelativeMouseState(&mouse.x, &mouse.y);
     camera.mouseUpdate(mouse);
@@ -184,14 +218,11 @@ void App::update() {
     glUniform4fv(getAmbientLightUniformLocation, 1, glm::value_ptr(ambientLight));
 
     GLuint getLightPositionUniformLocation = glGetUniformLocation(shaderProgram, "lightPosition");
-    glm::vec3 lightPosition(0.0f, 2.0f, move_straight);
+    glm::vec3 lightPosition(0.0f, -5.0f, 0);
     glUniform3fv(getLightPositionUniformLocation, 1, glm::value_ptr(lightPosition));
 
     GLuint getEyePositionWorldLocation = glGetUniformLocation(shaderProgram, "eyePositionWorld");
     glUniform3fv(getEyePositionWorldLocation, 1, glm::value_ptr(camera.getPosition()));
-
-    GLuint getscaleTheModelLocation = glGetUniformLocation(shaderProgram, "scaleTheModel");
-    glUniform1f(getscaleTheModelLocation, 1);
 }
 
 void App::render() {
@@ -200,15 +231,15 @@ void App::render() {
 
     // Cube
     glBindVertexArray(cubeVertexArrayID);
-    glm::mat4 cubeToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(3.5f, +0.0f, -2.0f));
-    glm::mat4 MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * cubeToWorldMatrix;
+    glm::mat4 cubeToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(3.5f, +0.0f, -2.0f)) * glm::scale(glm::mat4(1.0f), glm::vec3(5.0f, 0.5f, 0.5f));
+    glm::mat4 MatrixGangUwu = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * cubeToWorldMatrix;
     glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
     glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(cubeToWorldMatrix));
     glDrawElements(GL_TRIANGLES, CubeShape.num_indices, GL_UNSIGNED_SHORT, 0);
 
     glBindVertexArray(cubeVertexArrayID);
     cubeToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-3.5f, +0.0f, -2.0f));
-    MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * cubeToWorldMatrix;
+    MatrixGangUwu = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * cubeToWorldMatrix;
     glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
     glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(cubeToWorldMatrix));
     glDrawElements(GL_TRIANGLES, CubeShape.num_indices, GL_UNSIGNED_SHORT, 0);
@@ -216,36 +247,52 @@ void App::render() {
     // Arrow
     glBindVertexArray(arrowVertexArrayID);
     glm::mat4 arrowToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-6.5f, +0.0f, -2.0f));
-    MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * arrowToWorldMatrix;
+    MatrixGangUwu = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * arrowToWorldMatrix;
     glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
     glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(arrowToWorldMatrix));
     glDrawElements(GL_TRIANGLES, ArrowShape.num_indices, GL_UNSIGNED_SHORT, (void*)(CubeShape.getIndiceBufferSize()));
 
-    // glBindVertexArray(SceneVertexArrayID);
-    // glm::mat4 sceneToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(+0.0f, -5.0f, +0.0f));
-    // MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * sceneToWorldMatrix;
-    // glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
-    // glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(sceneToWorldMatrix));
-    // glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
-
     for (const auto& object : generateObject.getDynamicMeshes()) {
         glBindVertexArray(object.VAO);
-        glm::mat4 objectToWorldMatrix = object.transform_matrix;
-        MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * objectToWorldMatrix;
+        MatrixGangUwu = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * object.objToWorldMatrix;
         glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
-        glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(objectToWorldMatrix));
+        glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(object.objToWorldMatrix));
         glDrawElements(GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT, 0);
     }
 
     glBindVertexArray(generateObject.getStaticVao());
-
     for (auto& object : generateObject.getStaticMeshes()) {
-        glm::mat4 objectToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(+0.0f, +3.0f, +0.0f));
-        MatrixGangUwu = projectionMatrix * camera.getWorldToViewMatrix() * objectToWorldMatrix;
+        MatrixGangUwu = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * object.objToWorldMatrix;
         glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
-        glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(objectToWorldMatrix));
         glDrawElementsBaseVertex(GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT, (void*)(object.baseIndex * sizeof(GLuint)), object.baseVertex);
     }
+
+    /* | TESTING | */
+
+    glm::vec3 lightPos(+0.0f, +1.0f, move_straight);
+    glm::vec3 lightColor(+1.0f, +1.0f, +1.0f);
+
+    glUseProgram(testShaders);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, testTexture1);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, testTexture2);
+    glBindVertexArray(testVertexArray);
+    glm::mat4 modelTransformMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)) * glm::scale(glm::mat4(1.0f), glm::vec3(10.0f, 10.0f, 10.0f));
+    glm::mat4 modelToWorldMatrix = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * modelTransformMatrix;
+
+    glUniformMatrix4fv(glGetUniformLocation(testShaders, "modelToWorldProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(modelToWorldMatrix));
+    glUniformMatrix4fv(glGetUniformLocation(testShaders, "modelToWorldTransformation"), 1, GL_FALSE, glm::value_ptr(modelTransformMatrix));
+    glUniform3fv(glGetUniformLocation(testShaders, "material.ambient"), 1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 0.31f)));
+    glUniform3fv(glGetUniformLocation(testShaders, "material.diffuse"), 1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 0.31f)));
+    glUniform3fv(glGetUniformLocation(testShaders, "material.specular"), 1, glm::value_ptr(glm::vec3(0.5f, 0.5f, 0.5f)));
+    glUniform1f(glGetUniformLocation(shaderProgram, "material.shininess"), 32.0f);
+    glUniform3fv(glGetUniformLocation(testShaders, "viewPosition"), 1, glm::value_ptr(camera.getPosition()));
+    glUniform3fv(glGetUniformLocation(testShaders, "lightPos"), 1, glm::value_ptr(lightPos));
+    glUniform3fv(glGetUniformLocation(testShaders, "lightColor"), 1, glm::value_ptr(lightColor));
+    glUniform1i(glGetUniformLocation(testShaders, "texture1"), 0);
+    glUniform1i(glGetUniformLocation(testShaders, "texture2"), 1);
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, (void*)(0));
 
     GLenum err;
     while ((err = glGetError()) != GL_NO_ERROR) {

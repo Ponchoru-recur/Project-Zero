@@ -13,12 +13,12 @@
 
 struct Mesh {
     GLuint VAO = 0, VBO = 0, EBO = 0;  // Vertex Array Object, Vertex Buffer Object, Element Buffer Object.
-    glm::mat4 transform_matrix;
+    glm::mat4 objToWorldMatrix;
     GLsizei indexCount = 0;
 };
 
 struct StaticMeshInfo {
-    glm::mat4 transform_matrix;
+    glm::mat4 objToWorldMatrix;
     GLsizei indexCount;
     GLuint baseIndex;
     GLint baseVertex;
@@ -27,7 +27,7 @@ struct StaticMeshInfo {
 class ObjectGenerator {
    public:
     glm::vec2 uploadObj(std::string filepath, GLenum usage = GL_STATIC_DRAW);
-    void transform(glm::vec2 &object_name, glm::vec3 translate, glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f));
+    void transform(glm::vec2& object_name, glm::vec3 translate, glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f));
     void process();
     GLuint getStaticVao();
     const std::vector<Mesh>& getDynamicMeshes() const;

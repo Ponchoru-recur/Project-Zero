@@ -92,7 +92,7 @@ glm::vec2 ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, (localIndices.size() * sizeof(GLuint)), localIndices.data(), GL_DYNAMIC_DRAW);
         glBindVertexArray(0);
         m.indexCount = localIndices.size();
-        m.transform_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+        m.objToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
         Meshes.push_back(m);
         std::cout << "Sent to DYNAMIC_STORAGE" << "\n";
     } else {
@@ -104,7 +104,7 @@ glm::vec2 ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
         s_color.insert(s_color.end(), localColors.begin(), localColors.end());
         s_verticesAndNormals.insert(s_verticesAndNormals.end(), localVertsNormals.begin(), localVertsNormals.end());
         s_indices.insert(s_indices.end(), localIndices.begin(), localIndices.end());
-        obj.transform_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+        obj.objToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
         s_meshes.push_back(obj);
 
         currIndexSize += localIndices.size();
@@ -124,13 +124,17 @@ glm::vec2 ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
 void ObjectGenerator::transform(glm::vec2& object_index, glm::vec3 translate, glm::vec3 rotate) {
     glm::mat4 transform = glm::translate(glm::mat4(1.0f), translate) * glm::rotate(glm::mat4(1.0f), glm::radians(rotate.x), glm::vec3(1.0f, 0.0f, 0.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(rotate.y), glm::vec3(0.0f, 1.0f, 0.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(rotate.z), glm::vec3(0.0f, 0.0f, 1.0f));
     if (static_cast<int>(object_index.y) == 1) {
-        Meshes[object_index.x].transform_matrix = transform;
+        Meshes[object_index.x].objToWorldMatrix = transform;
     } else {
-        s_meshes[object_index.x].transform_matrix = transform;
+        s_meshes[object_index.x].objToWorldMatrix = transform;
     }
 }
 
 void ObjectGenerator::process() {
+    if (s_meshes.size() < 1) {
+        std::cout << "Generate process is disabled because no. \n";
+        return;
+    }
     std::cout << "Starting Process...\n";
     glGenVertexArrays(1, &s_vao);
     glBindVertexArray(s_vao);
@@ -187,10 +191,3 @@ void ObjectGenerator::cleanup() {
     std::vector<Mesh>().swap(Meshes);
     std::cout << "Object cleanup finished.\n";
 }
-
-// for (auto& object : Meshes) {
-//     std::cout << "VAO : " << object.VAO << "\n"
-//               << "VBO : " << object.VBO << "\n"
-//               << "EBO : " << object.EBO << "\n"
-//               << "indexCount : " << object.indexCount << "\n";
-// }

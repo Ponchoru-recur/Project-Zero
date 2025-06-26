@@ -1,12 +1,15 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include "window.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 
 class Camera {
    public:
     Camera();
     void mouseUpdate(const glm::vec2 &newMousePosition);
+    void changefov(GLfloat &fov);
+    glm::mat4 getProjectionMatrix();
     glm::mat4 getWorldToViewMatrix() const;
     glm::vec3 getPosition();
 
@@ -23,5 +26,6 @@ class Camera {
     glm::vec3 position;
     glm::vec3 viewDirection;
     const glm::vec3 UP;
-    glm::vec2 oldMousePosition;
+    glm::mat4 projectionMatrix;
+    GLfloat fov = 60.0f;
 };

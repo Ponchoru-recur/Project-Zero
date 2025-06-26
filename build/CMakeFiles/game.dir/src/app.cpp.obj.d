@@ -86,6 +86,7 @@ CMakeFiles/game.dir/src/app.cpp.obj: \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_tray.h \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_version.h \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_oldnames.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_image.h \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/glm.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_fixes.hpp \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cmath \
@@ -421,9 +422,25 @@ CMakeFiles/game.dir/src/app.cpp.obj: \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ostream.tcc \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/istream \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/istream.tcc \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/vector \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_uninitialized.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_vector.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_bvector.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/vector.tcc \
+ C:/Users/Sam/Desktop/PlayThrough/headers/shaders.hpp \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/fstream \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/codecvt.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/basic_file.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/c++io.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fstream.tcc \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/sstream \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/sstream.tcc \
+ C:/Users/Sam/Desktop/PlayThrough/headers/camera.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/headers/window.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/headers/shapeGenerator.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/headers/ShapeData.hpp \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/memory \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_tempbuf.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_uninitialized.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_raw_storage_iter.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/align.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/unique_ptr.h \
@@ -438,10 +455,8 @@ CMakeFiles/game.dir/src/app.cpp.obj: \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/backward/auto_ptr.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/pstl/glue_memory_defs.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/pstl/execution_defs.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/vector \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_vector.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_bvector.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/vector.tcc \
+ C:/Users/Sam/Desktop/PlayThrough/headers/vertex.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/headers/objectGenerator.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/Importer.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/types.h \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/defs.h \
@@ -484,18 +499,4 @@ CMakeFiles/game.dir/src/app.cpp.obj: \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/material.inl \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/anim.h \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/metadata.h \
- C:/Users/Sam/Desktop/PlayThrough/include/assimp/postprocess.h \
- C:/Users/Sam/Desktop/PlayThrough/headers/window.hpp \
- C:/Users/Sam/Desktop/PlayThrough/headers/shaders.hpp \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/fstream \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/codecvt.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/basic_file.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/c++io.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fstream.tcc \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/sstream \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/sstream.tcc \
- C:/Users/Sam/Desktop/PlayThrough/headers/camera.hpp \
- C:/Users/Sam/Desktop/PlayThrough/headers/shapeGenerator.hpp \
- C:/Users/Sam/Desktop/PlayThrough/headers/ShapeData.hpp \
- C:/Users/Sam/Desktop/PlayThrough/headers/vertex.hpp \
- C:/Users/Sam/Desktop/PlayThrough/headers/objectGenerator.hpp
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/postprocess.h

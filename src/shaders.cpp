@@ -50,6 +50,7 @@ GLuint Shader::linkProgram(GLuint vertexShader, GLuint fragmentShader) {
     return program;
 }
 
+// Unused, no use yet.
 GLuint Shader::loadShaderProgram(std::string& vertSource, std::string& fragSource) {
     GLuint vs = compileShader(vertSource, GL_VERTEX_SHADER);    // Compile vertex shader
     GLuint fs = compileShader(fragSource, GL_FRAGMENT_SHADER);  // Compile fragment shader

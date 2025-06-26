@@ -1,20 +1,15 @@
 #pragma once
 
 #include <SDL3/SDL.h>
+#include <SDL3/SDL_image.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glad/glad.h>
 #include <iostream>
-#include <memory>
 #include <vector>
+#include <cmath>
 
-// Assimp testing
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
-
-#include "window.hpp"
 #include "shaders.hpp"
 #include "camera.hpp"
 #include "shapeGenerator.hpp"
@@ -32,32 +27,37 @@ class App {
 
    private:
     // Private functions | TESTING |
-    void processMesh(aiMesh* mesh);
-    void processNode(aiNode* node, const aiScene* scene);
+
     // VAOS
     GLuint cubeVertexArrayID;
     GLuint arrowVertexArrayID;
     GLuint normalVertexArrayID;
-    GLuint SceneVertexArrayID;
+
     // BUFFERS
     GLuint theVertexBufferID;
     GLuint theIndexBufferID;
     GLuint normalBufferID;
-    GLuint SceneVertexBufferID;
-    GLuint SceneElementBufferID;
 
+    // Shaders
     GLuint shaderProgram;
+    GLuint testShaders;
 
     // Class instances
     Camera camera;
     ShapeData ArrowShape = ShapeGenerator::makeArrow();
     ShapeData CubeShape = ShapeGenerator::makeCube();
     // The pov basically
-    glm::mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), static_cast<float>(window.getWidth()) / static_cast<float>(window.getHeight()), 1.0f, 40.0f);
+
     // Vectors
 
-    std::vector<GLfloat> vertices;  // TESTING
-    std::vector<GLuint> indices;    // TESTING
     // temporary variables
     float move_straight = 0;
+    GLfloat fov = 60;
+
+    // TODO: TEST OBJECTS | CAUTION MUST DELETE AFTER |
+    GLuint testVertexArray;
+    GLuint testVertBufferObj;
+    GLuint testIndiceBufferObj;
+    GLuint testTexture1;
+    GLuint testTexture2;
 };

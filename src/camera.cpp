@@ -14,6 +14,18 @@ void Camera::mouseUpdate(const glm::vec2 &newMousePosition) {
     viewDirection = glm::mat3(glm::rotate(glm::mat4(1.0f), glm::radians(mouse_y), rotateAround)) * viewDirection;
 }
 
+void Camera::changefov(GLfloat &fovy) {
+    fov = fovy;
+    // if (fov > 60) { fov = 60; }
+    // if (fov <= 1) { fov = 1;  }
+    std::cout << "fov : " << fov << "\n";
+}
+
+glm::mat4 Camera::getProjectionMatrix() {
+    projectionMatrix = glm::perspective(glm::radians(fov), static_cast<float>(window.getWidth()) / static_cast<float>(window.getHeight()), 1.0f, 40.0f);
+    return projectionMatrix;
+}
+
 glm::mat4 Camera::getWorldToViewMatrix() const {
     return glm::lookAt(position, position + viewDirection, UP);
 }
