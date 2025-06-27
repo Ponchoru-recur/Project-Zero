@@ -24,7 +24,6 @@ struct Light {
 };
 
 in vec2 texCoords;
-in vec3 objColor;
 
 in vec3 vertexPositionWorld;  // Position of the object with transform
 in vec3 normalWorld;          // Normals of the object with transform
@@ -57,7 +56,6 @@ void main() {
     vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, flipped));
 
     // Specular
-
     vec3 viewDir = normalize(viewPosition - vertexPositionWorld);
     vec3 reflectorDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectorDir), 0.0), material.shininess);

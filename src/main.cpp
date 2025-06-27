@@ -11,8 +11,6 @@
 #include "window.hpp"
 #include "app.hpp"
 
-#define w_window 900
-#define h_window 700
 #define FRAME_DELAY (1000 / 60)
 
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[]) {

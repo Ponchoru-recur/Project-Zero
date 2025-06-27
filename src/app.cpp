@@ -9,13 +9,19 @@ const int VERTEX_BYTE_SIZE = 9;
 ObjectGenerator generateObject;
 
 void App::init() {
-    glm::vec2 kan = generateObject.uploadObj("../assets/objects/kan.obj", GL_STATIC_DRAW);
+    glm::vec2 kan = generateObject.uploadObj("../assets/objects/cube.obj", GL_DYNAMIC_DRAW);
     generateObject.transform(kan, glm::vec3(+0.0f, +2.0f, -4.0f));
+    GLuint container_wood = generateObject.uploadImg("../assets/images/uv_grid_opengl.jpg");
+    // GLuint container_metal = generateObject.uploadImg("../assets/images/container2_specular.png");
+    generateObject.attach(kan, container_wood, false);
+    // generateObject.attach(kan, container_metal, true);
 
     glm::vec2 platform = generateObject.uploadObj("../assets/objects/platform.obj", GL_DYNAMIC_DRAW);
+    generateObject.attach(platform, container_wood, false);
+    // generateObject.attach(platform, container_metal, true);
     generateObject.transform(platform, glm::vec3(+0.0f, -5.0f, +0.0f));
 
-    generateObject.process();
+    // generateObject.process();
 
     // Important! Init the shaders first!
     std::string vertexShaderSource = Shader::LoadShaderFileSource("../shaders/vertexShader.vs");
@@ -289,52 +295,95 @@ void App::render() {
     glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(arrowToWorldMatrix));
     glDrawElements(GL_TRIANGLES, ArrowShape.num_indices, GL_UNSIGNED_SHORT, (void*)(CubeShape.getIndiceBufferSize()));
 
+    glUseProgram(testShaders);
+
     for (const auto& object : generateObject.getDynamicMeshes()) {
         glBindVertexArray(object.VAO);
-        MatrixGangUwu = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * object.objToWorldMatrix;
-        glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
-        glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(object.objToWorldMatrix));
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, object.texture0);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, object.texture1);
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, testTexture3);
+
+        glUniform1i(glGetUniformLocation(testShaders, "material.diffuse"), 0);
+        glUniform1i(glGetUniformLocation(testShaders, "material.specular"), 1);
+        glUniform1i(glGetUniformLocation(testShaders, "emissionMap"), 2);
+        glUniform1f(glGetUniformLocation(testShaders, "material.shininess"), 32.0f);
+        glUniform3fv(glGetUniformLocation(testShaders, "light.position"), 1, glm::value_ptr(camera.getPosition()));
+        glUniform3fv(glGetUniformLocation(testShaders, "light.direction"), 1, glm::value_ptr(camera.getViewDirection()));
+        glUniform1f(glGetUniformLocation(testShaders, "light.cutOff"), glm::cos(glm::radians(12.5f)));
+        glUniform1f(glGetUniformLocation(testShaders, "light.outerCutOff"), glm::cos(glm::radians(17.5f)));
+        glUniform3fv(glGetUniformLocation(testShaders, "light.ambient"), 1, glm::value_ptr(glm::vec3(0.2f, 0.2f, 0.2f)));
+        glUniform3fv(glGetUniformLocation(testShaders, "light.diffuse"), 1, glm::value_ptr(glm::vec3(0.5f, 0.5f, 0.5f)));
+        glUniform3fv(glGetUniformLocation(testShaders, "light.specular"), 1, glm::value_ptr(glm::vec3(1.0f, 1.0f, 1.0f)));
+        glUniform1f(glGetUniformLocation(testShaders, "light.constant"), 1.0f);
+        glUniform1f(glGetUniformLocation(testShaders, "light.linear"), 0.09f);
+        glUniform1f(glGetUniformLocation(testShaders, "light.quadratic"), 0.032f);
+        glUniform3fv(glGetUniformLocation(testShaders, "viewPosition"), 1, glm::value_ptr(camera.getPosition()));
+
+        glm::mat4 modelToWorldMatrix = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * object.objToWorldMatrix;
+        glUniformMatrix4fv(glGetUniformLocation(testShaders, "modelToWorldProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(modelToWorldMatrix));
+        glUniformMatrix4fv(glGetUniformLocation(testShaders, "modelToWorldTransformation"), 1, GL_FALSE, glm::value_ptr(object.objToWorldMatrix));
         glDrawElements(GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT, 0);
     }
 
-    glBindVertexArray(generateObject.getStaticVao());
-    for (auto& object : generateObject.getStaticMeshes()) {
-        MatrixGangUwu = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * object.objToWorldMatrix;
-        glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
-        glDrawElementsBaseVertex(GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT, (void*)(object.baseIndex * sizeof(GLuint)), object.baseVertex);
-    }
+    // glBindVertexArray(generateObject.getStaticVao());
+
+    // for (auto& object : generateObject.getStaticMeshes()) {
+
+    //     glUniform1i(glGetUniformLocation(testShaders, "material.diffuse"), 0);
+    //     glUniform1i(glGetUniformLocation(testShaders, "material.specular"), 1);
+    //     glUniform1i(glGetUniformLocation(testShaders, "emissionMap"), 2);
+    //     glUniform1f(glGetUniformLocation(testShaders, "material.shininess"), 32.0f);
+    //     glUniform3fv(glGetUniformLocation(testShaders, "light.position"), 1, glm::value_ptr(camera.getPosition()));
+    //     glUniform3fv(glGetUniformLocation(testShaders, "light.direction"), 1, glm::value_ptr(camera.getViewDirection()));
+    //     glUniform1f(glGetUniformLocation(testShaders, "light.cutOff"), glm::cos(glm::radians(12.5f)));
+    //     glUniform1f(glGetUniformLocation(testShaders, "light.outerCutOff"), glm::cos(glm::radians(17.5f)));
+    //     glUniform3fv(glGetUniformLocation(testShaders, "light.ambient"), 1, glm::value_ptr(glm::vec3(0.2f, 0.2f, 0.2f)));
+    //     glUniform3fv(glGetUniformLocation(testShaders, "light.diffuse"), 1, glm::value_ptr(glm::vec3(0.5f, 0.5f, 0.5f)));
+    //     glUniform3fv(glGetUniformLocation(testShaders, "light.specular"), 1, glm::value_ptr(glm::vec3(1.0f, 1.0f, 1.0f)));
+    //     glUniform1f(glGetUniformLocation(testShaders, "light.constant"), 1.0f);
+    //     glUniform1f(glGetUniformLocation(testShaders, "light.linear"), 0.09f);
+    //     glUniform1f(glGetUniformLocation(testShaders, "light.quadratic"), 0.032f);
+    //     glUniform3fv(glGetUniformLocation(testShaders, "viewPosition"), 1, glm::value_ptr(camera.getPosition()));
+
+    //     glm::mat4 modelToWorldMatrix = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * object.objToWorldMatrix;
+    //     glUniformMatrix4fv(glGetUniformLocation(testShaders, "modelToWorldProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(modelToWorldMatrix));
+    //     glUniformMatrix4fv(glGetUniformLocation(testShaders, "modelToWorldTransformation"), 1, GL_FALSE, glm::value_ptr(object.objToWorldMatrix));
+    //     glDrawElementsBaseVertex(GL_TRIANGLES, object.indexCount, GL_UNSIGNED_INT, (void*)(object.baseIndex * sizeof(GLuint)), object.baseVertex);
+    // }
 
     /* | TESTING | */
 
-    glUseProgram(testShaders);
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, testTexture1);
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, testTexture2);
-    glActiveTexture(GL_TEXTURE2);
-    glBindTexture(GL_TEXTURE_2D, testTexture3);
+    // glActiveTexture(GL_TEXTURE0);
+    // glBindTexture(GL_TEXTURE_2D, testTexture1);
+    // glActiveTexture(GL_TEXTURE1);
+    // glBindTexture(GL_TEXTURE_2D, testTexture2);
+    // glActiveTexture(GL_TEXTURE2);
+    // glBindTexture(GL_TEXTURE_2D, testTexture3);
 
-    glBindVertexArray(testVertexArray);
-    glm::mat4 modelTransformMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)) * glm::scale(glm::mat4(1.0f), glm::vec3(5.0f, 5.0f, 5.0f));
-    glm::mat4 modelToWorldMatrix = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * modelTransformMatrix;
+    // glBindVertexArray(testVertexArray);
+    // modelTransformMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f)) * glm::scale(glm::mat4(1.0f), glm::vec3(5.0f, 5.0f, 5.0f));
+    // modelToWorldMatrix = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * modelTransformMatrix;
 
-    glUniformMatrix4fv(glGetUniformLocation(testShaders, "modelToWorldProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(modelToWorldMatrix));
-    glUniformMatrix4fv(glGetUniformLocation(testShaders, "modelToWorldTransformation"), 1, GL_FALSE, glm::value_ptr(modelTransformMatrix));
-    glUniform1i(glGetUniformLocation(testShaders, "material.diffuse"), 0);
-    glUniform1i(glGetUniformLocation(testShaders, "material.specular"), 1);
-    glUniform1i(glGetUniformLocation(testShaders, "emissionMap"), 2);
-    glUniform1f(glGetUniformLocation(testShaders, "material.shininess"), 32.0f);
-    glUniform3fv(glGetUniformLocation(testShaders, "light.position"), 1, glm::value_ptr(camera.getPosition()));
-    glUniform3fv(glGetUniformLocation(testShaders, "light.direction"), 1, glm::value_ptr(camera.getViewDirection()));
-    glUniform1f(glGetUniformLocation(testShaders, "light.cutOff"), glm::cos(glm::radians(12.5f)));
-    glUniform1f(glGetUniformLocation(testShaders, "light.outerCutOff"), glm::cos(glm::radians(17.5f)));
-    glUniform3fv(glGetUniformLocation(testShaders, "light.ambient"), 1, glm::value_ptr(glm::vec3(0.2f, 0.2f, 0.2f)));
-    glUniform3fv(glGetUniformLocation(testShaders, "light.diffuse"), 1, glm::value_ptr(glm::vec3(0.5f, 0.5f, 0.5f)));
-    glUniform3fv(glGetUniformLocation(testShaders, "light.specular"), 1, glm::value_ptr(glm::vec3(1.0f, 1.0f, 1.0f)));
-    glUniform1f(glGetUniformLocation(testShaders, "light.constant"), 1.0f);
-    glUniform1f(glGetUniformLocation(testShaders, "light.linear"), 0.09f);
-    glUniform1f(glGetUniformLocation(testShaders, "light.quadratic"), 0.032f);
-    glUniform3fv(glGetUniformLocation(testShaders, "viewPosition"), 1, glm::value_ptr(camera.getPosition()));
+    // glUniformMatrix4fv(glGetUniformLocation(testShaders, "modelToWorldProjectionMatrix"), 1, GL_FALSE, glm::value_ptr(modelToWorldMatrix));
+    // glUniformMatrix4fv(glGetUniformLocation(testShaders, "modelToWorldTransformation"), 1, GL_FALSE, glm::value_ptr(modelTransformMatrix));
+    // glUniform1i(glGetUniformLocation(testShaders, "material.diffuse"), 0);
+    // glUniform1i(glGetUniformLocation(testShaders, "material.specular"), 1);
+    // glUniform1i(glGetUniformLocation(testShaders, "emissionMap"), 2);
+    // glUniform1f(glGetUniformLocation(testShaders, "material.shininess"), 32.0f);
+    // glUniform3fv(glGetUniformLocation(testShaders, "light.position"), 1, glm::value_ptr(camera.getPosition()));
+    // glUniform3fv(glGetUniformLocation(testShaders, "light.direction"), 1, glm::value_ptr(camera.getViewDirection()));
+    // glUniform1f(glGetUniformLocation(testShaders, "light.cutOff"), glm::cos(glm::radians(12.5f)));
+    // glUniform1f(glGetUniformLocation(testShaders, "light.outerCutOff"), glm::cos(glm::radians(17.5f)));
+    // glUniform3fv(glGetUniformLocation(testShaders, "light.ambient"), 1, glm::value_ptr(glm::vec3(0.2f, 0.2f, 0.2f)));
+    // glUniform3fv(glGetUniformLocation(testShaders, "light.diffuse"), 1, glm::value_ptr(glm::vec3(0.5f, 0.5f, 0.5f)));
+    // glUniform3fv(glGetUniformLocation(testShaders, "light.specular"), 1, glm::value_ptr(glm::vec3(1.0f, 1.0f, 1.0f)));
+    // glUniform1f(glGetUniformLocation(testShaders, "light.constant"), 1.0f);
+    // glUniform1f(glGetUniformLocation(testShaders, "light.linear"), 0.09f);
+    // glUniform1f(glGetUniformLocation(testShaders, "light.quadratic"), 0.032f);
+    // glUniform3fv(glGetUniformLocation(testShaders, "viewPosition"), 1, glm::value_ptr(camera.getPosition()));
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)(0));
     GLenum err;
