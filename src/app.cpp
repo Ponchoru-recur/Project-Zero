@@ -328,6 +328,9 @@ void App::render() {
     glUniform3fv(glGetUniformLocation(testShaders, "light.ambient"), 1, glm::value_ptr(glm::vec3(0.2f, 0.2f, 0.2f)));
     glUniform3fv(glGetUniformLocation(testShaders, "light.diffuse"), 1, glm::value_ptr(glm::vec3(0.5f, 0.5f, 0.5f)));
     glUniform3fv(glGetUniformLocation(testShaders, "light.specular"), 1, glm::value_ptr(glm::vec3(1.0f, 1.0f, 1.0f)));
+    glUniform1f(glGetUniformLocation(testShaders, "light.constant"), 1.0f);
+    glUniform1f(glGetUniformLocation(testShaders, "light.linear"), 0.09f);
+    glUniform1f(glGetUniformLocation(testShaders, "light.quadratic"), 0.032f);
     glUniform3fv(glGetUniformLocation(testShaders, "viewPosition"), 1, glm::value_ptr(camera.getPosition()));
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)(0));

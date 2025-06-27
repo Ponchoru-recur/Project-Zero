@@ -9,10 +9,16 @@ struct Material {
 };
 
 struct Light {
+    // vec3 direction;
+
     vec3 position;
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
+
+    float constant;
+    float linear;
+    float quadratic;
 };
 
 in vec2 texCoords;
@@ -30,17 +36,20 @@ uniform sampler2D emissionMap;
 // TODO: DONT FORGET TO ADD VALUES TO THE LIGHTS AND CHANGE LightColor
 
 void main() {
+    // Distance
+    float distance = length(light.position - vertexPositionWorld);
+    float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
+
     // Texture
     vec2 flipped = vec2(texCoords.x, 1.0 - texCoords.y);
-
-    // Ambient
-
+    // Emission that i dont even use yet
     vec3 emission = texture(emissionMap, flipped).rgb * 1.0;
-
+    // Ambient
     vec3 ambient = light.ambient * vec3(texture(material.diffuse, flipped));
 
     vec3 norm = normalize(normalWorld);
     // vector that points toward the light
+    // FIXME: normalize(-light.direction);
     vec3 lightDir = normalize(light.position - vertexPositionWorld);
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, flipped));
@@ -52,7 +61,11 @@ void main() {
     float spec = pow(max(dot(viewDir, reflectorDir), 0.0), material.shininess);
     vec3 specular = light.specular * spec * vec3(texture(material.specular, flipped));
 
+    ambient *= attenuation;
+    diffuse *= attenuation;
+    specular *= attenuation;
+
     // ambient + diffuse * texture
-    vec3 result = (ambient + diffuse + specular + emission);
+    vec3 result = (ambient + diffuse + specular);
     FragColor = vec4(result, 1.0);
 }
