@@ -34,6 +34,10 @@ glm::vec3 Camera::getPosition() {
     return position;
 }
 
+glm::vec3 Camera::getViewDirection() {
+    return viewDirection;
+}
+
 void Camera::moveForward() {
     position += movement_speed * viewDirection;
 }

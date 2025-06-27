@@ -12,6 +12,7 @@ class Camera {
     glm::mat4 getProjectionMatrix();
     glm::mat4 getWorldToViewMatrix() const;
     glm::vec3 getPosition();
+    glm::vec3 getViewDirection();
 
     void moveForward();
     void moveBackward();

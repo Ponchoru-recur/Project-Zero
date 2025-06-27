@@ -324,7 +324,10 @@ void App::render() {
     glUniform1i(glGetUniformLocation(testShaders, "material.specular"), 1);
     glUniform1i(glGetUniformLocation(testShaders, "emissionMap"), 2);
     glUniform1f(glGetUniformLocation(testShaders, "material.shininess"), 32.0f);
-    glUniform3fv(glGetUniformLocation(testShaders, "light.position"), 1, glm::value_ptr(glm::vec3(-0.2f, -1.0f, move_straight)));
+    glUniform3fv(glGetUniformLocation(testShaders, "light.position"), 1, glm::value_ptr(camera.getPosition()));
+    glUniform3fv(glGetUniformLocation(testShaders, "light.direction"), 1, glm::value_ptr(camera.getViewDirection()));
+    glUniform1f(glGetUniformLocation(testShaders, "light.cutOff"), glm::cos(glm::radians(12.5f)));
+    glUniform1f(glGetUniformLocation(testShaders, "light.outerCutOff"), glm::cos(glm::radians(17.5f)));
     glUniform3fv(glGetUniformLocation(testShaders, "light.ambient"), 1, glm::value_ptr(glm::vec3(0.2f, 0.2f, 0.2f)));
     glUniform3fv(glGetUniformLocation(testShaders, "light.diffuse"), 1, glm::value_ptr(glm::vec3(0.5f, 0.5f, 0.5f)));
     glUniform3fv(glGetUniformLocation(testShaders, "light.specular"), 1, glm::value_ptr(glm::vec3(1.0f, 1.0f, 1.0f)));
