@@ -7,7 +7,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Direct the game.exe to project/bin
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
 
-# Include SDL3 + your headers
+# Set to Debug mode so you i wont go insane finding things
+set(CMAKE_CXX_FLAGS_DEBUG "$ {CMAKE_CXX_FLAGS_DEBUG} -g")
+
+# Include SDL3 + my headers
 include_directories(
     "${PROJECT_SOURCE_DIR}/include"
     "${PROJECT_SOURCE_DIR}/headers"
