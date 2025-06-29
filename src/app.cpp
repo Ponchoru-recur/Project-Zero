@@ -13,11 +13,11 @@ void App::init() {
     generateObject.transform(kan, glm::vec3(+0.0f, +2.0f, -4.0f));
     GLuint container_wood = generateObject.uploadImg("../assets/images/uv_grid_opengl.jpg");
     // GLuint container_metal = generateObject.uploadImg("../assets/images/container2_specular.png");
-    generateObject.attach(kan, container_wood, true);
+    generateObject.attach(kan, container_wood, false);
     // generateObglm::vec3(1.0f, 1.0f, 1.0f)ject.attach(kan, container_metal, true);
 
     glm::vec2 platform = generateObject.uploadObj("../assets/objects/platform.obj", GL_DYNAMIC_DRAW);
-    generateObject.attach(platform, container_wood, true);
+    generateObject.attach(platform, container_wood, false);
     // generateObject.attach(platform, container_metal, true);
     generateObject.transform(platform, glm::vec3(+0.0f, -5.0f, +0.0f));
 
@@ -237,8 +237,14 @@ void App::render() {
 
         glUniform3fv(glGetUniformLocation(testShaders, "spotLight.position"), 1, glm::value_ptr(camera.getPosition()));
         glUniform3fv(glGetUniformLocation(testShaders, "spotLight.direction"), 1, glm::value_ptr(camera.getViewDirection()));
-        glUniform1f(glGetUniformLocation(testShaders, "spotLight.cutOff"), 12.5f);
-        glUniform1f(glGetUniformLocation(testShaders, "spotLight.outerCutOff"), 17.5f);
+
+        // GLint location = glGetUniformLocation(testShaders, "spotLight.direction");
+        // if (location == -1) {
+        //     std::cout << "Uniform 'spotLight.direction' not found or not active!" << std::endl;
+        // }
+        // std::cout << "View Direction : " << camera.getViewDirection().z << "\n";
+        glUniform1f(glGetUniformLocation(testShaders, "spotLight.cutOff"), glm::cos(glm::radians(12.5f)));
+        glUniform1f(glGetUniformLocation(testShaders, "spotLight.outerCutOff"), glm::cos(glm::radians(17.5f)));
         glUniform3fv(glGetUniformLocation(testShaders, "spotLight.ambient"), 1, glm::value_ptr(glm::vec3(0.2f, 0.2f, 0.2f)));
         glUniform3fv(glGetUniformLocation(testShaders, "spotLight.diffuse"), 1, glm::value_ptr(glm::vec3(0.5f, 0.5f, 0.5f)));
         glUniform3fv(glGetUniformLocation(testShaders, "spotLight.specular"), 1, glm::value_ptr(glm::vec3(1.0f, 1.0f, 1.0f)));
