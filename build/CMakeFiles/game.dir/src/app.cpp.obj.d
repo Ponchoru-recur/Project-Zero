@@ -339,7 +339,7 @@ CMakeFiles/game.dir/src/app.cpp.obj: \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_uint1_sized.hpp \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cstring \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/type_ptr.inl \
- C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h \
  C:/Users/Sam/Desktop/PlayThrough/include/KHR/khrplatform.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iostream \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ostream \

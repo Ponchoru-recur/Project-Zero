@@ -185,7 +185,7 @@ CMakeFiles/game.dir/src/objectGenerator.cpp.obj: \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_vector.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_bvector.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/vector.tcc \
- C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h \
  C:/Users/Sam/Desktop/PlayThrough/include/KHR/khrplatform.h \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/glm.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_fixes.hpp \

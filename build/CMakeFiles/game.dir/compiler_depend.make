@@ -346,7 +346,7 @@ CMakeFiles/game.dir/src/app.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/app.cp
   C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector2.inl \
   C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector3.h \
   C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector3.inl \
-  C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h \
+  C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/common.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_fixes.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_vectorize.hpp \
@@ -797,7 +797,7 @@ CMakeFiles/game.dir/src/camera.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/cam
   C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_tray.h \
   C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_version.h \
   C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_video.h \
-  C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h \
+  C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/common.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_fixes.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_vectorize.hpp \
@@ -944,7 +944,7 @@ CMakeFiles/game.dir/src/camera.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/cam
   C:/Users/Sam/Desktop/PlayThrough/include/glm/vec4.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/vector_relational.hpp
 
-CMakeFiles/game.dir/src/glad.c.obj: C:/Users/Sam/Desktop/PlayThrough/src/glad.c \
+CMakeFiles/game.dir/src/gl.c.obj: C:/Users/Sam/Desktop/PlayThrough/src/gl.c \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/adxintrin.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/ammintrin.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/amxbf16intrin.h \
@@ -1220,7 +1220,7 @@ CMakeFiles/game.dir/src/glad.c.obj: C:/Users/Sam/Desktop/PlayThrough/src/glad.c 
   C:/MinGW/mingw64/x86_64-w64-mingw32/include/wtypes.h \
   C:/MinGW/mingw64/x86_64-w64-mingw32/include/wtypesbase.h \
   C:/Users/Sam/Desktop/PlayThrough/include/KHR/khrplatform.h \
-  C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h
+  C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h
 
 CMakeFiles/game.dir/src/main.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/main.cpp \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/algorithm \
@@ -1584,7 +1584,7 @@ CMakeFiles/game.dir/src/main.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/main.
   C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector2.inl \
   C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector3.h \
   C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector3.inl \
-  C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h \
+  C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/common.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_fixes.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_vectorize.hpp \
@@ -2082,7 +2082,7 @@ CMakeFiles/game.dir/src/objectGenerator.cpp.obj: C:/Users/Sam/Desktop/PlayThroug
   C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector2.inl \
   C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector3.h \
   C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector3.inl \
-  C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h \
+  C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/common.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_fixes.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_vectorize.hpp \
@@ -2417,7 +2417,7 @@ CMakeFiles/game.dir/src/shaders.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/sh
   C:/MinGW/mingw64/x86_64-w64-mingw32/include/wctype.h \
   C:/Users/Sam/Desktop/PlayThrough/headers/shaders.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/KHR/khrplatform.h \
-  C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h
+  C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h
 
 CMakeFiles/game.dir/src/shapeData.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/shapeData.cpp \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/array \
@@ -2643,7 +2643,7 @@ CMakeFiles/game.dir/src/shapeData.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/
   C:/Users/Sam/Desktop/PlayThrough/headers/shapeData.hpp \
   C:/Users/Sam/Desktop/PlayThrough/headers/vertex.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/KHR/khrplatform.h \
-  C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h \
+  C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/common.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_fixes.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_vectorize.hpp \
@@ -3003,7 +3003,7 @@ CMakeFiles/game.dir/src/shapeGenerator.cpp.obj: C:/Users/Sam/Desktop/PlayThrough
   C:/Users/Sam/Desktop/PlayThrough/headers/shapeGenerator.hpp \
   C:/Users/Sam/Desktop/PlayThrough/headers/vertex.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/KHR/khrplatform.h \
-  C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h \
+  C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/common.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_fixes.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_vectorize.hpp \
@@ -3405,7 +3405,7 @@ CMakeFiles/game.dir/src/window.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/win
   C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_tray.h \
   C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_version.h \
   C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_video.h \
-  C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h \
+  C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/common.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_fixes.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_vectorize.hpp \
@@ -4209,6 +4209,8 @@ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw3
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h:
 
+C:/Users/Sam/Desktop/PlayThrough/src/gl.c:
+
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/c++locale.h:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_double1_precision.hpp:
@@ -4559,9 +4561,7 @@ C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector3.h:
 
 C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector3.inl:
 
-C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_double.hpp:
-
-C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h:
+C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/common.hpp:
 
@@ -4691,6 +4691,8 @@ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_common.hpp:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_common.inl:
 
+C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_double.hpp:
+
 C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_double_precision.hpp:
 
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/objbase.h:
@@ -4786,8 +4788,6 @@ C:/Users/Sam/Desktop/PlayThrough/include/glm/vec4.hpp:
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xsaveoptintrin.h:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/vector_relational.hpp:
-
-C:/Users/Sam/Desktop/PlayThrough/src/glad.c:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/keylockerintrin.h:
 

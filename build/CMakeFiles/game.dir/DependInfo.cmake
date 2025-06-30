@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/Sam/Desktop/PlayThrough/src/glad.c" "CMakeFiles/game.dir/src/glad.c.obj" "gcc" "CMakeFiles/game.dir/src/glad.c.obj.d"
+  "C:/Users/Sam/Desktop/PlayThrough/src/gl.c" "CMakeFiles/game.dir/src/gl.c.obj" "gcc" "CMakeFiles/game.dir/src/gl.c.obj.d"
   "C:/Users/Sam/Desktop/PlayThrough/src/app.cpp" "CMakeFiles/game.dir/src/app.cpp.obj" "gcc" "CMakeFiles/game.dir/src/app.cpp.obj.d"
   "C:/Users/Sam/Desktop/PlayThrough/src/camera.cpp" "CMakeFiles/game.dir/src/camera.cpp.obj" "gcc" "CMakeFiles/game.dir/src/camera.cpp.obj.d"
   "C:/Users/Sam/Desktop/PlayThrough/src/main.cpp" "CMakeFiles/game.dir/src/main.cpp.obj" "gcc" "CMakeFiles/game.dir/src/main.cpp.obj.d"

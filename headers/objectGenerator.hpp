@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <cstddef>
-#include <glad/glad.h>
+#include <glad/gl.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <SDL3/SDL_image.h>

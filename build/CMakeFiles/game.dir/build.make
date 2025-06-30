@@ -101,20 +101,20 @@ CMakeFiles/game.dir/src/camera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/game.dir/src/camera.cpp.s"
 	C:\MinGW\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Sam\Desktop\PlayThrough\src\camera.cpp -o CMakeFiles\game.dir\src\camera.cpp.s
 
-CMakeFiles/game.dir/src/glad.c.obj: CMakeFiles/game.dir/flags.make
-CMakeFiles/game.dir/src/glad.c.obj: CMakeFiles/game.dir/includes_C.rsp
-CMakeFiles/game.dir/src/glad.c.obj: C:/Users/Sam/Desktop/PlayThrough/src/glad.c
-CMakeFiles/game.dir/src/glad.c.obj: CMakeFiles/game.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Sam\Desktop\PlayThrough\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/game.dir/src/glad.c.obj"
-	C:\MinGW\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/game.dir/src/glad.c.obj -MF CMakeFiles\game.dir\src\glad.c.obj.d -o CMakeFiles\game.dir\src\glad.c.obj -c C:\Users\Sam\Desktop\PlayThrough\src\glad.c
+CMakeFiles/game.dir/src/gl.c.obj: CMakeFiles/game.dir/flags.make
+CMakeFiles/game.dir/src/gl.c.obj: CMakeFiles/game.dir/includes_C.rsp
+CMakeFiles/game.dir/src/gl.c.obj: C:/Users/Sam/Desktop/PlayThrough/src/gl.c
+CMakeFiles/game.dir/src/gl.c.obj: CMakeFiles/game.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Sam\Desktop\PlayThrough\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/game.dir/src/gl.c.obj"
+	C:\MinGW\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/game.dir/src/gl.c.obj -MF CMakeFiles\game.dir\src\gl.c.obj.d -o CMakeFiles\game.dir\src\gl.c.obj -c C:\Users\Sam\Desktop\PlayThrough\src\gl.c
 
-CMakeFiles/game.dir/src/glad.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/game.dir/src/glad.c.i"
-	C:\MinGW\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Sam\Desktop\PlayThrough\src\glad.c > CMakeFiles\game.dir\src\glad.c.i
+CMakeFiles/game.dir/src/gl.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/game.dir/src/gl.c.i"
+	C:\MinGW\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Sam\Desktop\PlayThrough\src\gl.c > CMakeFiles\game.dir\src\gl.c.i
 
-CMakeFiles/game.dir/src/glad.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/game.dir/src/glad.c.s"
-	C:\MinGW\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Sam\Desktop\PlayThrough\src\glad.c -o CMakeFiles\game.dir\src\glad.c.s
+CMakeFiles/game.dir/src/gl.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/game.dir/src/gl.c.s"
+	C:\MinGW\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Sam\Desktop\PlayThrough\src\gl.c -o CMakeFiles\game.dir\src\gl.c.s
 
 CMakeFiles/game.dir/src/main.cpp.obj: CMakeFiles/game.dir/flags.make
 CMakeFiles/game.dir/src/main.cpp.obj: CMakeFiles/game.dir/includes_CXX.rsp
@@ -210,7 +210,7 @@ CMakeFiles/game.dir/src/window.cpp.s: cmake_force
 game_OBJECTS = \
 "CMakeFiles/game.dir/src/app.cpp.obj" \
 "CMakeFiles/game.dir/src/camera.cpp.obj" \
-"CMakeFiles/game.dir/src/glad.c.obj" \
+"CMakeFiles/game.dir/src/gl.c.obj" \
 "CMakeFiles/game.dir/src/main.cpp.obj" \
 "CMakeFiles/game.dir/src/objectGenerator.cpp.obj" \
 "CMakeFiles/game.dir/src/shaders.cpp.obj" \
@@ -223,7 +223,7 @@ game_EXTERNAL_OBJECTS =
 
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/app.cpp.obj
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/camera.cpp.obj
-C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/glad.c.obj
+C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/gl.c.obj
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/main.cpp.obj
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/objectGenerator.cpp.obj
 C:/Users/Sam/Desktop/PlayThrough/bin/game.exe: CMakeFiles/game.dir/src/shaders.cpp.obj

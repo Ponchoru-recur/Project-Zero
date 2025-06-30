@@ -176,29 +176,29 @@ src/camera.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/camera.cpp.s
 .PHONY : src/camera.cpp.s
 
-src/glad.obj: src/glad.c.obj
-.PHONY : src/glad.obj
+src/gl.obj: src/gl.c.obj
+.PHONY : src/gl.obj
 
 # target to build an object file
-src/glad.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/glad.c.obj
-.PHONY : src/glad.c.obj
+src/gl.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/gl.c.obj
+.PHONY : src/gl.c.obj
 
-src/glad.i: src/glad.c.i
-.PHONY : src/glad.i
+src/gl.i: src/gl.c.i
+.PHONY : src/gl.i
 
 # target to preprocess a source file
-src/glad.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/glad.c.i
-.PHONY : src/glad.c.i
+src/gl.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/gl.c.i
+.PHONY : src/gl.c.i
 
-src/glad.s: src/glad.c.s
-.PHONY : src/glad.s
+src/gl.s: src/gl.c.s
+.PHONY : src/gl.s
 
 # target to generate assembly for a file
-src/glad.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/glad.c.s
-.PHONY : src/glad.c.s
+src/gl.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\game.dir\build.make CMakeFiles/game.dir/src/gl.c.s
+.PHONY : src/gl.c.s
 
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
@@ -359,9 +359,9 @@ help:
 	@echo ... src/camera.obj
 	@echo ... src/camera.i
 	@echo ... src/camera.s
-	@echo ... src/glad.obj
-	@echo ... src/glad.i
-	@echo ... src/glad.s
+	@echo ... src/gl.obj
+	@echo ... src/gl.i
+	@echo ... src/gl.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s

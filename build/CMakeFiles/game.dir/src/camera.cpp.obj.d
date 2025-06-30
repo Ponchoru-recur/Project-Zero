@@ -289,7 +289,7 @@ CMakeFiles/game.dir/src/camera.cpp.obj: \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_tray.h \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_version.h \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_oldnames.h \
- C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h \
  C:/Users/Sam/Desktop/PlayThrough/include/KHR/khrplatform.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iostream \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ostream \

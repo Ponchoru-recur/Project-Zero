@@ -1,7 +1,7 @@
 CMakeFiles/game.dir/src/shapeData.cpp.obj: \
  C:\Users\Sam\Desktop\PlayThrough\src\shapeData.cpp \
  C:/Users/Sam/Desktop/PlayThrough/headers/shapeData.hpp \
- C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h \
  C:/Users/Sam/Desktop/PlayThrough/include/KHR/khrplatform.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdint.h \
  C:/MinGW/mingw64/x86_64-w64-mingw32/include/stdint.h \

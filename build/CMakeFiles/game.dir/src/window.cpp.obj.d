@@ -86,7 +86,7 @@ CMakeFiles/game.dir/src/window.cpp.obj: \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_tray.h \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_version.h \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_oldnames.h \
- C:/Users/Sam/Desktop/PlayThrough/include/glad/glad.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h \
  C:/Users/Sam/Desktop/PlayThrough/include/KHR/khrplatform.h \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/glm.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_fixes.hpp \

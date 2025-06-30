@@ -33,7 +33,7 @@ Window::Window(const char* name, int w, int h) : window_width(w), window_height(
         return;
     }
 
-    if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress)) {
+    if (!gladLoaderLoadGL()) {
         std::cerr << "Failed to initialize GLAD\n";
         SDL_GL_DestroyContext(gl_context);
         SDL_DestroyWindow(window);
