@@ -36,31 +36,11 @@ void objectProcess::processMesh(aiMesh* mesh, std::vector<GLfloat>& verticesAndN
             verticesAndNormals.push_back(1.0f);
         }
 
-        // Vertex Colors (optional)
-        // if (mesh->HasVertexColors(0)) {
-        //     colors.push_back(mesh->mColors[0][i].r);
-        //     colors.push_back(mesh->mColors[0][i].g);
-        //     colors.push_back(mesh->mColors[0][i].b);
-        //     // Optional alpha
-        //     // vertices.push_back(mesh->mColors[0][i].a);
-        // } else {
-        //     colors.push_back(1.0f);  // Fallback white
-        //     colors.push_back(1.0f);
-        //     colors.push_back(1.0f);
-        // }
-    }
-
-    if (mesh->HasTextureCoords(0)) {
-        std::cout << "Has Textures " << "\n";
-        for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
-            // mTextureCoords[0] is an array of aiVector3D, but only x and y are used for 2D textures.
+        if (mesh->HasTextureCoords(0)) {
             textureCoordinates.push_back(mesh->mTextureCoords[0][i].x);
             textureCoordinates.push_back(mesh->mTextureCoords[0][i].y);
-        }
-    } else {
-        std::cout << "Has No Textures " << "\n";
-        // No texture coords — use fallback
-        for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
+
+        } else {
             textureCoordinates.push_back(0.0f);
             textureCoordinates.push_back(0.0f);
         }
@@ -79,6 +59,7 @@ glm::vec2 ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
     const aiScene* scene = importer.ReadFile(filepath, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_GenNormals);
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
         std::cerr << "Assimp error: " << importer.GetErrorString() << std::endl;
+        return glm::vec2(0, 0);
     }
 
     std::vector<GLfloat> localVerticesAndNormals;
@@ -100,7 +81,7 @@ glm::vec2 ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
         glBufferSubData(GL_ARRAY_BUFFER, 0, localVerticesAndNormals.size() * sizeof(GLfloat), localVerticesAndNormals.data());
         glBufferSubData(GL_ARRAY_BUFFER, localVerticesAndNormals.size() * sizeof(GLfloat), localtextureCoordinates.size() * sizeof(GLfloat), localtextureCoordinates.data());
 
-        glEnableVertexAttribArray(0);  // Position
+        glEnableVertexAttribArray(0);  // Positions
         glEnableVertexAttribArray(1);  // Normals
         glEnableVertexAttribArray(2);  // Texture
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, 0);
@@ -112,29 +93,34 @@ glm::vec2 ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
         m.indexCount = localIndices.size();
         m.objToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
         Meshes.push_back(m);
-        std::cout << "Sent to DYNAMIC_STORAGE" << "\n";
+        std::cout << "Sending to DYNAMIC_STORAGE" << "\n"
+                  << "Vertice count : " << localVerticesAndNormals.size() / 6 << "\n"
+                  << "Normal count : " << localVerticesAndNormals.size() / 6 << "\n"
+                  << "Texture count : " << localtextureCoordinates.size() << "\n"
+                  << "Indice count : " << localIndices.size() << "\n";
+
     } else {
         StaticMeshInfo obj;
         obj.baseVertex = currVertexSize;
         obj.baseIndex = currIndexSize;
         obj.indexCount = localIndices.size();
 
-        s_verticesAndNormals.insert(s_verticesAndNormals.begin(), localVerticesAndNormals.begin(), localVerticesAndNormals.end());
-        s_textureCoordinates.insert(s_textureCoordinates.begin(), localtextureCoordinates.begin(), localtextureCoordinates.end());
-        s_indices.insert(s_indices.begin(), localIndices.begin(), localIndices.end());
-
+        s_verticesAndNormals.insert(s_verticesAndNormals.end(), localVerticesAndNormals.begin(), localVerticesAndNormals.end());
+        s_textureCoordinates.insert(s_textureCoordinates.end(), localtextureCoordinates.begin(), localtextureCoordinates.end());
         s_indices.insert(s_indices.end(), localIndices.begin(), localIndices.end());
+
         obj.objToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
         s_meshes.push_back(obj);
+        std::cout << "Sending to STATIC_STORAGE" << "\n"
+                  << "Vertice count : " << s_verticesAndNormals.size() / 6 << "\n"
+                  << "Normal count : " << s_verticesAndNormals.size() / 6 << "\n"
+                  << "Texture count : " << s_textureCoordinates.size() << "\n"
+                  << "Indice count : " << s_indices.size() << "\n"
+                  << "BaseVertex : " << obj.baseVertex << "\n"
+                  << "BaseIndex : " << obj.baseIndex << "\n";
 
+        currVertexSize += localVerticesAndNormals.size() / 6;
         currIndexSize += localIndices.size();
-        currVertexSize += s_verticesAndNormals.size() / 6;
-        std::cout << "Sent to STATIC_STORAGE" << "\n";
-        std::cout << "mesh has "
-                  << s_verticesAndNormals.size() / 6 << " verts, "
-                  << localIndices.size() << " indices, "
-                  << " baseVertex=" << obj.baseVertex
-                  << " baseIndex=" << obj.baseIndex << "\n";
     }
 
     std::cout << "Uploaded to buffers!\n";
@@ -154,6 +140,12 @@ GLuint ObjectGenerator::uploadImg(const char* filepath) {
     SDL_Surface* formatted = SDL_ConvertSurface(surface, SDL_PIXELFORMAT_RGBA32);
     SDL_DestroySurface(surface);
 
+    if (!formatted) {
+        SDL_Log("Couldn't load image Error : %s", SDL_GetError());
+        SDL_DestroySurface(formatted);
+        return 0;
+    }
+
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
 
@@ -167,7 +159,6 @@ GLuint ObjectGenerator::uploadImg(const char* filepath) {
 
     SDL_DestroySurface(formatted);
     sampleImages.push_back(texture);
-    std::cout << "Successfully loaded img : " << sampleImages[sampleImages.size() - 1] << "\n";
     return sampleImages.size() - 1;
 }
 
@@ -187,20 +178,19 @@ void ObjectGenerator::attach(glm::vec2 obj_index, GLuint img_index, bool affecte
         } else {
             Meshes[obj_index.x].texture0 = sampleImages[img_index];
         }
-        std::cout << "img_index attached to dynamic : " << img_index << "\n";
+
     } else {
         if (affectedBySpecular == true) {
             s_meshes[obj_index.x].texture1 = sampleImages[img_index];
         } else {
             s_meshes[obj_index.x].texture0 = sampleImages[img_index];
         }
-        std::cout << "img_index attached to static" << img_index << "\n";
     }
 }
 
 void ObjectGenerator::process() {
     if (s_meshes.size() < 1) {
-        std::cout << "Generate process is disabled because no. \n";
+        std::cout << "Unable to process static meshes without static_meshes. \n";
         return;
     }
     std::cout << "Starting Process...\n";
@@ -212,25 +202,21 @@ void ObjectGenerator::process() {
 
     glBindBuffer(GL_ARRAY_BUFFER, s_vbo);
     glBufferData(GL_ARRAY_BUFFER, (s_verticesAndNormals.size() + s_textureCoordinates.size()) * sizeof(GLfloat), 0, GL_STATIC_DRAW);
-    // FIXME: FIX THE BUFFERS BECAUSE ITS NOT SET PROPERLY
-    //  Reminder that YOU put the vertices and normals in one vector and separated the color (because i might remove the color and replace it with texture sooner or later.)
+    glBufferSubData(GL_ARRAY_BUFFER, 0, s_verticesAndNormals.size() * sizeof(GLfloat), s_verticesAndNormals.data());
+    glBufferSubData(GL_ARRAY_BUFFER, s_verticesAndNormals.size() * sizeof(GLfloat), s_textureCoordinates.size() * sizeof(GLfloat), s_textureCoordinates.data());
+
     glEnableVertexAttribArray(0);  // Positions
     glEnableVertexAttribArray(1);  // Normals
     glEnableVertexAttribArray(2);  // Textures
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (void*)0);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (void*)(sizeof(GLfloat) * 3));
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(GLfloat) * s_verticesAndNormals.size()));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(GLfloat) * (s_verticesAndNormals.size())));
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, s_indices.size() * sizeof(GLuint), s_indices.data(), GL_STATIC_DRAW);
-    glBindVertexArray(0);
 
-    for (auto& object : s_meshes) {
-        std::cout << "indexCount : " << object.indexCount << "\n"
-                  << "baseIndex : " << object.baseIndex << "\n"
-                  << "baseVertex : " << object.baseVertex << "\n";
-    }
+    glBindVertexArray(0);
 }
 
 const std::vector<Mesh>& ObjectGenerator::getDynamicMeshes() const {
@@ -251,8 +237,18 @@ void ObjectGenerator::cleanup() {
         glDeleteBuffers(1, &object.VBO);
         glDeleteBuffers(1, &object.EBO);
     }
+
     Meshes.clear();
     Meshes.shrink_to_fit();
     std::vector<Mesh>().swap(Meshes);
+
+    glDeleteVertexArrays(1, &s_vao);
+    glDeleteBuffers(1, &s_vbo);
+    glDeleteBuffers(1, &s_ebo);
+
+    s_meshes.clear();
+    s_meshes.shrink_to_fit();
+    std::vector<StaticMeshInfo>().swap(s_meshes);
+
     std::cout << "Object cleanup finished.\n";
 }

@@ -12,6 +12,12 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
+struct Vortex {
+    glm::vec3 Position;
+    glm::vec3 Normals;
+    glm::vec2 Textures;
+};
+
 struct Mesh {
     GLuint VAO = 0, VBO = 0, EBO = 0;  // Vertex Array Object, Vertex Buffer Object, Element Buffer Object.
     glm::mat4 objToWorldMatrix;
@@ -53,7 +59,7 @@ class ObjectGenerator {
 
     std::vector<GLfloat> s_verticesAndNormals;
     std::vector<GLfloat> s_textureCoordinates;
-    std::vector<GLfloat> s_indices;
+    std::vector<GLuint> s_indices;
     std::vector<StaticMeshInfo> s_meshes;
 
     // Texture

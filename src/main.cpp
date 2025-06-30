@@ -54,7 +54,7 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event) {
     return SDL_APP_CONTINUE;
 }
 
-const float TargetFPS = 60;
+const float TargetFPS = 144;
 const float TargetFrameTIme = (1000.0f / TargetFPS);
 
 SDL_AppResult SDL_AppIterate(void *appstate) {

@@ -48,8 +48,6 @@ class App {
     ShapeData CubeShape = ShapeGenerator::makeCube();
     // The pov basically
 
-    // Vectors
-
     // temporary variables
     float move_straight = -0.3f;
     GLfloat fov = 60;
