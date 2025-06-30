@@ -1,11 +1,12 @@
 #pragma once
 
 #include <iostream>
-#include <vector>
-#include <glad/glad.h>
 #include <string>
-#include <glm/gtc/matrix_transform.hpp>
+#include <vector>
+#include <cstddef>
+#include <glad/glad.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include <SDL3/SDL_image.h>
 
 #include <assimp/Importer.hpp>
@@ -13,12 +14,12 @@
 #include <assimp/postprocess.h>
 
 struct Vortex {
-    glm::vec3 Position;
+    glm::vec3 Positions;
     glm::vec3 Normals;
     glm::vec2 Textures;
 };
 
-struct Mesh {
+struct dynamicMesh {
     GLuint VAO = 0, VBO = 0, EBO = 0;  // Vertex Array Object, Vertex Buffer Object, Element Buffer Object.
     glm::mat4 objToWorldMatrix;
     GLsizei indexCount = 0;
@@ -26,7 +27,7 @@ struct Mesh {
     GLuint texture1 = 0;
 };
 
-struct StaticMeshInfo {
+struct staticMesh {
     glm::mat4 objToWorldMatrix;
     GLsizei indexCount;
     GLuint baseIndex;
@@ -43,13 +44,13 @@ class ObjectGenerator {
     void attach(glm::vec2 obj_index, GLuint img_index, bool affected_by_specular);
     void process();
     GLuint getStaticVao();
-    const std::vector<Mesh>& getDynamicMeshes() const;
-    const std::vector<StaticMeshInfo>& getStaticMeshes() const;
+    const std::vector<dynamicMesh>& getDynamicMeshes() const;
+    const std::vector<staticMesh>& getStaticMeshes() const;
     void cleanup();
 
    private:
     // Dynamic
-    std::vector<Mesh> Meshes;
+    std::vector<dynamicMesh> Meshes;
     // Static Objects
     GLuint s_vao = 0;
     GLuint s_vbo = 0;
@@ -57,10 +58,9 @@ class ObjectGenerator {
     GLsizei currIndexSize = 0;
     GLsizei currVertexSize = 0;
 
-    std::vector<GLfloat> s_verticesAndNormals;
-    std::vector<GLfloat> s_textureCoordinates;
+    std::vector<Vortex> globalInterleavedData;
     std::vector<GLuint> s_indices;
-    std::vector<StaticMeshInfo> s_meshes;
+    std::vector<staticMesh> s_meshes;
 
     // Texture
     std::vector<GLuint> sampleImages;

@@ -9,7 +9,7 @@
 
 class ShapeData {
    public:
-    ShapeData() : vertices(0), num_vertices(0), indices(0), num_indices(0) {}
+    ShapeData() : vertices(0), indices(0), num_vertices(0), num_indices(0) {}
     Vertex *vertices;
     GLushort *indices;
 

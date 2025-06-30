@@ -25,6 +25,13 @@ file(GLOB_RECURSE SOURCES "${PROJECT_SOURCE_DIR}/src/*.[cC]*")
 
 add_executable(game ${SOURCES} ${HEADERS})
 
+# target_compile_options(game PRIVATE
+#    $<$<CXX_COMPILER_ID:GNU>:
+#    -Wall -Wextra -Wpedantic -Werror
+#    -Wconversion -Wshadow -Wfloat-equal -Winvalid-pch
+#    >
+#)
+
 # OpenGL
 find_package(OpenGL REQUIRED)
 

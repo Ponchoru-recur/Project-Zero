@@ -3,10 +3,10 @@
 Camera::Camera() : viewDirection(0.0f, 0.0f, -1.0f), UP(0.0f, 1.0f, 0.0f) {
 }
 
-void Camera::mouseUpdate(const glm::vec2 &newMousePosition) {
-    const float sensitivity = 0.35;
-    const float mouse_x = -newMousePosition.x * sensitivity;
-    const float mouse_y = -newMousePosition.y * sensitivity;
+void Camera::mouseUpdate(const glm::vec2 &mousePosition) {
+    const float sensitivity = 0.35f;
+    const float mouse_x = -mousePosition.x * sensitivity;
+    const float mouse_y = -mousePosition.y * sensitivity;
     // Horizontal
     viewDirection = glm::mat3(glm::rotate(glm::mat4(1.0f), glm::radians(mouse_x), UP)) * viewDirection;
     // VErtical
