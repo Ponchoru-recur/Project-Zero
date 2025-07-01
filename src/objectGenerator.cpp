@@ -101,17 +101,17 @@ glm::vec2 ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
         obj.indexCount = static_cast<GLsizei>(localIndices.size());
 
         globalInterleavedData.insert(globalInterleavedData.end(), localInterleavedData.begin(), localInterleavedData.end());
-        s_indices.insert(s_indices.end(), localIndices.begin(), localIndices.end());
+        globalIndices.insert(globalIndices.end(), localIndices.begin(), localIndices.end());
 
         obj.objToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-        s_meshes.push_back(obj);
+        globalMeshes.push_back(obj);
 
         currVertexSize += static_cast<GLsizei>(localInterleavedData.size());
         currIndexSize += static_cast<GLsizei>(localIndices.size());
     }
 
     std::cout << "Uploaded to buffers!\n";
-    return usage == GL_DYNAMIC_DRAW ? glm::vec2(Meshes.size() - 1, 1) : glm::vec2(s_meshes.size() - 1, 2);
+    return usage == GL_DYNAMIC_DRAW ? glm::vec2(Meshes.size() - 1, 1) : glm::vec2(globalMeshes.size() - 1, 2);
 }
 
 GLuint ObjectGenerator::uploadImg(const char* filepath) {
@@ -156,7 +156,7 @@ void ObjectGenerator::transform(glm::vec2& object_index, glm::vec3 translate, gl
         Meshes[static_cast<GLint>(object_index.x)].objToWorldMatrix = transform;
 
     } else {
-        s_meshes[static_cast<GLint>(object_index.x)].objToWorldMatrix = transform;
+        globalMeshes[static_cast<GLint>(object_index.x)].objToWorldMatrix = transform;
     }
 }
 
@@ -170,15 +170,15 @@ void ObjectGenerator::attach(glm::vec2 obj_index, GLuint img_index, bool affecte
 
     } else {
         if (affectedBySpecular == true) {
-            s_meshes[static_cast<GLint>(obj_index.x)].texture1 = sampleImages[img_index];
+            globalMeshes[static_cast<GLint>(obj_index.x)].texture1 = sampleImages[img_index];
         } else {
-            s_meshes[static_cast<GLint>(obj_index.x)].texture0 = sampleImages[img_index];
+            globalMeshes[static_cast<GLint>(obj_index.x)].texture0 = sampleImages[img_index];
         }
     }
 }
 
 void ObjectGenerator::process() {
-    if (s_meshes.size() < 1) {
+    if (globalMeshes.size() < 1) {
         std::cout << "Unable to process static meshes without static_meshes. \n";
         return;
     }
@@ -199,7 +199,7 @@ void ObjectGenerator::process() {
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vortex), (void*)(offsetof(Vortex, Textures)));
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, s_indices.size() * sizeof(GLuint), s_indices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, globalIndices.size() * sizeof(GLuint), globalIndices.data(), GL_STATIC_DRAW);
 
     glBindVertexArray(0);
 }
@@ -209,7 +209,7 @@ const std::vector<dynamicMesh>& ObjectGenerator::getDynamicMeshes() const {
 }
 
 const std::vector<staticMesh>& ObjectGenerator::getStaticMeshes() const {
-    return s_meshes;
+    return globalMeshes;
 }
 
 GLuint ObjectGenerator::getStaticVao() {
@@ -231,9 +231,9 @@ void ObjectGenerator::cleanup() {
     glDeleteBuffers(1, &s_vbo);
     glDeleteBuffers(1, &s_ebo);
 
-    s_meshes.clear();
-    s_meshes.shrink_to_fit();
-    std::vector<staticMesh>().swap(s_meshes);
+    globalMeshes.clear();
+    globalMeshes.shrink_to_fit();
+    std::vector<staticMesh>().swap(globalMeshes);
 
     std::cout << "Object cleanup finished.\n";
 }

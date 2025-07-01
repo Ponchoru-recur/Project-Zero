@@ -59,9 +59,8 @@ class ObjectGenerator {
     GLsizei currVertexSize = 0;
 
     std::vector<Vortex> globalInterleavedData;
-    std::vector<GLuint> s_indices;
-    std::vector<staticMesh> s_meshes;
-
+    std::vector<GLuint> globalIndices;
+    std::vector<staticMesh> globalMeshes;
     // Texture
     std::vector<GLuint> sampleImages;
 };
