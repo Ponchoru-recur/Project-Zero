@@ -7,11 +7,11 @@ C_DEFINES =
 
 C_INCLUDES = @CMakeFiles/game.dir/includes_C.rsp
 
-C_FLAGS = 
+C_FLAGS = -Wall -Wextra -Wpedantic -Werror -Wconversion -Wshadow -Wfloat-equal -Winvalid-pch
 
 CXX_DEFINES = 
 
 CXX_INCLUDES = @CMakeFiles/game.dir/includes_CXX.rsp
 
-CXX_FLAGS = -std=gnu++23
+CXX_FLAGS = -std=gnu++23 -Wall -Wextra -Wpedantic -Werror -Wconversion -Wshadow -Wfloat-equal -Winvalid-pch
 

@@ -13,7 +13,7 @@
 
 #define FRAME_DELAY (1000 / 60)
 
-SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[]) {
+SDL_AppResult SDL_AppInit(void **appstate, int /*argc*/, char * /*argv*/[]) {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
     // glEnable(GL_BLEND);
@@ -54,7 +54,7 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event) {
     return SDL_APP_CONTINUE;
 }
 
-const float TargetFPS = 144;
+const float TargetFPS = 144.0f;
 const float TargetFrameTIme = (1000.0f / TargetFPS);
 
 SDL_AppResult SDL_AppIterate(void *appstate) {
@@ -74,14 +74,16 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
 
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(EndFrame - StartFrame);
 
-    if (elapsed.count() < TargetFrameTIme) {
-        SDL_Delay((TargetFrameTIme - elapsed.count()));
+    // Translate elapsed.count() to float to prevent error convertion.
+    auto elapse = static_cast<float>(elapsed.count());
+    if ((elapse) < TargetFrameTIme) {
+        SDL_Delay(static_cast<std::uint32_t>(TargetFrameTIme - elapse));
     }
 
     return SDL_APP_CONTINUE;
 }
 
-void SDL_AppQuit(void *appstate, SDL_AppResult result) {
+void SDL_AppQuit(void *appstate, SDL_AppResult /*result*/) {
     static_cast<App *>(appstate)->cleanup();
     delete static_cast<App *>(appstate);
     window.clean();
