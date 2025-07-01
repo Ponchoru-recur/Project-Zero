@@ -22,7 +22,7 @@ void Camera::changefov(GLfloat &fovy) {
 }
 
 glm::mat4 Camera::getProjectionMatrix() {
-    projectionMatrix = glm::perspective(glm::radians(fov), static_cast<float>(window.getWidth()) / static_cast<float>(window.getHeight()), 1.0f, 40.0f);
+    projectionMatrix = glm::perspective(glm::radians(fov), static_cast<float>(window.getWidth()) / static_cast<float>(window.getHeight()), 1.0f, 80.0f);
     return projectionMatrix;
 }
 

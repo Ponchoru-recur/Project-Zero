@@ -90,7 +90,7 @@ glm::vec2 ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m.EBO);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, (localIndices.size() * sizeof(GLuint)), localIndices.data(), GL_DYNAMIC_DRAW);
         glBindVertexArray(0);
-        m.indexCount = localIndices.size();
+        m.indexCount = static_cast<GLsizei>(localIndices.size());
         m.objToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
         Meshes.push_back(m);
 
@@ -98,7 +98,7 @@ glm::vec2 ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
         staticMesh obj;
         obj.baseVertex = currVertexSize;
         obj.baseIndex = currIndexSize;
-        obj.indexCount = localIndices.size();
+        obj.indexCount = static_cast<GLsizei>(localIndices.size());
 
         globalInterleavedData.insert(globalInterleavedData.end(), localInterleavedData.begin(), localInterleavedData.end());
         s_indices.insert(s_indices.end(), localIndices.begin(), localIndices.end());
@@ -106,8 +106,8 @@ glm::vec2 ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
         obj.objToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
         s_meshes.push_back(obj);
 
-        currVertexSize += localInterleavedData.size() / (sizeof(Vortex) / sizeof(GLfloat));
-        currIndexSize += localIndices.size();
+        currVertexSize += static_cast<GLsizei>(localInterleavedData.size());
+        currIndexSize += static_cast<GLsizei>(localIndices.size());
     }
 
     std::cout << "Uploaded to buffers!\n";
@@ -146,31 +146,33 @@ GLuint ObjectGenerator::uploadImg(const char* filepath) {
 
     SDL_DestroySurface(formatted);
     sampleImages.push_back(texture);
-    return sampleImages.size() - 1;
+    return static_cast<GLuint>(sampleImages.size() - 1);
 }
 
 void ObjectGenerator::transform(glm::vec2& object_index, glm::vec3 translate, glm::vec3 rotate) {
     glm::mat4 transform = glm::translate(glm::mat4(1.0f), translate) * glm::rotate(glm::mat4(1.0f), glm::radians(rotate.x), glm::vec3(1.0f, 0.0f, 0.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(rotate.y), glm::vec3(0.0f, 1.0f, 0.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(rotate.z), glm::vec3(0.0f, 0.0f, 1.0f));
-    if (static_cast<int>(object_index.y) == 1) {
-        Meshes[object_index.x].objToWorldMatrix = transform;
+
+    if (static_cast<GLint>(object_index.y) == 1) {
+        Meshes[static_cast<GLint>(object_index.x)].objToWorldMatrix = transform;
+
     } else {
-        s_meshes[object_index.x].objToWorldMatrix = transform;
+        s_meshes[static_cast<GLint>(object_index.x)].objToWorldMatrix = transform;
     }
 }
 
 void ObjectGenerator::attach(glm::vec2 obj_index, GLuint img_index, bool affectedBySpecular) {
     if (static_cast<int>(obj_index.y) == 1) {
         if (affectedBySpecular == true) {
-            Meshes[obj_index.x].texture1 = sampleImages[img_index];
+            Meshes[static_cast<GLint>(obj_index.x)].texture1 = sampleImages[img_index];
         } else {
-            Meshes[obj_index.x].texture0 = sampleImages[img_index];
+            Meshes[static_cast<GLint>(obj_index.x)].texture0 = sampleImages[img_index];
         }
 
     } else {
         if (affectedBySpecular == true) {
-            s_meshes[obj_index.x].texture1 = sampleImages[img_index];
+            s_meshes[static_cast<GLint>(obj_index.x)].texture1 = sampleImages[img_index];
         } else {
-            s_meshes[obj_index.x].texture0 = sampleImages[img_index];
+            s_meshes[static_cast<GLint>(obj_index.x)].texture0 = sampleImages[img_index];
         }
     }
 }

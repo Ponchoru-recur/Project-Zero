@@ -1,13 +1,13 @@
 #include "window.hpp"
 
-Window window("2DWindow!", 1024, 1024);
+Window window("Freak November", 1024, 1024);
 
 Window::Window(const char* name, int w, int h) : window_width(w), window_height(h) {
     if (w <= 0 || h <= 0) {
         std::cerr << "Invalid width or height\n";
         return;
     }
-    SDL_SetAppMetadata("Tutel", "0.0.1", "com.cum.inside");
+    SDL_SetAppMetadata(name, "0.0.1", "com.cum.inside");
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         SDL_Log("Failed to initialize VIDEO.\nError : %s", SDL_GetError());
         return;
@@ -17,7 +17,7 @@ Window::Window(const char* name, int w, int h) : window_width(w), window_height(
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
-    window = SDL_CreateWindow("Opengl + SDL3", w, h, SDL_WINDOW_OPENGL);
+    window = SDL_CreateWindow(name, w, h, SDL_WINDOW_OPENGL);
 
     if (!window) {
         std::cerr << "window failed to init Error : " << SDL_GetError() << "\n";
