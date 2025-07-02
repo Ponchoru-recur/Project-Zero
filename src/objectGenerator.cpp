@@ -58,7 +58,7 @@ void objectProcess::processMesh(aiMesh* mesh, std::vector<Vortex>& interleavedDa
 
 glm::vec2 ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
     Assimp::Importer importer;
-    const aiScene* scene = importer.ReadFile(filepath, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_GenNormals);
+    const aiScene* scene = importer.ReadFile(filepath, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_GenNormals | aiTextureType_HEIGHT);
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
         std::cerr << "Assimp error: " << importer.GetErrorString() << std::endl;
         return glm::vec2(0, 0);
