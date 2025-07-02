@@ -13,15 +13,15 @@ void App::init() {
     GLuint subaru = generateObject.uploadImg("../assets/images/subaru1.jpg");
 
     glm::vec2 kan = generateObject.uploadObj("../assets/objects/plane.obj", GL_STATIC_DRAW);
-    generateObject.attach(kan, grid, false);
+    generateObject.attach(kan, grid, 0);
     generateObject.transform(kan, glm::vec3(+0.0f, +2.0f, -4.0f));
 
     glm::vec2 platform1 = generateObject.uploadObj("../assets/objects/platform.obj", GL_DYNAMIC_DRAW);
-    generateObject.attach(platform1, subaru, false);
+    generateObject.attach(platform1, subaru, 0);
     generateObject.transform(platform1, glm::vec3(+0.0f, -5.0f, +0.0f));
 
     glm::vec2 platform2 = generateObject.uploadObj("../assets/objects/platform.obj", GL_STATIC_DRAW);
-    generateObject.attach(platform2, subaru, false);
+    generateObject.attach(platform2, subaru, 0);
     generateObject.transform(platform2, glm::vec3(+20.0f, -5.0f, +0.0f));
 
     generateObject.process();
@@ -189,10 +189,11 @@ void App::render() {
 
     for (const auto& object : generateObject.getDynamicMeshes()) {
         glBindVertexArray(object.VAO);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, object.texture0);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, object.texture1);
+
+        for (auto id : object.usedData) {
+            glActiveTexture(GL_TEXTURE0 + id);
+            glBindTexture(GL_TEXTURE_2D, object.data[id]);
+        }
 
         glUniform1i(glGetUniformLocation(testShaders, "material.diffuse"), 0);
         glUniform1i(glGetUniformLocation(testShaders, "material.specular"), 1);
@@ -266,10 +267,10 @@ void App::render() {
     glBindVertexArray(generateObject.getStaticVao());
 
     for (auto& object : generateObject.getStaticMeshes()) {
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, object.texture0);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, object.texture1);
+        for (auto id : object.usedData) {
+            glActiveTexture(GL_TEXTURE0 + id);
+            glBindTexture(GL_TEXTURE_2D, object.data[id]);
+        }
 
         glUniform1i(glGetUniformLocation(testShaders, "material.diffuse"), 0);
         glUniform1i(glGetUniformLocation(testShaders, "material.specular"), 1);

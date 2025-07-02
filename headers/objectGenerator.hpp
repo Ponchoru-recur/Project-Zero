@@ -23,8 +23,8 @@ struct dynamicMesh {
     GLuint VAO = 0, VBO = 0, EBO = 0;  // Vertex Array Object, Vertex Buffer Object, Element Buffer Object.
     glm::mat4 objToWorldMatrix;
     GLsizei indexCount = 0;
-    GLuint texture0 = 0;
-    GLuint texture1 = 0;
+    GLint data[30] = {0};
+    std::vector<GLint> usedData;
 };
 
 struct staticMesh {
@@ -32,8 +32,8 @@ struct staticMesh {
     GLsizei indexCount;
     GLuint baseIndex;
     GLint baseVertex;
-    GLuint texture0 = 0;
-    GLuint texture1 = 0;
+    GLint data[30] = {0};
+    std::vector<GLint> usedData;
 };
 
 class ObjectGenerator {
@@ -41,7 +41,7 @@ class ObjectGenerator {
     glm::vec2 uploadObj(std::string filepath, GLenum usage = GL_STATIC_DRAW);
     GLuint uploadImg(const char* filepath);
     void transform(glm::vec2& object_name, glm::vec3 translate, glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f));
-    void attach(glm::vec2 obj_index, GLuint img_index, bool affected_by_specular);
+    void attach(glm::vec2 obj_index, GLuint img_index, GLshort textureOffset);
     void process();
     GLuint getStaticVao();
     const std::vector<dynamicMesh>& getDynamicMeshes() const;

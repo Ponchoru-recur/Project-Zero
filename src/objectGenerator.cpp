@@ -160,20 +160,13 @@ void ObjectGenerator::transform(glm::vec2& object_index, glm::vec3 translate, gl
     }
 }
 
-void ObjectGenerator::attach(glm::vec2 obj_index, GLuint img_index, bool affectedBySpecular) {
+void ObjectGenerator::attach(glm::vec2 obj_index, GLuint img_index, GLshort textureOffset) {
     if (static_cast<int>(obj_index.y) == 1) {
-        if (affectedBySpecular == true) {
-            Meshes[static_cast<GLint>(obj_index.x)].texture1 = sampleImages[img_index];
-        } else {
-            Meshes[static_cast<GLint>(obj_index.x)].texture0 = sampleImages[img_index];
-        }
-
+        Meshes[static_cast<GLint>(obj_index.x)].data[textureOffset] = sampleImages[img_index];
+        Meshes[static_cast<GLint>(obj_index.x)].usedData.push_back(textureOffset);
     } else {
-        if (affectedBySpecular == true) {
-            globalMeshes[static_cast<GLint>(obj_index.x)].texture1 = sampleImages[img_index];
-        } else {
-            globalMeshes[static_cast<GLint>(obj_index.x)].texture0 = sampleImages[img_index];
-        }
+        globalMeshes[static_cast<GLint>(obj_index.x)].data[textureOffset] = sampleImages[img_index];
+        globalMeshes[static_cast<GLint>(obj_index.x)].usedData.push_back(textureOffset);
     }
 }
 
