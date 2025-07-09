@@ -27,6 +27,8 @@ class App {
 
    private:
     // Private functions | TESTING |
+    SDL_Surface* getImageFormat(const char* filepath);
+    void makeTexture(SDL_Surface* image_format);
 
     // VAOS
     GLuint cubeVertexArrayID;
@@ -40,7 +42,7 @@ class App {
 
     // Shaders
     GLuint shaderProgram;
-    GLuint testShaders;
+    GLuint opShaderProgram;
 
     // Class instances
     Camera camera;
@@ -51,4 +53,11 @@ class App {
     // temporary variables
     float move_straight = -0.3f;
     GLfloat fov = 60;
+
+    // Tests
+    GLuint testShaders;
+    GLuint testVAO;
+    GLuint testVBO;
+    GLuint testEBO;
+    std::vector<GLuint64> textureHandles;
 };

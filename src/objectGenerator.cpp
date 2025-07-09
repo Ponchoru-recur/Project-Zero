@@ -1,15 +1,18 @@
 #include "objectGenerator.hpp"
 
+// Testing
+std::vector<std::string> textures;
+
 namespace objectProcess {
 void processNode(aiNode* node, const aiScene* scene, std::vector<Vortex>& interleavedData, std::vector<GLuint>& indices);
-void processMesh(aiMesh* mesh, std::vector<Vortex>& interleavedData, std::vector<GLuint>& indices);
+void processMesh(aiMesh* mesh, const aiScene* scene, std::vector<Vortex>& interleavedData, std::vector<GLuint>& indices);
 };  // namespace objectProcess
 
 void objectProcess::processNode(aiNode* node, const aiScene* scene, std::vector<Vortex>& interleavedData, std::vector<GLuint>& indices) {
     // Process all the node’s meshes
     for (unsigned int i = 0; i < node->mNumMeshes; i++) {
         aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-        processMesh(mesh, interleavedData, indices);
+        processMesh(mesh, scene, interleavedData, indices);
     }
 
     // Recursively process children
@@ -18,7 +21,7 @@ void objectProcess::processNode(aiNode* node, const aiScene* scene, std::vector<
     }
 }
 
-void objectProcess::processMesh(aiMesh* mesh, std::vector<Vortex>& interleavedData, std::vector<GLuint>& indices) {
+void objectProcess::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<Vortex>& interleavedData, std::vector<GLuint>& indices) {
     for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
         Vortex interleavedPass{};
         // Position
@@ -54,11 +57,23 @@ void objectProcess::processMesh(aiMesh* mesh, std::vector<Vortex>& interleavedDa
             indices.push_back(face.mIndices[j]);
         }
     }
+
+    if (mesh->mMaterialIndex < scene->mNumMaterials) {
+        aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+
+        aiString str;
+        if (material->GetTexture(aiTextureType_DIFFUSE, 0, &str) == AI_SUCCESS) {
+            std::string texPath = str.C_Str();
+            textures.push_back(texPath);
+        } else {
+            textures.push_back("");
+        }
+    }
 }
 
 glm::vec2 ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
     Assimp::Importer importer;
-    const aiScene* scene = importer.ReadFile(filepath, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_GenNormals | aiTextureType_HEIGHT);
+    const aiScene* scene = importer.ReadFile(filepath, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
         std::cerr << "Assimp error: " << importer.GetErrorString() << std::endl;
         return glm::vec2(0, 0);
@@ -90,8 +105,13 @@ glm::vec2 ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m.EBO);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, (localIndices.size() * sizeof(GLuint)), localIndices.data(), GL_DYNAMIC_DRAW);
         glBindVertexArray(0);
+        // size_t floatsPerVertex = sizeof(Vortex) / sizeof(GLfloat);
+        // size_t numVertices = localInterleavedData.size() / floatsPerVertex;
+
+        std::cout << "vertices: " << localInterleavedData.size() << "\n";
         m.indexCount = static_cast<GLsizei>(localIndices.size());
         m.objToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+
         Meshes.push_back(m);
 
     } else {
@@ -193,7 +213,9 @@ void ObjectGenerator::process() {
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, globalIndices.size() * sizeof(GLuint), globalIndices.data(), GL_STATIC_DRAW);
-
+    for (auto i : textures) {
+        std::cout << i << "\n";
+    }
     glBindVertexArray(0);
 }
 

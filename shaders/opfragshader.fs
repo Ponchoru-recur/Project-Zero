@@ -12,7 +12,7 @@ struct SpotLight {
     vec3 position;
     vec3 direction;
     float cutOff;
-    float outerCutOff;
+    float outerCutOff;  
 
     vec3 ambient;
     vec3 diffuse;

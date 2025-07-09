@@ -40,6 +40,11 @@ Window::Window(const char* name, int w, int h) : window_width(w), window_height(
         SDL_Quit();
         return;
     }
+
+    if (!GLAD_GL_ARB_bindless_texture) {
+        std::cerr << "Bindless texture not supported on this hardware." << std::endl;
+        exit(1);
+    }
 }
 
 void Window::clean() {

@@ -16,6 +16,7 @@
 SDL_AppResult SDL_AppInit(void **appstate, int /*argc*/, char * /*argv*/[]) {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
+    glDepthFunc(GL_LESS);
     // glEnable(GL_BLEND);
     // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
