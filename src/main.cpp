@@ -1,5 +1,9 @@
 #define SDL_MAIN_USE_CALLBACKS 1
 
+// Headers
+#include "app.hpp"
+#include "window.hpp"
+
 // Libraries
 #include <SDL3/SDL_main.h>
 #include <SDL3/SDL.h>
@@ -7,16 +11,13 @@
 #include <thread>
 #include <chrono>
 
-// Headers
-#include "window.hpp"
-#include "app.hpp"
-
 #define FRAME_DELAY (1000 / 60)
 
 SDL_AppResult SDL_AppInit(void **appstate, int /*argc*/, char * /*argv*/[]) {
     glEnable(GL_DEPTH_TEST);
+    glDisable(GL_CULL_FACE);
     glEnable(GL_CULL_FACE);
-    glDepthFunc(GL_LESS);
+    // glDepthFunc(GL_LESS);
     // glEnable(GL_BLEND);
     // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 

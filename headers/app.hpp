@@ -48,7 +48,6 @@ class App {
     Camera camera;
     ShapeData ArrowShape = ShapeGenerator::makeArrow();
     ShapeData CubeShape = ShapeGenerator::makeCube();
-    // The pov basically
 
     // temporary variables
     float move_straight = -0.3f;
@@ -60,4 +59,6 @@ class App {
     GLuint testVBO;
     GLuint testEBO;
     std::vector<GLuint64> textureHandles;
+
+    AssimpObject* cube = nullptr;
 };

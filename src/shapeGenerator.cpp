@@ -5,7 +5,7 @@
 ShapeData ShapeGenerator::makeArrow() {
     ShapeData ret;
 
-    Vertex arr1[] = {
+    Vertex_ arr1[] = {
         /* Position | Color | Normal */
 
         // TOP
@@ -105,7 +105,7 @@ ShapeData ShapeGenerator::makeArrow() {
 
     // Passing the memory to ret.vertices
     ret.num_vertices = num_array_elements(arr1);
-    ret.vertices = new Vertex[ret.num_vertices];
+    ret.vertices = new Vertex_[ret.num_vertices];
     memcpy(ret.vertices, arr1, sizeof(arr1));
 
     ret.num_indices = num_array_elements(indexes);
@@ -118,7 +118,7 @@ ShapeData ShapeGenerator::makeArrow() {
 ShapeData ShapeGenerator::makeCube() {
     ShapeData ret;
 
-    Vertex arr1[] = {
+    Vertex_ arr1[] = {
         // Face 1 (Top)
         {glm::vec3(1.0f, 1.0f, -1.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)},
         {glm::vec3(-1.0f, 1.0f, -1.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)},
@@ -167,7 +167,7 @@ ShapeData ShapeGenerator::makeCube() {
 
     // Passing the memory to ret.vertices
     ret.num_vertices = num_array_elements(arr1);
-    ret.vertices = new Vertex[ret.num_vertices];
+    ret.vertices = new Vertex_[ret.num_vertices];
     memcpy(ret.vertices, arr1, sizeof(arr1));
 
     ret.num_indices = num_array_elements(indexes);
@@ -180,7 +180,7 @@ ShapeData ShapeGenerator::makeCube() {
 ShapeData ShapeGenerator::makePlatform() {
     ShapeData ret;
 
-    Vertex arr1[] = {
+    Vertex_ arr1[] = {
         /* Position            | Color (gray)       | Normal (up)       */
         // First triangle
         {glm::vec3(-10.0f, 0.0f, -10.0f), glm::vec3(0.6f, 0.6f, 0.6f), glm::vec3(0.0f, 1.0f, 0.0f)},  // 0
@@ -200,7 +200,7 @@ ShapeData ShapeGenerator::makePlatform() {
 
     // Passing the memory to ret.vertices
     ret.num_vertices = num_array_elements(arr1);
-    ret.vertices = new Vertex[ret.num_vertices];
+    ret.vertices = new Vertex_[ret.num_vertices];
     memcpy(ret.vertices, arr1, sizeof(arr1));
 
     ret.num_indices = num_array_elements(indexes);

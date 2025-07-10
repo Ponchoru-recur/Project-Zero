@@ -1,17 +1,18 @@
 #version 460
 
 layout(location = 0) in vec3 position;
-layout(location = 1) in vec2 textureCoordinates;
-layout(location = 2) in int theIndex;
+layout(location = 1) in vec3 normal;
+layout(location = 2) in vec2 textureCoordinate;
+layout(location = 3) in float textureFace;
 
-uniform mat4 modelToWorldProjectionMatrix;
+uniform mat4 MVP;
 
 out vec2 textureCoords;
-flat out int textureIndex;
+out float textureIndex;
 
 void main() {
-    gl_Position = modelToWorldProjectionMatrix * vec4(position, 1.0f);
+    gl_Position = MVP * vec4(position, 1.0f);
 
-    textureCoords = textureCoordinates;
-    textureIndex = theIndex;
+    textureCoords = textureCoordinate;
+    textureIndex = textureFace;
 }

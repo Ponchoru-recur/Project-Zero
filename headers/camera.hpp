@@ -1,8 +1,8 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "window.hpp"
 #include <glm/gtc/matrix_transform.hpp>
+#include "window.hpp"
 
 class Camera {
    public:

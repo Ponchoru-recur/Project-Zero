@@ -215,6 +215,18 @@ CMakeFiles/game.dir/src/camera.cpp.obj: \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/type_half.inl \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/integer.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/func_integer.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/matrix_transform.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_projection.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/constants.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/scalar_constants.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/scalar_constants.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/constants.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_projection.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_clip_space.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_clip_space.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_transform.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_transform.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/matrix_transform.inl \
  C:/Users/Sam/Desktop/PlayThrough/headers/window.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL.h \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_stdinc.h \
@@ -402,16 +414,4 @@ CMakeFiles/game.dir/src/camera.cpp.obj: \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/unicode-data.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ostream.tcc \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/istream \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/istream.tcc \
- C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/matrix_transform.hpp \
- C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_projection.hpp \
- C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/constants.hpp \
- C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/scalar_constants.hpp \
- C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/scalar_constants.inl \
- C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/constants.inl \
- C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_projection.inl \
- C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_clip_space.hpp \
- C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_clip_space.inl \
- C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_transform.hpp \
- C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_transform.inl \
- C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/matrix_transform.inl
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/istream.tcc

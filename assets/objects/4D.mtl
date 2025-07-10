@@ -1,4 +1,4 @@
-# Blender 4.2.3 LTS MTL File: 'cube.blend'
+# Blender 4.2.3 LTS MTL File: 'None'
 # www.blender.org
 
 newmtl face1
@@ -9,7 +9,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd C:/Users/Sam/Desktop/PlayThrough/assets/images/awesomeface.png
+map_Kd C:/Users/Sam/Desktop/PlayThrough/assets/images/uv_grid_opengl.jpg
 
 newmtl face2
 Ns 250.000000
@@ -19,7 +19,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd C:/Users/Sam/Desktop/PlayThrough/assets/images/awesomeface.png
+map_Kd C:/Users/Sam/Desktop/PlayThrough/assets/images/lighting_maps_specular_color.png
 
 newmtl face3
 Ns 250.000000
@@ -29,7 +29,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd C:/Users/Sam/Desktop/PlayThrough/assets/images/awesomeface.png
+map_Kd C:/Users/Sam/Desktop/PlayThrough/assets/images/bricked.jpg
 
 newmtl face4
 Ns 250.000000
@@ -39,7 +39,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd C:/Users/Sam/Desktop/PlayThrough/assets/images/awesomeface.png
+map_Kd C:/Users/Sam/Desktop/PlayThrough/assets/images/subaru1.jpg
 
 newmtl face5
 Ns 250.000000
@@ -49,7 +49,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 2
-map_Kd C:/Users/Sam/Desktop/PlayThrough/assets/images/awesomeface.png
+map_Kd C:/Users/Sam/Desktop/PlayThrough/assets/images/container2.png
 
 newmtl face6.001
 Ns 250.000000

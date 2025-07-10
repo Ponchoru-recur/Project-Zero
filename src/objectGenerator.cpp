@@ -1,61 +1,50 @@
 #include "objectGenerator.hpp"
 
-// Testing
-std::vector<std::string> textures;
-
-namespace objectProcess {
-void processNode(aiNode* node, const aiScene* scene, std::vector<Vortex>& interleavedData, std::vector<GLuint>& indices);
-void processMesh(aiMesh* mesh, const aiScene* scene, std::vector<Vortex>& interleavedData, std::vector<GLuint>& indices);
-};  // namespace objectProcess
-
-void objectProcess::processNode(aiNode* node, const aiScene* scene, std::vector<Vortex>& interleavedData, std::vector<GLuint>& indices) {
+void AssimpObject::processNode(aiNode* node, const aiScene* scene, std::vector<Vertex>& interleavedData, std::vector<GLuint>& indices, GLuint& vertexBase) {
     // Process all the node’s meshes
     for (unsigned int i = 0; i < node->mNumMeshes; i++) {
         aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-        processMesh(mesh, scene, interleavedData, indices);
+        processMesh(mesh, scene, interleavedData, indices, vertexBase);
     }
 
     // Recursively process children
     for (unsigned int i = 0; i < node->mNumChildren; i++) {
-        processNode(node->mChildren[i], scene, interleavedData, indices);
+        processNode(node->mChildren[i], scene, interleavedData, indices, vertexBase);
     }
 }
 
-void objectProcess::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<Vortex>& interleavedData, std::vector<GLuint>& indices) {
+void AssimpObject::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<Vertex>& interleavedData, std::vector<GLuint>& indices, GLuint& vertexBase) {
+    if (!scene) {
+    }
     for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
-        Vortex interleavedPass{};
+        Vertex interleavedPass{};
         // Position
-        interleavedPass.Positions.x = (mesh->mVertices[i].x);
-        interleavedPass.Positions.y = (mesh->mVertices[i].y);
-        interleavedPass.Positions.z = (mesh->mVertices[i].z);
+        interleavedPass.position.x = (mesh->mVertices[i].x);
+        interleavedPass.position.y = (mesh->mVertices[i].y);
+        interleavedPass.position.z = (mesh->mVertices[i].z);
 
-        // Normals (optional)
+        // Normals
         if (mesh->HasNormals()) {
-            interleavedPass.Normals.x = (mesh->mNormals[i].x);
-            interleavedPass.Normals.y = (mesh->mNormals[i].y);
-            interleavedPass.Normals.z = (mesh->mNormals[i].z);
+            interleavedPass.normal.x = (mesh->mNormals[i].x);
+            interleavedPass.normal.y = (mesh->mNormals[i].y);
+            interleavedPass.normal.z = (mesh->mNormals[i].z);
         } else {
-            interleavedPass.Normals.x = (0.0f);  // Fallback normal
-            interleavedPass.Normals.y = (0.0f);
-            interleavedPass.Normals.z = (1.0f);
+            interleavedPass.normal.x = (0.0f);  // Fallback normal
+            interleavedPass.normal.y = (0.0f);
+            interleavedPass.normal.z = (1.0f);
         }
 
         if (mesh->HasTextureCoords(0)) {
-            interleavedPass.Textures.x = (mesh->mTextureCoords[0][i].x);
-            interleavedPass.Textures.y = (mesh->mTextureCoords[0][i].y);
+            interleavedPass.textureCoord.x = (mesh->mTextureCoords[0][i].x);
+            interleavedPass.textureCoord.y = (mesh->mTextureCoords[0][i].y);
 
         } else {
-            interleavedPass.Textures.x = (0.0f);
-            interleavedPass.Textures.y = (0.0f);
+            interleavedPass.textureCoord.x = (0.0f);
+            interleavedPass.textureCoord.y = (0.0f);
         }
-        interleavedData.push_back(interleavedPass);
-    }
 
-    for (unsigned int i = 0; i < mesh->mNumFaces; i++) {
-        aiFace face = mesh->mFaces[i];
-        for (unsigned int j = 0; j < face.mNumIndices; j++) {
-            indices.push_back(face.mIndices[j]);
-        }
+        interleavedPass.textureFace = temp;
+        interleavedData.push_back(interleavedPass);
     }
 
     if (mesh->mMaterialIndex < scene->mNumMaterials) {
@@ -64,95 +53,54 @@ void objectProcess::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<
         aiString str;
         if (material->GetTexture(aiTextureType_DIFFUSE, 0, &str) == AI_SUCCESS) {
             std::string texPath = str.C_Str();
-            textures.push_back(texPath);
+            // textures.push_back(texPath);
+            std::cout << "texture path : " << texPath << "\n";
+            SDL_Surface* surf = createImage(str.C_Str());
+            if (surf != nullptr) {
+                processToHandle(surf);
+                std::cout << "Sucessfully sent to processToHandle." << "\n";
+            }
         } else {
-            textures.push_back("");
+            // textures.push_back("");
+            std::cout << "texture path : None " << "\n";
         }
     }
+
+    for (unsigned int i = 0; i < mesh->mNumFaces; i++) {
+        aiFace face = mesh->mFaces[i];
+        // std::cout << "Face " << i << ": ";
+        for (unsigned int j = 0; j < face.mNumIndices; j++) {
+            std::cout << (face.mIndices[j] + vertexBase) << " ";
+            indices.push_back(face.mIndices[j] + vertexBase);
+        }
+        std::cout << std::endl;
+    }
+    vertexBase += mesh->mNumVertices;
+    temp++;
 }
 
-glm::vec2 ObjectGenerator::uploadObj(std::string filepath, GLenum usage) {
-    Assimp::Importer importer;
-    const aiScene* scene = importer.ReadFile(filepath, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
-    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
-        std::cerr << "Assimp error: " << importer.GetErrorString() << std::endl;
-        return glm::vec2(0, 0);
-    }
-
-    // This vector holds all Positions, Normals, Textures.
-    std::vector<Vortex> localInterleavedData;
-    std::vector<GLuint> localIndices;
-
-    objectProcess::processNode(scene->mRootNode, scene, localInterleavedData, localIndices);
-
-    if (usage == GL_DYNAMIC_DRAW) {
-        dynamicMesh m{};
-        glGenVertexArrays(1, &m.VAO);
-        glBindVertexArray(m.VAO);
-
-        glGenBuffers(1, &m.VBO);
-        glGenBuffers(1, &m.EBO);
-        /* | VERTICES | NORMALS | TEXTURE | */
-        glBindBuffer(GL_ARRAY_BUFFER, m.VBO);
-        glBufferData(GL_ARRAY_BUFFER, localInterleavedData.size() * sizeof(Vortex), localInterleavedData.data(), GL_DYNAMIC_DRAW);
-
-        glEnableVertexAttribArray(0);  // Positions
-        glEnableVertexAttribArray(1);  // Normals
-        glEnableVertexAttribArray(2);  // Textures
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vortex), (void*)(offsetof(Vortex, Positions)));
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vortex), (void*)(offsetof(Vortex, Normals)));
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vortex), (void*)(offsetof(Vortex, Textures)));
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m.EBO);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, (localIndices.size() * sizeof(GLuint)), localIndices.data(), GL_DYNAMIC_DRAW);
-        glBindVertexArray(0);
-        // size_t floatsPerVertex = sizeof(Vortex) / sizeof(GLfloat);
-        // size_t numVertices = localInterleavedData.size() / floatsPerVertex;
-
-        std::cout << "vertices: " << localInterleavedData.size() << "\n";
-        m.indexCount = static_cast<GLsizei>(localIndices.size());
-        m.objToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-
-        Meshes.push_back(m);
-
-    } else {
-        staticMesh obj;
-        obj.baseVertex = currVertexSize;
-        obj.baseIndex = currIndexSize;
-        obj.indexCount = static_cast<GLsizei>(localIndices.size());
-
-        globalInterleavedData.insert(globalInterleavedData.end(), localInterleavedData.begin(), localInterleavedData.end());
-        globalIndices.insert(globalIndices.end(), localIndices.begin(), localIndices.end());
-
-        obj.objToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-        globalMeshes.push_back(obj);
-
-        currVertexSize += static_cast<GLsizei>(localInterleavedData.size());
-        currIndexSize += static_cast<GLsizei>(localIndices.size());
-    }
-
-    std::cout << "Uploaded to buffers!\n";
-    return usage == GL_DYNAMIC_DRAW ? glm::vec2(Meshes.size() - 1, 1) : glm::vec2(globalMeshes.size() - 1, 2);
-}
-
-GLuint ObjectGenerator::uploadImg(const char* filepath) {
-    GLuint texture;
-
+SDL_Surface* AssimpObject::createImage(const char* filepath) {
     SDL_Surface* surface = IMG_Load(filepath);
+
+    // Guard
     if (!surface) {
-        SDL_Log("Couldn't load image Error : %s", SDL_GetError());
-        SDL_DestroySurface(surface);
-        return 0;
+        std::cerr << "Image load error : " << SDL_GetError() << "\n";
+        return nullptr;
     }
 
-    SDL_Surface* formatted = SDL_ConvertSurface(surface, SDL_PIXELFORMAT_RGBA32);
-    SDL_DestroySurface(surface);
+    SDL_Surface* format = SDL_ConvertSurface(surface, SDL_PIXELFORMAT_RGBA32);
 
-    if (!formatted) {
-        SDL_Log("Couldn't load image Error : %s", SDL_GetError());
-        SDL_DestroySurface(formatted);
-        return 0;
+    // Guard
+    if (!format) {
+        std::cerr << "Format load error : " << SDL_GetError() << "\n";
+        return nullptr;
     }
 
+    return format;
+}
+
+void AssimpObject::processToHandle(SDL_Surface* image_format) {
+    GLuint texture;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
 
@@ -161,94 +109,58 @@ GLuint ObjectGenerator::uploadImg(const char* filepath) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, formatted->w, formatted->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, formatted->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_format->w, image_format->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_format->pixels);
     glGenerateMipmap(GL_TEXTURE_2D);
 
-    SDL_DestroySurface(formatted);
-    sampleImages.push_back(texture);
-    return static_cast<GLuint>(sampleImages.size() - 1);
-}
-
-void ObjectGenerator::transform(glm::vec2& object_index, glm::vec3 translate, glm::vec3 rotate) {
-    glm::mat4 transform = glm::translate(glm::mat4(1.0f), translate) * glm::rotate(glm::mat4(1.0f), glm::radians(rotate.x), glm::vec3(1.0f, 0.0f, 0.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(rotate.y), glm::vec3(0.0f, 1.0f, 0.0f)) * glm::rotate(glm::mat4(1.0f), glm::radians(rotate.z), glm::vec3(0.0f, 0.0f, 1.0f));
-
-    if (static_cast<GLint>(object_index.y) == 1) {
-        Meshes[static_cast<GLint>(object_index.x)].objToWorldMatrix = transform;
-
+    GLuint64 handle = glGetTextureHandleARB(texture);
+    if (handle) {
+        glMakeTextureHandleResidentARB(handle);
+        textureHandles.push_back(handle);
     } else {
-        globalMeshes[static_cast<GLint>(object_index.x)].objToWorldMatrix = transform;
-    }
-}
-
-void ObjectGenerator::attach(glm::vec2 obj_index, GLuint img_index, GLshort textureOffset) {
-    if (static_cast<int>(obj_index.y) == 1) {
-        Meshes[static_cast<GLint>(obj_index.x)].data[textureOffset] = sampleImages[img_index];
-        Meshes[static_cast<GLint>(obj_index.x)].usedData.push_back(textureOffset);
-    } else {
-        globalMeshes[static_cast<GLint>(obj_index.x)].data[textureOffset] = sampleImages[img_index];
-        globalMeshes[static_cast<GLint>(obj_index.x)].usedData.push_back(textureOffset);
-    }
-}
-
-void ObjectGenerator::process() {
-    if (globalMeshes.size() < 1) {
-        std::cout << "Unable to process static meshes without static_meshes. \n";
-        return;
-    }
-    std::cout << "Starting Process...\n";
-    glGenVertexArrays(1, &s_vao);
-    glBindVertexArray(s_vao);
-
-    glGenBuffers(1, &s_vbo);
-    glGenBuffers(1, &s_ebo);
-
-    glBindBuffer(GL_ARRAY_BUFFER, s_vbo);
-    glBufferData(GL_ARRAY_BUFFER, globalInterleavedData.size() * sizeof(Vortex), globalInterleavedData.data(), GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);  // Positions
-    glEnableVertexAttribArray(1);  // Normals
-    glEnableVertexAttribArray(2);  // Textures
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vortex), (void*)(offsetof(Vortex, Positions)));
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vortex), (void*)(offsetof(Vortex, Normals)));
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vortex), (void*)(offsetof(Vortex, Textures)));
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, globalIndices.size() * sizeof(GLuint), globalIndices.data(), GL_STATIC_DRAW);
-    for (auto i : textures) {
-        std::cout << i << "\n";
-    }
-    glBindVertexArray(0);
-}
-
-const std::vector<dynamicMesh>& ObjectGenerator::getDynamicMeshes() const {
-    return Meshes;
-}
-
-const std::vector<staticMesh>& ObjectGenerator::getStaticMeshes() const {
-    return globalMeshes;
-}
-
-GLuint ObjectGenerator::getStaticVao() {
-    return s_vao;
-}
-
-void ObjectGenerator::cleanup() {
-    for (auto& object : Meshes) {
-        glDeleteVertexArrays(1, &object.VAO);
-        glDeleteBuffers(1, &object.VBO);
-        glDeleteBuffers(1, &object.EBO);
+        std::cerr << "Cannot push handle to resident." << "\n";
     }
 
-    Meshes.clear();
-    Meshes.shrink_to_fit();
-    std::vector<dynamicMesh>().swap(Meshes);
+    SDL_DestroySurface(image_format);
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
 
-    glDeleteVertexArrays(1, &s_vao);
-    glDeleteBuffers(1, &s_vbo);
-    glDeleteBuffers(1, &s_ebo);
+AssimpObject::AssimpObject(std::string filepath) {
+    Assimp::Importer importer;
 
-    globalMeshes.clear();
-    globalMeshes.shrink_to_fit();
-    std::vector<staticMesh>().swap(globalMeshes);
+    const aiScene* scene = importer.ReadFile(filepath, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
 
-    std::cout << "Object cleanup finished.\n";
+    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
+        std::cerr << "Assimp error : " << importer.GetErrorString() << "\n";
+    }
+
+    GLuint vertexBase = 0;
+    processNode(scene->mRootNode, scene, globalInterleavedData, globalIndices, vertexBase);
+
+    std::cout << "globalInterleavedData.size() : " << globalInterleavedData.size() << "\n";
+    std::cout << "globalIndices.size() : " << globalIndices.size() << "\n";
+    std::cout << "textureHandles.size() : " << textureHandles.size() << "\n";
+
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+
+    glGenBuffers(1, &VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * globalInterleavedData.size(), globalInterleavedData.data(), GL_STATIC_DRAW);
+
+    glEnableVertexAttribArray(0);  // Position
+    glEnableVertexAttribArray(1);  // Normal
+    glEnableVertexAttribArray(2);  // Texure coordinates
+    glEnableVertexAttribArray(3);  // texture face
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, position)));      // Position
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, normal)));        // Normal
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, textureCoord)));  // Texture coords
+    glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, textureFace)));   // Texture face
+
+    glGenBuffers(1, &EBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * globalIndices.size(), globalIndices.data(), GL_STATIC_DRAW);
+}
+
+AssimpObject::~AssimpObject() {
 }

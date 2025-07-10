@@ -343,18 +343,58 @@ CMakeFiles/game.dir/src/objectGenerator.cpp.obj: \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/type_half.inl \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/integer.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/func_integer.inl \
- C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/matrix_transform.hpp \
- C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_projection.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/type_ptr.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/quaternion.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/constants.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/scalar_constants.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/scalar_constants.inl \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/constants.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/matrix_transform.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_projection.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_projection.inl \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_clip_space.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_clip_space.inl \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_transform.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_transform.inl \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/matrix_transform.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_relational.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_relational.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/type_float.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_common.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_geometric.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_geometric.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_common.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_float.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/type_quat.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_relational.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_relational.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/type_quat.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_float_precision.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_double.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_double_precision.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_trigonometric.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_trigonometric.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_transform.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_transform.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/quaternion.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/epsilon.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/setup.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/epsilon.inl \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/vec1.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_bool1.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_bool1_precision.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_float1.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_float1_precision.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_double1.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_double1_precision.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_int1.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_int1_sized.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_uint1.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_uint1_sized.hpp \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cstring \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/string.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/type_ptr.inl \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_image.h \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL.h \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_stdinc.h \
@@ -362,8 +402,6 @@ CMakeFiles/game.dir/src/objectGenerator.cpp.obj: \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
  C:/MinGW/mingw64/x86_64-w64-mingw32/include/stdarg.h \
  C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_stdarg.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/string.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_begin_code.h \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_close_code.h \
  C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_assert.h \
@@ -430,7 +468,6 @@ CMakeFiles/game.dir/src/objectGenerator.cpp.obj: \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/matrix3x3.h \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/matrix4x4.h \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/quaternion.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cstring \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector2.inl \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/vector3.inl \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/color4.inl \
@@ -461,4 +498,6 @@ CMakeFiles/game.dir/src/objectGenerator.cpp.obj: \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/material.inl \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/anim.h \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/metadata.h \
- C:/Users/Sam/Desktop/PlayThrough/include/assimp/postprocess.h
+ C:/Users/Sam/Desktop/PlayThrough/include/assimp/postprocess.h \
+ C:/Users/Sam/Desktop/PlayThrough/headers/camera.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/headers/window.hpp
