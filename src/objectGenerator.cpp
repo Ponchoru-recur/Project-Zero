@@ -14,8 +14,6 @@ void AssimpObject::processNode(aiNode* node, const aiScene* scene, std::vector<V
 }
 
 void AssimpObject::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<Vertex>& interleavedData, std::vector<GLuint>& indices, GLuint& vertexBase) {
-    if (!scene) {
-    }
     for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
         Vertex interleavedPass{};
         // Position
@@ -112,7 +110,15 @@ void AssimpObject::processToHandle(SDL_Surface* image_format) {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_format->w, image_format->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_format->pixels);
     glGenerateMipmap(GL_TEXTURE_2D);
 
+    if (texture) {
+        textures.push_back(texture);
+    } else {
+        std::cerr << "Texture Error in processToHandle" << "\n";
+        return;
+    }
+
     GLuint64 handle = glGetTextureHandleARB(texture);
+
     if (handle) {
         glMakeTextureHandleResidentARB(handle);
         textureHandles.push_back(handle);
@@ -131,6 +137,7 @@ AssimpObject::AssimpObject(std::string filepath) {
 
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
         std::cerr << "Assimp error : " << importer.GetErrorString() << "\n";
+        return;
     }
 
     GLuint vertexBase = 0;
@@ -163,4 +170,16 @@ AssimpObject::AssimpObject(std::string filepath) {
 }
 
 AssimpObject::~AssimpObject() {
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &EBO);
+
+    for (size_t i = 0; i < textureHandles.size(); i++) {
+        glMakeTextureHandleNonResidentARB(textureHandles[i]);
+        glDeleteTextures(1, &textures[i]);
+    }
+    std::vector<GLuint64>().swap(textureHandles);
+    std::vector<GLuint>().swap(textures);
+    std::vector<GLuint>().swap(globalIndices);
+    std::cout << "successfully deleted object." << "\n";
 }
