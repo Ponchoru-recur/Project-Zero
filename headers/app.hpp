@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <memory>
 
 #include "shaders.hpp"
 #include "camera.hpp"
@@ -60,5 +61,7 @@ class App {
     GLuint testEBO;
     std::vector<GLuint64> textureHandles;
 
-    AssimpObject* cube = nullptr;
+    std::vector<std::unique_ptr<AssimpObject>> modelObjects;
+
+    // AssimpObject* cube;
 };

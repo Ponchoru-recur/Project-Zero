@@ -51,15 +51,14 @@ void AssimpObject::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<V
         aiString str;
         if (material->GetTexture(aiTextureType_DIFFUSE, 0, &str) == AI_SUCCESS) {
             std::string texPath = str.C_Str();
-            // textures.push_back(texPath);
-            std::cout << "texture path : " << texPath << "\n";
+
+            // std::cout << "texture path : " << texPath << "\n";
             SDL_Surface* surf = createImage(str.C_Str());
             if (surf != nullptr) {
                 processToHandle(surf);
-                std::cout << "Sucessfully sent to processToHandle." << "\n";
+                // std::cout << "Sucessfully sent to processToHandle." << "\n";
             }
         } else {
-            // textures.push_back("");
             std::cout << "texture path : None " << "\n";
         }
     }
@@ -68,7 +67,7 @@ void AssimpObject::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<V
         aiFace face = mesh->mFaces[i];
         // std::cout << "Face " << i << ": ";
         for (unsigned int j = 0; j < face.mNumIndices; j++) {
-            std::cout << (face.mIndices[j] + vertexBase) << " ";
+            // std::cout << (face.mIndices[j] + vertexBase) << " ";
             indices.push_back(face.mIndices[j] + vertexBase);
         }
         std::cout << std::endl;
@@ -183,3 +182,13 @@ AssimpObject::~AssimpObject() {
     std::vector<GLuint>().swap(globalIndices);
     std::cout << "successfully deleted object." << "\n";
 }
+
+// ASDVNASVASDNAOIWDBNVAIBWDAJSDBVAKJBSDVKBSDSADBWHBDASBVDA
+
+// YOU CANT THINK PROPERLY BUT FIND A SOLUTION ON HOW TO MAKE A STORAGE FOR YOUR IMAGES SO YOU CAN CONFIRM IF ITS
+//  DUPLICATED
+
+// std::cout << "Absolutely horried";
+// GLint testID;
+// glGetIntegerv(GL_CURRENT_PROGRAM, &testID);
+// std::cout << "Current GL program in AssimpObject: " << testID << "\n";

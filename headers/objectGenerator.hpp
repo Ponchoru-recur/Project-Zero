@@ -1,14 +1,16 @@
 #pragma once
 
+#include <SDL3/SDL_image.h>
+#include <glad/gl.h>
 #include <iostream>
+
 #include <string>
 #include <vector>
 #include <cstddef>
-#include <glad/gl.h>
+#include <unordered_map>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <SDL3/SDL_image.h>
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
@@ -51,3 +53,6 @@ class AssimpObject {
     // Temporary varaibles
     GLfloat temp = 0;
 };
+
+// GLOBAL ARRAYS
+// std::unordered_map<std::string, GLuint> textures;

@@ -1,6 +1,94 @@
 CMakeFiles/game.dir/src/objectGenerator.cpp.obj: \
  C:\Users\Sam\Desktop\PlayThrough\src\objectGenerator.cpp \
  C:/Users/Sam/Desktop/PlayThrough/headers/objectGenerator.hpp \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_image.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_stdinc.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_platform_defines.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/stdarg.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_stdarg.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/vadefs.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdint.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/stdint.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/crtdefs.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/stddef.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/string.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/wchar.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt_wstdlib.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_off_t.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_stat64.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/swprintf.inl \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/wchar_s.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_begin_code.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_close_code.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_assert.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_asyncio.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_atomic.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_audio.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_endian.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_error.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_mutex.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_thread.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_properties.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/process.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt_startup.h \
+ C:/MinGW/mingw64/x86_64-w64-mingw32/include/sys/types.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_iostream.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_bits.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_blendmode.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_camera.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_pixels.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_surface.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_rect.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_clipboard.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_cpuinfo.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_dialog.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_video.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_events.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_gamepad.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_guid.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_joystick.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_power.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_sensor.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_keyboard.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_keycode.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_scancode.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_mouse.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_pen.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_touch.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_filesystem.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_gpu.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_haptic.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_hidapi.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_hints.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_init.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_loadso.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_locale.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_log.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_messagebox.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_metal.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_misc.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_platform.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_process.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_render.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_storage.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_system.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_time.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_timer.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_tray.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_version.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_oldnames.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h \
+ C:/Users/Sam/Desktop/PlayThrough/include/KHR/khrplatform.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iostream \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/requires_hosted.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -14,28 +102,12 @@ CMakeFiles/game.dir/src/objectGenerator.cpp.obj: \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/memoryfwd.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/postypes.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cwchar \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/wchar.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/vadefs.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt_wstdlib.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_off_t.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_stat64.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/swprintf.inl \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/wchar_s.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/exception \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/exception.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/version.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/exception_ptr.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/exception_defines.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/cxxabi_init_exception.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/stddef.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/crtdefs.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/typeinfo \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/hash_bytes.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/new \
@@ -67,9 +139,6 @@ CMakeFiles/game.dir/src/objectGenerator.cpp.obj: \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/gthr-default.h \
  C:/MinGW/mingw64/x86_64-w64-mingw32/include/pthread.h \
  C:/MinGW/mingw64/x86_64-w64-mingw32/include/errno.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/sys/types.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/process.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt_startup.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/limits.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/syslimits.h \
  C:/MinGW/mingw64/x86_64-w64-mingw32/include/limits.h \
@@ -169,8 +238,6 @@ CMakeFiles/game.dir/src/objectGenerator.cpp.obj: \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ranges_algobase.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/unicode.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cstdint \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdint.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/stdint.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_algo.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/algorithmfwd.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_heap.h \
@@ -185,8 +252,13 @@ CMakeFiles/game.dir/src/objectGenerator.cpp.obj: \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_vector.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_bvector.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/vector.tcc \
- C:/Users/Sam/Desktop/PlayThrough/include/glad/gl.h \
- C:/Users/Sam/Desktop/PlayThrough/include/KHR/khrplatform.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/unordered_map \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/unordered_map.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/hashtable.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/hashtable_policy.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/aligned_buffer.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/node_handle.h \
+ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/erase_if.h \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/glm.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/_fixes.hpp \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cmath \
@@ -392,72 +464,7 @@ CMakeFiles/game.dir/src/objectGenerator.cpp.obj: \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_uint1.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_uint1_sized.hpp \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cstring \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/string.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h \
  C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/type_ptr.inl \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_image.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_stdinc.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_platform_defines.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/stdarg.h \
- C:/MinGW/mingw64/x86_64-w64-mingw32/include/_mingw_stdarg.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_begin_code.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_close_code.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_assert.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_asyncio.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_atomic.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_audio.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_endian.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_error.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_mutex.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_thread.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_properties.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_iostream.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_bits.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_blendmode.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_camera.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_pixels.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_surface.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_rect.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_clipboard.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_cpuinfo.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_dialog.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_video.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_events.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_gamepad.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_guid.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_joystick.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_power.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_sensor.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_keyboard.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_keycode.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_scancode.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_mouse.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_pen.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_touch.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_filesystem.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_gpu.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_haptic.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_hidapi.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_hints.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_init.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_loadso.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_locale.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_log.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_messagebox.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_metal.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_misc.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_platform.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_process.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_render.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_storage.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_system.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_time.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_timer.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_tray.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_version.h \
- C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_oldnames.h \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/Importer.hpp \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/types.h \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/defs.h \
@@ -487,11 +494,6 @@ CMakeFiles/game.dir/src/objectGenerator.cpp.obj: \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/aabb.h \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/unordered_set \
  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/unordered_set.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/hashtable.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/hashtable_policy.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/aligned_buffer.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/node_handle.h \
- C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/erase_if.h \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/light.h \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/camera.h \
  C:/Users/Sam/Desktop/PlayThrough/include/assimp/material.h \
