@@ -1,5 +1,10 @@
 #include "objectGenerator.hpp"
 
+// Declaring it outside so it creates storage for it
+GLuint AssimpObject::imageIndexCounter;
+std::unordered_map<std::string, size_t> AssimpObject::textureIndexMap;
+std::vector<GLuint64> AssimpObject::textureHandles;
+
 void AssimpObject::processNode(aiNode* node, const aiScene* scene, std::vector<Vertex>& interleavedData, std::vector<GLuint>& indices, GLuint& vertexBase) {
     // Process all the node’s meshes
     for (unsigned int i = 0; i < node->mNumMeshes; i++) {
@@ -35,7 +40,6 @@ void AssimpObject::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<V
         if (mesh->HasTextureCoords(0)) {
             interleavedPass.textureCoord.x = (mesh->mTextureCoords[0][i].x);
             interleavedPass.textureCoord.y = (mesh->mTextureCoords[0][i].y);
-
         } else {
             interleavedPass.textureCoord.x = (0.0f);
             interleavedPass.textureCoord.y = (0.0f);
@@ -52,12 +56,9 @@ void AssimpObject::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<V
         if (material->GetTexture(aiTextureType_DIFFUSE, 0, &str) == AI_SUCCESS) {
             std::string texPath = str.C_Str();
 
-            // std::cout << "texture path : " << texPath << "\n";
-            SDL_Surface* surf = createImage(str.C_Str());
-            if (surf != nullptr) {
-                processToHandle(surf);
-                // std::cout << "Sucessfully sent to processToHandle." << "\n";
-            }
+            std::cout << "texture path : " << texPath << "\n";
+
+            loadTextureIndex(str.C_Str());
         } else {
             std::cout << "texture path : None " << "\n";
         }
@@ -70,7 +71,6 @@ void AssimpObject::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<V
             // std::cout << (face.mIndices[j] + vertexBase) << " ";
             indices.push_back(face.mIndices[j] + vertexBase);
         }
-        std::cout << std::endl;
     }
     vertexBase += mesh->mNumVertices;
     temp++;
@@ -112,7 +112,7 @@ void AssimpObject::processToHandle(SDL_Surface* image_format) {
     if (texture) {
         textures.push_back(texture);
     } else {
-        std::cerr << "Texture Error in processToHandle" << "\n";
+        std::cerr << "Texture Error in processToHandle : broken texture" << "\n";
         return;
     }
 
@@ -129,6 +129,21 @@ void AssimpObject::processToHandle(SDL_Surface* image_format) {
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+void AssimpObject::loadTextureIndex(std::string path) {
+    auto it = textureIndexMap.find(path);
+    if (it != textureIndexMap.end()) {
+        std::cout << "already exists.\n";
+        imageIndices.push_back(static_cast<GLuint>(it->second));
+        return;
+    }
+
+    SDL_Surface* format = createImage(path.c_str());
+    processToHandle(format);
+
+    imageIndices.push_back(imageIndexCounter++);
+    return;
+}
+
 AssimpObject::AssimpObject(std::string filepath) {
     Assimp::Importer importer;
 
@@ -142,9 +157,9 @@ AssimpObject::AssimpObject(std::string filepath) {
     GLuint vertexBase = 0;
     processNode(scene->mRootNode, scene, globalInterleavedData, globalIndices, vertexBase);
 
-    std::cout << "globalInterleavedData.size() : " << globalInterleavedData.size() << "\n";
-    std::cout << "globalIndices.size() : " << globalIndices.size() << "\n";
-    std::cout << "textureHandles.size() : " << textureHandles.size() << "\n";
+    // std::cout << "globalInterleavedData.size() : " << globalInterleavedData.size() << "\n";
+    // std::cout << "globalIndices.size() : " << globalIndices.size() << "\n";
+    // std::cout << "textureHandles.size() : " << textureHandles.size() << "\n";
 
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
@@ -173,22 +188,7 @@ AssimpObject::~AssimpObject() {
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
 
-    for (size_t i = 0; i < textureHandles.size(); i++) {
-        glMakeTextureHandleNonResidentARB(textureHandles[i]);
-        glDeleteTextures(1, &textures[i]);
-    }
-    std::vector<GLuint64>().swap(textureHandles);
-    std::vector<GLuint>().swap(textures);
+    std::vector<Vertex>().swap(globalInterleavedData);
     std::vector<GLuint>().swap(globalIndices);
     std::cout << "successfully deleted object." << "\n";
 }
-
-// ASDVNASVASDNAOIWDBNVAIBWDAJSDBVAKJBSDVKBSDSADBWHBDASBVDA
-
-// YOU CANT THINK PROPERLY BUT FIND A SOLUTION ON HOW TO MAKE A STORAGE FOR YOUR IMAGES SO YOU CAN CONFIRM IF ITS
-//  DUPLICATED
-
-// std::cout << "Absolutely horried";
-// GLint testID;
-// glGetIntegerv(GL_CURRENT_PROGRAM, &testID);
-// std::cout << "Current GL program in AssimpObject: " << testID << "\n";

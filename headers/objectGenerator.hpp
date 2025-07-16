@@ -39,20 +39,25 @@ class AssimpObject {
     GLuint VAO;
     GLuint VBO;
     GLuint EBO;
-    std::vector<GLuint> textures;
-    std::vector<GLuint64> textureHandles;
+
     std::vector<GLuint> globalIndices;
+    std::vector<GLuint> imageIndices;  // This takes the array position of the images in the textureHandles
+    static std::vector<GLuint64> textureHandles;
 
    private:
     SDL_Surface* createImage(const char* filepath);
     void processToHandle(SDL_Surface* image_format);
+    void loadTextureIndex(std::string path);
     void processNode(aiNode* node, const aiScene* scene, std::vector<Vertex>& interleavedData, std::vector<GLuint>& indices, GLuint& vertexBase);
     void processMesh(aiMesh* mesh, const aiScene* scene, std::vector<Vertex>& interleavedData, std::vector<GLuint>& indices, GLuint& vertexBase);
 
     std::vector<Vertex> globalInterleavedData;
+    std::vector<GLuint> textures;
     // Temporary varaibles
     GLfloat temp = 0;
-};
 
-// GLOBAL ARRAYS
-// std::unordered_map<std::string, GLuint> textures;
+    // VERY IMPORTANT
+    static GLuint imageIndexCounter;
+
+    static std::unordered_map<std::string, size_t> textureIndexMap;
+};

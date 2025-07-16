@@ -174,7 +174,13 @@ void App::init() {
         modelObjects.push_back(std::move(object));
     }
 
-    // cube = new AssimpObject("../assets/models/4D.obj");
+    // Trying out SSBO
+    GLuint textureHandleSSBO;
+    glGenBuffers(1, &textureHandleSSBO);
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, textureHandleSSBO);
+    glBufferData(GL_SHADER_STORAGE_BUFFER, AssimpObject::textureHandles.size() * sizeof(GLuint64),
+                 AssimpObject::textureHandles.data(), GL_STATIC_DRAW);
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, textureHandleSSBO);
 
     std::cout << "Game initialzied.\n";
 }
@@ -278,15 +284,14 @@ void App::render() {
         glm::mat4 testObjectToWorld = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -10.0f));
         glm::mat4 testModelToWorldMatrix = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * testObjectToWorld;
 
-        GLint loc2 = glGetUniformLocation(testShaders, "yourTexture");
         GLint loc1 = glGetUniformLocation(testShaders, "MVP");
 
-        if (loc1 == -1 || loc2 == -1) {
+        if (loc1 == -1) {
             std::cout << "Uniform lcoation is not active!" << "\n";
         }
-
         glUniformMatrix4fv(loc1, 1, GL_FALSE, glm::value_ptr(testModelToWorldMatrix));
-        glUniformHandleui64vARB(loc2, static_cast<GLsizei>(model->textureHandles.size()), model->textureHandles.data());
+
+        glUniform1uiv(glGetUniformLocation(testShaders, "textureIndices"), static_cast<GLsizei>(model->imageIndices.size()), model->imageIndices.data());
 
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(model->globalIndices.size()), GL_UNSIGNED_INT, (void*)(0));
     }
