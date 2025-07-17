@@ -27,10 +27,6 @@ class App {
     ~App() = default;
 
    private:
-    // Private functions | TESTING |
-    SDL_Surface* getImageFormat(const char* filepath);
-    void makeTexture(SDL_Surface* image_format);
-
     // VAOS
     GLuint cubeVertexArrayID;
     GLuint arrowVertexArrayID;
@@ -44,6 +40,7 @@ class App {
     // Shaders
     GLuint shaderProgram;
     GLuint opShaderProgram;
+    GLuint testShaders;
 
     // Class instances
     Camera camera;
@@ -54,14 +51,6 @@ class App {
     float move_straight = -0.3f;
     GLfloat fov = 60;
 
-    // Tests
-    GLuint testShaders;
-    GLuint testVAO;
-    GLuint testVBO;
-    GLuint testEBO;
-    std::vector<GLuint64> textureHandles;
-
+    // Model Storage
     std::vector<std::unique_ptr<AssimpObject>> modelObjects;
-
-    // AssimpObject* cube;
 };

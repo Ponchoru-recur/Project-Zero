@@ -144,6 +144,14 @@ void AssimpObject::loadTextureIndex(std::string path) {
     return;
 }
 
+void AssimpObject::applyTransformation(glm::vec3 translate, glm::vec3 rotate, glm::vec3 scale) {
+    modelToWorld = glm::translate(modelToWorld, translate) * glm::rotate(modelToWorld, glm::radians(rotate.x), glm::vec3(1.0f, 0.0f, 0.0f)) * glm::rotate(modelToWorld, glm::radians(rotate.y), glm::vec3(0.0f, 1.0f, 0.0f)) * glm::rotate(modelToWorld, glm::radians(rotate.z), glm::vec3(0.0f, 0.0f, 1.0f)) * glm::scale(modelToWorld, glm::vec3(scale));
+}
+
+glm::mat4 AssimpObject::getModelToWorldTransform() {
+    return modelToWorld;
+}
+
 AssimpObject::AssimpObject(std::string filepath) {
     Assimp::Importer importer;
 
@@ -181,6 +189,14 @@ AssimpObject::AssimpObject(std::string filepath) {
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * globalIndices.size(), globalIndices.data(), GL_STATIC_DRAW);
+    // Set Transformation
+    modelToWorld = glm::translate(modelToWorld, glm::vec3(0.0f, 0.0f, 0.0f));
+
+    std::vector<Vertex>().swap(globalInterleavedData);
+    for (GLuint texture : textures) {
+        glDeleteTextures(1, &texture);
+    }
+    std::vector<GLuint>().swap(textures);
 }
 
 AssimpObject::~AssimpObject() {
@@ -188,7 +204,7 @@ AssimpObject::~AssimpObject() {
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
 
-    std::vector<Vertex>().swap(globalInterleavedData);
+    std::vector<GLuint>().swap(imageIndices);
     std::vector<GLuint>().swap(globalIndices);
     std::cout << "successfully deleted object." << "\n";
 }

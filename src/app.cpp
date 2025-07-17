@@ -1,48 +1,5 @@
 #include "app.hpp"
 
-SDL_Surface* App::getImageFormat(const char* filepath) {
-    SDL_Surface* surface = IMG_Load(filepath);
-    if (!surface) {
-        SDL_Log("Could not load image : %s", SDL_GetError());
-        SDL_DestroySurface(surface);
-        return nullptr;
-    }
-
-    SDL_Surface* formatted = SDL_ConvertSurface(surface, SDL_PIXELFORMAT_RGBA32);
-    SDL_DestroySurface(surface);
-
-    if (!formatted) {
-        SDL_Log("Could not load format : %s", SDL_GetError());
-        SDL_DestroySurface(formatted);
-        return nullptr;
-    }
-    return formatted;
-}
-
-void App::makeTexture(SDL_Surface* image_format) {
-    GLuint texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_format->w, image_format->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_format->pixels);
-    glGenerateMipmap(GL_TEXTURE_2D);
-
-    GLuint64 handle = glGetTextureHandleARB(texture);
-    glMakeTextureHandleResidentARB(handle);
-
-    textureHandles.push_back(handle);
-
-    SDL_DestroySurface(image_format);
-
-    glBindTexture(GL_TEXTURE_2D, 0);
-    return;
-}
-
 const int VERTEX_BYTE_SIZE = 9;
 /*
     BUFFER OVERVIEW GL_ARRAY_BUFFER : CUBEBUFFERSIZE | ARROWBUFFERSIZE
@@ -109,55 +66,6 @@ void App::init() {
     glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * VERTEX_BYTE_SIZE, (void*)(currentBufferSize + sizeof(GLfloat) * 3));
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * VERTEX_BYTE_SIZE, (void*)(currentBufferSize + sizeof(GLfloat) * 6));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theIndexBufferID);
-
-    // Making yet another testing
-    // Position | Texture Coordinates | Face
-    GLfloat vertexAndTexturePos[] = {
-        -1.0f, +1.0f, +0.0f, +0.0f, +1.0f, 0.0f,  // top-left
-        +0.0f, +1.0f, +0.0f, +1.0f, +1.0f, 0.0f,  // top-right
-        -1.0f, +0.0f, +0.0f, +0.0f, +0.0f, 0.0f,  // bottom-left
-
-        +0.0f, +1.0f, +0.0f, +1.0f, +1.0f, 0.0f,  // top-right
-        -1.0f, +0.0f, +0.0f, +0.0f, +0.0f, 0.0f,  // bottom-left
-        +0.0f, +0.0f, +0.0f, +1.0f, +0.0f, 0.0f,  // bottom-right
-
-        -1.0f, +1.0f, +1.0f, +0.0f, +1.0f, 1.0f,  // top-left
-        +0.0f, +1.0f, +1.0f, +1.0f, +1.0f, 1.0f,  // top-right
-        -1.0f, +0.0f, +1.0f, +0.0f, +0.0f, 1.0f,  // bottom-left
-
-        +0.0f, +1.0f, +1.0f, +1.0f, +1.0f, 1.0f,  // top-right
-        -1.0f, +0.0f, +1.0f, +0.0f, +0.0f, 1.0f,  // bottom-left
-        +0.0f, +0.0f, +1.0f, +1.0f, +0.0f, 1.0f,  // bottom-right
-    };
-    GLuint elementIndices[] = {
-        0, 2, 1,
-        4, 5, 3,
-        7, 8, 6,
-        10, 11, 9};
-
-    glGenVertexArrays(1, &testVAO);
-    glBindVertexArray(testVAO);
-
-    glGenBuffers(1, &testVBO);
-    glBindBuffer(GL_ARRAY_BUFFER, testVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexAndTexturePos), vertexAndTexturePos, GL_STATIC_DRAW);
-
-    glGenBuffers(1, &testEBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, testEBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elementIndices), elementIndices, GL_STATIC_DRAW);
-
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(2);
-    glEnableVertexAttribArray(3);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (void*)(0));
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (void*)(sizeof(GLfloat) * 3));
-    glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (void*)(sizeof(GLfloat) * 5));
-
-    // Images
-
-    makeTexture(getImageFormat("../assets/images/awesomeface.png"));
-    makeTexture(getImageFormat("../assets/images/subaru1.jpg"));
 
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -281,18 +189,11 @@ void App::render() {
 
     for (const auto& model : modelObjects) {
         glBindVertexArray(model->VAO);
-        glm::mat4 testObjectToWorld = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -10.0f));
-        glm::mat4 testModelToWorldMatrix = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * testObjectToWorld;
 
-        GLint loc1 = glGetUniformLocation(testShaders, "MVP");
+        glm::mat4 testModelToWorldMatrix = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * model->getModelToWorldTransform();
 
-        if (loc1 == -1) {
-            std::cout << "Uniform lcoation is not active!" << "\n";
-        }
-        glUniformMatrix4fv(loc1, 1, GL_FALSE, glm::value_ptr(testModelToWorldMatrix));
-
+        glUniformMatrix4fv(glGetUniformLocation(testShaders, "MVP"), 1, GL_FALSE, glm::value_ptr(testModelToWorldMatrix));
         glUniform1uiv(glGetUniformLocation(testShaders, "textureIndices"), static_cast<GLsizei>(model->imageIndices.size()), model->imageIndices.data());
-
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(model->globalIndices.size()), GL_UNSIGNED_INT, (void*)(0));
     }
 

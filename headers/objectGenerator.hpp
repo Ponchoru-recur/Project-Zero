@@ -11,6 +11,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/quaternion.hpp>
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
@@ -44,7 +45,12 @@ class AssimpObject {
     std::vector<GLuint> imageIndices;  // This takes the array position of the images in the textureHandles
     static std::vector<GLuint64> textureHandles;
 
-   private:
+    void applyTransformation(glm::vec3 translate, glm::vec3 rotate, glm::vec3 scale);
+    glm::mat4 getModelToWorldTransform();
+
+   private:  // Note glm uses ZYX instead of XYZ
+    glm::mat4 modelToWorld = glm::mat4(1.0f);
+
     SDL_Surface* createImage(const char* filepath);
     void processToHandle(SDL_Surface* image_format);
     void loadTextureIndex(std::string path);
@@ -58,6 +64,5 @@ class AssimpObject {
 
     // VERY IMPORTANT
     static GLuint imageIndexCounter;
-
     static std::unordered_map<std::string, size_t> textureIndexMap;
 };

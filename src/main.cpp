@@ -91,3 +91,5 @@ void SDL_AppQuit(void *appstate, SDL_AppResult /*result*/) {
     window.clean();
     std::cout << "Exited.\n";
 }
+
+// if you see this remember to try out bit manipulation and adding Luajit to you code
