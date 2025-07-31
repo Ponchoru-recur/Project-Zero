@@ -1,10 +1,5 @@
 #include "objectGenerator.hpp"
 
-// Declaring it outside so it creates storage for it
-GLuint AssimpObject::imageIndexCounter;
-std::unordered_map<std::string, size_t> AssimpObject::textureIndexMap;
-std::vector<GLuint64> AssimpObject::textureHandles;
-
 void AssimpObject::processNode(aiNode* node, const aiScene* scene, std::vector<Vertex>& interleavedData, std::vector<GLuint>& indices, GLuint& vertexBase) {
     // Process all the node’s meshes
     for (unsigned int i = 0; i < node->mNumMeshes; i++) {
@@ -56,11 +51,11 @@ void AssimpObject::processMesh(aiMesh* mesh, const aiScene* scene, std::vector<V
         if (material->GetTexture(aiTextureType_DIFFUSE, 0, &str) == AI_SUCCESS) {
             std::string texPath = str.C_Str();
 
-            std::cout << "texture path : " << texPath << "\n";
-
+            // std::cout << "texture path : " << texPath << "\n";
             loadTextureIndex(str.C_Str());
         } else {
-            std::cout << "texture path : None " << "\n";
+            std::cerr << "[Warning] No valid texture. Using texture fallback.\n";
+            imageIndices.push_back(0);
         }
     }
 
@@ -132,10 +127,12 @@ void AssimpObject::processToHandle(SDL_Surface* image_format) {
 void AssimpObject::loadTextureIndex(std::string path) {
     auto it = textureIndexMap.find(path);
     if (it != textureIndexMap.end()) {
-        std::cout << "already exists.\n";
+        // std::cout << "already exists.\n";
         imageIndices.push_back(static_cast<GLuint>(it->second));
         return;
     }
+
+    textureIndexMap[path] = imageIndexCounter;
 
     SDL_Surface* format = createImage(path.c_str());
     processToHandle(format);
@@ -153,8 +150,11 @@ glm::mat4 AssimpObject::getModelToWorldTransform() {
 }
 
 AssimpObject::AssimpObject(std::string filepath) {
-    Assimp::Importer importer;
+    if (textureHandles.empty()) {
+        processToHandle(createImage("../assets/images/fallback.png"));
+    }
 
+    Assimp::Importer importer;
     const aiScene* scene = importer.ReadFile(filepath, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
 
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
@@ -192,6 +192,8 @@ AssimpObject::AssimpObject(std::string filepath) {
     // Set Transformation
     modelToWorld = glm::translate(modelToWorld, glm::vec3(0.0f, 0.0f, 0.0f));
 
+    // std::cout << "size textureHandles : " << textureHandles.size() << std::endl;
+
     std::vector<Vertex>().swap(globalInterleavedData);
     for (GLuint texture : textures) {
         glDeleteTextures(1, &texture);
@@ -208,3 +210,8 @@ AssimpObject::~AssimpObject() {
     std::vector<GLuint>().swap(globalIndices);
     std::cout << "successfully deleted object." << "\n";
 }
+
+// Declaring it outside so it creates storage for it
+GLuint AssimpObject::imageIndexCounter = 1;
+std::unordered_map<std::string, size_t> AssimpObject::textureIndexMap;
+std::vector<GLuint64> AssimpObject::textureHandles;

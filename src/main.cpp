@@ -11,23 +11,39 @@
 #include <thread>
 #include <chrono>
 
+// LUA
+extern "C" {
+#include <luajit/lua.h>
+#include <luajit/lauxlib.h>
+#include <luajit/lualib.h>
+}
+
 #define FRAME_DELAY (1000 / 60)
 
 SDL_AppResult SDL_AppInit(void **appstate, int /*argc*/, char * /*argv*/[]) {
     glEnable(GL_DEPTH_TEST);
-    glDisable(GL_CULL_FACE);
-    glEnable(GL_CULL_FACE);
     glDepthFunc(GL_LESS);
-    // glEnable(GL_BLEND);
-    // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_CULL_FACE);
 
-    std::unique_ptr<App> app = std::make_unique<App>();
+    glEnable(GL_STENCIL_TEST);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    std::unique_ptr<App>
+        app = std::make_unique<App>();
     app->init();
 
     // release the raw pointer to appstate.
     // This is equivalent to *appstate = new App();
     *appstate = app.release();
     std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
+
+    lua_State *L = luaL_newstate();
+    luaL_openlibs(L);
+    luaL_dostring(L, "print('Hello from LuaJIT!')");
+    lua_close(L);
+
     return SDL_APP_CONTINUE;
 }
 
@@ -66,14 +82,10 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
     // Logic
     static_cast<App *>(appstate)->update();
 
-    // Start renderering below this
-    glClearColor(0.2f, 0.3f, 0.5f, 1.0f);  // RGB blueish
-    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     static_cast<App *>(appstate)->render();
     SDL_GL_SwapWindow(window.getWindow());
 
     auto EndFrame = std::chrono::steady_clock::now();
-
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(EndFrame - StartFrame);
 
     // Translate elapsed.count() to float to prevent error convertion.
@@ -81,6 +93,8 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
     if ((elapse) < TargetFrameTIme) {
         SDL_Delay(static_cast<std::uint32_t>(TargetFrameTIme - elapse));
     }
+
+    // std::cout << "\rFPS: " << elapse * TargetFPS << "    " << std::flush;
 
     return SDL_APP_CONTINUE;
 }

@@ -3,9 +3,12 @@ project(MySDL3Game)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# Direct the game.exe to project/bin
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
+
+# OpenGL
+find_package(OpenGL REQUIRED)
+
+# find_package(LuaJIT REQUIRED)
 
 # Include SDL3 + my headers
 include_directories(
@@ -13,7 +16,7 @@ include_directories(
     "${PROJECT_SOURCE_DIR}/headers"
 )
 
-# Linker directory for SDL3 static lib
+# Linker directory for library
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 
 # Grab all .cpp/.c files
@@ -29,14 +32,10 @@ target_compile_options(game PRIVATE
     >
 )
 
-# OpenGL
-find_package(OpenGL REQUIRED)
-
-# Core linking
-target_link_libraries(game PRIVATE OpenGL::GL)
-
 # SDL3 libs
 target_link_libraries(game PRIVATE
+    OpenGL::GL
+    "${PROJECT_SOURCE_DIR}/lib/libluajit.a"
     "${PROJECT_SOURCE_DIR}/lib/libassimp.dll.a"
     "${PROJECT_SOURCE_DIR}/lib/libSDL3.dll.a"
     "${PROJECT_SOURCE_DIR}/lib/libSDL3_image.dll.a"

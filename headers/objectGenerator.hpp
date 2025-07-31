@@ -45,7 +45,7 @@ class AssimpObject {
     std::vector<GLuint> imageIndices;  // This takes the array position of the images in the textureHandles
     static std::vector<GLuint64> textureHandles;
 
-    void applyTransformation(glm::vec3 translate, glm::vec3 rotate, glm::vec3 scale);
+    void applyTransformation(glm::vec3 translate, glm::vec3 rotate = glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3 scale = glm::vec3(1.0f, 1.0f, 1.0f));
     glm::mat4 getModelToWorldTransform();
 
    private:  // Note glm uses ZYX instead of XYZ

@@ -27,6 +27,12 @@ void App::init() {
     GLuint testFragShader = Shader::compileShader(testFragSource, GL_FRAGMENT_SHADER);
     testShaders = Shader::linkProgram(testVertexShader, testFragShader);
 
+    std::string stencilVertSource = Shader::LoadShaderFileSource("../shaders/stencilVertShader.vs");
+    std::string stencilFragSource = Shader::LoadShaderFileSource("../shaders/stencilFragShader.fs");
+    GLuint stencilVertShader = Shader::compileShader(stencilVertSource, GL_VERTEX_SHADER);
+    GLuint stencilFragShader = Shader::compileShader(stencilFragSource, GL_FRAGMENT_SHADER);
+    stencilShaderProgram = Shader::linkProgram(stencilVertShader, stencilFragShader);
+
     // Generate a buffer for information of the triangle
     glGenBuffers(1, &theVertexBufferID);
     glGenBuffers(1, &theIndexBufferID);
@@ -74,13 +80,16 @@ void App::init() {
     // Creating new objects here!
     std::vector<std::string> modelPaths = {
         "../assets/models/4D.obj",
+        "../assets/models/4D.obj"
+
     };
 
     for (std::string& path : modelPaths) {
         std::unique_ptr<AssimpObject> object = std::make_unique<AssimpObject>(path);
-
         modelObjects.push_back(std::move(object));
     }
+    // FIXME: [Danger temporary]
+    modelObjects[0]->applyTransformation(glm::vec3(5.0, +5.0, -20));
 
     // Trying out SSBO
     GLuint textureHandleSSBO;
@@ -89,6 +98,32 @@ void App::init() {
     glBufferData(GL_SHADER_STORAGE_BUFFER, AssimpObject::textureHandles.size() * sizeof(GLuint64),
                  AssimpObject::textureHandles.data(), GL_STATIC_DRAW);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, textureHandleSSBO);
+
+    // FIXME: | TESTING |
+
+    glGenFramebuffers(1, &fbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, window.getWidth(), window.getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glTexImage2D(
+        GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, 800, 600, 0,
+        GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL);
+
+    // Attach it
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
+
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE) {
+        // std::cout << "Frame Buffer is ready!" << "\n";
+    }
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     std::cout << "Game initialzied.\n";
 }
@@ -157,10 +192,42 @@ void App::update() {
 }
 
 void App::render() {
+    glViewport(0, 0, window.getWidth(), window.getHeight());
+    glClearColor(0.2f, 0.3f, 0.5f, 1.0f);  // RGB blueish
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+    // New objects made
+
+    for (const auto& model : modelObjects) {
+        glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+        glStencilFunc(GL_ALWAYS, 1, 0xFF);
+        glStencilMask(0xFF);
+        glBindVertexArray(model->VAO);
+
+        glUseProgram(testShaders);
+        glm::mat4 modelMatrix = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * model->getModelToWorldTransform();
+        glUniformMatrix4fv(glGetUniformLocation(testShaders, "MVP"), 1, GL_FALSE, glm::value_ptr(modelMatrix));
+        glUniform1uiv(glGetUniformLocation(testShaders, "textureIndices"), static_cast<GLsizei>(model->imageIndices.size()), model->imageIndices.data());
+        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(model->globalIndices.size()), GL_UNSIGNED_INT, (void*)(0));
+
+        glStencilMask(0x00);
+        glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+
+        glUseProgram(stencilShaderProgram);
+        glm::mat4 outlineModel = model->getModelToWorldTransform() * glm::scale(glm::mat4(1.0f), glm::vec3(1.05f));
+        glm::mat4 outlineMVP = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * outlineModel;
+        glUniformMatrix4fv(glGetUniformLocation(stencilShaderProgram, "MVP"), 1, GL_FALSE, glm::value_ptr(outlineMVP));
+        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(model->globalIndices.size()), GL_UNSIGNED_INT, (void*)(0));
+
+        glStencilMask(0xFF);
+        glStencilFunc(GL_ALWAYS, 1, 0xFF);  // reset default
+    }
+    glUseProgram(shaderProgram);
+
     GLuint getModelToWorldProjectionMatrix = glGetUniformLocation(shaderProgram, "modelToWorldProjectionMatrix");
     GLuint getmodelToWorldTransformationMatrix = glGetUniformLocation(shaderProgram, "modelToWorldTransformMatrix");
 
-    // Cube
+    // Cube 1
     glBindVertexArray(cubeVertexArrayID);
     glm::mat4 cubeToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(3.5f, +0.0f, -2.0f)) /** glm::scale(glm::mat4(1.0f), glm::vec3(5.0f, 0.5f, 0.5f))*/;
     glm::mat4 MatrixGangUwu = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * cubeToWorldMatrix;
@@ -168,8 +235,9 @@ void App::render() {
     glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(cubeToWorldMatrix));
     glDrawElements(GL_TRIANGLES, CubeShape.num_indices, GL_UNSIGNED_SHORT, 0);
 
+    // Cube 2
     glBindVertexArray(cubeVertexArrayID);
-    cubeToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-3.5f, +0.0f, -2.0f));
+    cubeToWorldMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(3.5f, +0.0f, -2.0f)) * glm::scale(glm::mat4(1.0f), glm::vec3(2, 2, 2));
     MatrixGangUwu = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * cubeToWorldMatrix;
     glUniformMatrix4fv(getModelToWorldProjectionMatrix, 1, GL_FALSE, glm::value_ptr(MatrixGangUwu));
     glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(cubeToWorldMatrix));
@@ -183,38 +251,25 @@ void App::render() {
     glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(arrowToWorldMatrix));
     glDrawElements(GL_TRIANGLES, ArrowShape.num_indices, GL_UNSIGNED_SHORT, (void*)(CubeShape.getIndiceBufferSize()));
 
-    // New objects made
-
-    glUseProgram(testShaders);
-
-    for (const auto& model : modelObjects) {
-        glBindVertexArray(model->VAO);
-
-        glm::mat4 testModelToWorldMatrix = camera.getProjectionMatrix() * camera.getWorldToViewMatrix() * model->getModelToWorldTransform();
-
-        glUniformMatrix4fv(glGetUniformLocation(testShaders, "MVP"), 1, GL_FALSE, glm::value_ptr(testModelToWorldMatrix));
-        glUniform1uiv(glGetUniformLocation(testShaders, "textureIndices"), static_cast<GLsizei>(model->imageIndices.size()), model->imageIndices.data());
-        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(model->globalIndices.size()), GL_UNSIGNED_INT, (void*)(0));
-    }
-
     GLenum err;
     while ((err = glGetError()) != GL_NO_ERROR) {
         std::cerr << "OpenGL Error: " << err << std::endl;
     }
 
     glBindVertexArray(0);
+    // glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void App::cleanup() {
-    // generateObject.cleanup();
     CubeShape.cleanup();
     ArrowShape.cleanup();
-    // delete cube;
+
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glDeleteVertexArrays(1, &cubeVertexArrayID);
     glDeleteVertexArrays(1, &arrowVertexArrayID);
     glDeleteBuffers(1, &theVertexBufferID);
     glDeleteBuffers(1, &theIndexBufferID);
+    glDeleteFramebuffers(1, &fbo);
     glDeleteProgram(shaderProgram);
     std::cout << "Cleanup done.\n";
 }

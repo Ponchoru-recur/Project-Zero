@@ -21,6 +21,7 @@ CMakeFiles/game.dir/src/app.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/app.cp
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/basic_string.tcc \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/char_traits.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/charconv.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/chrono.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/codecvt.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/concept_check.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/cpp_type_traits.h \
@@ -31,6 +32,10 @@ CMakeFiles/game.dir/src/app.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/app.cp
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/exception.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/exception_defines.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/exception_ptr.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fs_dir.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fs_fwd.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fs_ops.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fs_path.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fstream.tcc \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/functexcept.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/functional_hash.h \
@@ -63,6 +68,7 @@ CMakeFiles/game.dir/src/app.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/app.cp
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/postypes.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/predefined_ops.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ptr_traits.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/quoted_string.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/range_access.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ranges_algo.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ranges_algobase.h \
@@ -116,6 +122,7 @@ CMakeFiles/game.dir/src/app.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/app.cp
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/climits \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/clocale \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cmath \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/codecvt \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/compare \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/concepts \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cstddef \
@@ -136,9 +143,11 @@ CMakeFiles/game.dir/src/app.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/app.cp
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/numeric_traits.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/string_conversions.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/type_traits.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/filesystem \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/format \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/fstream \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/initializer_list \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iomanip \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ios \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iosfwd \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iostream \
@@ -154,6 +163,7 @@ CMakeFiles/game.dir/src/app.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/app.cp
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/pstl/glue_algorithm_defs.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/pstl/glue_memory_defs.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/pstl/pstl_config.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ratio \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/span \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/sstream \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/stdexcept \
@@ -1258,6 +1268,10 @@ CMakeFiles/game.dir/src/main.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/main.
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/exception.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/exception_defines.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/exception_ptr.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fs_dir.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fs_fwd.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fs_ops.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fs_path.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fstream.tcc \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/functexcept.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/functional_hash.h \
@@ -1348,6 +1362,7 @@ CMakeFiles/game.dir/src/main.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/main.
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/climits \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/clocale \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cmath \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/codecvt \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/compare \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/concepts \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cstddef \
@@ -1368,6 +1383,7 @@ CMakeFiles/game.dir/src/main.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/main.
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/numeric_traits.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/string_conversions.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/type_traits.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/filesystem \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/format \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/fstream \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/initializer_list \
@@ -1769,7 +1785,11 @@ CMakeFiles/game.dir/src/main.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/main.
   C:/Users/Sam/Desktop/PlayThrough/include/glm/vec2.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/vec3.hpp \
   C:/Users/Sam/Desktop/PlayThrough/include/glm/vec4.hpp \
-  C:/Users/Sam/Desktop/PlayThrough/include/glm/vector_relational.hpp
+  C:/Users/Sam/Desktop/PlayThrough/include/glm/vector_relational.hpp \
+  C:/Users/Sam/Desktop/PlayThrough/include/LuaJit/lauxlib.h \
+  C:/Users/Sam/Desktop/PlayThrough/include/LuaJit/lua.h \
+  C:/Users/Sam/Desktop/PlayThrough/include/LuaJit/luaconf.h \
+  C:/Users/Sam/Desktop/PlayThrough/include/LuaJit/lualib.h
 
 CMakeFiles/game.dir/src/objectGenerator.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/objectGenerator.cpp \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/algorithm \
@@ -2278,7 +2298,9 @@ CMakeFiles/game.dir/src/shaders.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/sh
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/backward/binders.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bit \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/algorithmfwd.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/align.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/alloc_traits.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/allocated_ptr.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/allocator.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/basic_ios.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/basic_ios.tcc \
@@ -2286,6 +2308,7 @@ CMakeFiles/game.dir/src/shaders.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/sh
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/basic_string.tcc \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/char_traits.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/charconv.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/chrono.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/codecvt.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/concept_check.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/cpp_type_traits.h \
@@ -2295,6 +2318,10 @@ CMakeFiles/game.dir/src/shaders.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/sh
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/exception.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/exception_defines.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/exception_ptr.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fs_dir.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fs_fwd.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fs_ops.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fs_path.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fstream.tcc \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/functexcept.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/functional_hash.h \
@@ -2323,6 +2350,7 @@ CMakeFiles/game.dir/src/shaders.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/sh
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/postypes.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/predefined_ops.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ptr_traits.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/quoted_string.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/range_access.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ranges_algobase.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ranges_base.h \
@@ -2330,6 +2358,8 @@ CMakeFiles/game.dir/src/shaders.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/sh
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ranges_util.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/refwrap.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/requires_hosted.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/shared_ptr.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/shared_ptr_base.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/sstream.tcc \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/std_abs.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_algo.h \
@@ -2342,6 +2372,7 @@ CMakeFiles/game.dir/src/shaders.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/sh
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_iterator_base_types.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_pair.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_tempbuf.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/stl_uninitialized.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/streambuf.tcc \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/streambuf_iterator.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/string_view.tcc \
@@ -2349,6 +2380,7 @@ CMakeFiles/game.dir/src/shaders.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/sh
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/unicode-data.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/unicode.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/uniform_int_dist.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/unique_ptr.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/uses_allocator.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/uses_allocator_args.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/utility.h \
@@ -2357,6 +2389,7 @@ CMakeFiles/game.dir/src/shaders.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/sh
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cerrno \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/charconv \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/clocale \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/codecvt \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/compare \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/concepts \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/cstddef \
@@ -2369,14 +2402,18 @@ CMakeFiles/game.dir/src/shaders.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/sh
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/debug/assertions.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/debug/debug.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/exception \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/aligned_buffer.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/alloc_traits.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/atomicity.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/concurrence.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/numeric_traits.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/string_conversions.h \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/type_traits.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/filesystem \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/format \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/fstream \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/initializer_list \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iomanip \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ios \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iosfwd \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iostream \
@@ -2388,6 +2425,7 @@ CMakeFiles/game.dir/src/shaders.cpp.obj: C:/Users/Sam/Desktop/PlayThrough/src/sh
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/optional \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ostream \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/pstl/pstl_config.h \
+  C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ratio \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/span \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/sstream \
   C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/stdexcept \
@@ -3649,11 +3687,11 @@ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/clzerointrin.h:
 
 C:/Users/Sam/Desktop/PlayThrough/include/assimp/color4.h:
 
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iomanip:
-
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/exception_ptr.h:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/uses_allocator.h:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/iomanip:
 
 C:/Users/Sam/Desktop/PlayThrough/headers/shapeData.hpp:
 
@@ -3671,6 +3709,12 @@ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/debug/debug.h:
 
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/stdlib_s.h:
 
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/span:
+
+C:/MinGW/mingw64/x86_64-w64-mingw32/include/ioapiset.h:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/chrono.h:
+
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/limits.h:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_double2x3_precision.hpp:
@@ -3680,6 +3724,8 @@ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/thread:
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/alloc_traits.h:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/align.h:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/codecvt:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/allocator.h:
 
@@ -3713,9 +3759,9 @@ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_pen.h:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/atomic_wait.h:
 
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ptr_traits.h:
-
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/basic_string.h:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ptr_traits.h:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/constants.hpp:
 
@@ -3724,12 +3770,6 @@ C:/MinGW/mingw64/x86_64-w64-mingw32/include/winscard.h:
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/objidlbase.h:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/basic_ios.h:
-
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/riemann_zeta.tcc:
-
-C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/epsilon.inl:
-
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/range_access.h:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/iterator_concepts.h:
 
@@ -3791,15 +3831,9 @@ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_float3x3_precision.hpp:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_float3x2.hpp:
 
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ranges_algo.h:
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/locale_classes.tcc:
 
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/atomic:
-
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fstream.tcc:
-
-C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_bool4.hpp:
-
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/version.h:
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fs_dir.h:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/max_size_type.h:
 
@@ -3816,6 +3850,36 @@ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/functexcept.
 C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/setup.hpp:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/x86_64-w64-mingw32/bits/cpu_defines.h:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fs_fwd.h:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fs_ops.h:
+
+C:/MinGW/mingw64/x86_64-w64-mingw32/include/crtdefs.h:
+
+C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/type_half.hpp:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/locale_facets.h:
+
+C:/MinGW/mingw64/x86_64-w64-mingw32/include/sdkddkver.h:
+
+C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_double3x4_precision.hpp:
+
+C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_transform.hpp:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fs_path.h:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/fstream:
+
+C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_properties.h:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/atomic:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/fstream.tcc:
+
+C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_bool4.hpp:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/version.h:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/hash_bytes.h:
 
@@ -3849,23 +3913,15 @@ C:/MinGW/mingw64/x86_64-w64-mingw32/include/swprintf.inl:
 
 C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_timer.h:
 
-C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_float4x3.hpp:
-
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/predefined_ops.h:
-
 C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_video.h:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/locale_classes.h:
 
 C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_guid.h:
 
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/locale_classes.tcc:
-
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/avx512fp16vlintrin.h:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/locale_conv.h:
-
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/locale_facets.h:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_int2_sized.hpp:
 
@@ -3888,6 +3944,22 @@ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ostream.tcc:
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/postypes.h:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/limits:
+
+C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_float4x3.hpp:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/predefined_ops.h:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/poly_hermite.tcc:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/quoted_string.h:
+
+C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/epsilon.inl:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/riemann_zeta.tcc:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/range_access.h:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ranges_algo.h:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ranges_algobase.h:
 
@@ -4119,17 +4191,11 @@ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ext/type_traits.h
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_float2x4_precision.hpp:
 
+C:/MinGW/mingw64/x86_64-w64-mingw32/include/pthread_compat.h:
+
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/filesystem:
+
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/format:
-
-C:/MinGW/mingw64/x86_64-w64-mingw32/include/sdkddkver.h:
-
-C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_double3x4_precision.hpp:
-
-C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_transform.hpp:
-
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/fstream:
-
-C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_properties.h:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/initializer_list:
 
@@ -4169,9 +4235,9 @@ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/pstl/glue_memory_
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/pstl/pstl_config.h:
 
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/span:
+C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ratio:
 
-C:/Users/Sam/Desktop/PlayThrough/include/glm/integer.hpp:
+C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/type_vec1.hpp:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/sstream:
 
@@ -4218,8 +4284,6 @@ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/modified_bess
 C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_bits.h:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/qualifier.hpp:
-
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/tr1/poly_hermite.tcc:
 
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/inaddr.h:
 
@@ -4345,10 +4409,6 @@ C:/Users/Sam/Desktop/PlayThrough/include/glm/matrix.hpp:
 
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/corecrt_wstdlib.h:
 
-C:/MinGW/mingw64/x86_64-w64-mingw32/include/crtdefs.h:
-
-C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/type_half.hpp:
-
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/float.h:
 
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/locale.h:
@@ -4373,8 +4433,6 @@ C:/MinGW/mingw64/x86_64-w64-mingw32/include/pthread.h:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/constants.inl:
 
-C:/MinGW/mingw64/x86_64-w64-mingw32/include/pthread_compat.h:
-
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/pthread_signal.h:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/vector_bool1_precision.hpp:
@@ -4383,9 +4441,9 @@ C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_joystick.h:
 
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/pthread_time.h:
 
-C:/MinGW/mingw64/x86_64-w64-mingw32/include/pthread_unistd.h:
-
 C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/matrix_transform.hpp:
+
+C:/MinGW/mingw64/x86_64-w64-mingw32/include/pthread_unistd.h:
 
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/sec_api/stdio_s.h:
 
@@ -4669,10 +4727,6 @@ C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/type_mat4x4.hpp:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/type_quat.inl:
 
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/ratio:
-
-C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/type_vec1.hpp:
-
 C:/Users/Sam/Desktop/PlayThrough/include/glm/detail/type_vec1.inl:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_clip_space.hpp:
@@ -4684,8 +4738,6 @@ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_double2x4.hpp:
 C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_double3x2_precision.hpp:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_double3x3.hpp:
-
-C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/vec1.hpp:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/matrix_double3x4.hpp:
 
@@ -4738,6 +4790,8 @@ C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_common.inl:
 C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_double.hpp:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/ext/quaternion_double_precision.hpp:
+
+C:/Users/Sam/Desktop/PlayThrough/include/LuaJit/luaconf.h:
 
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/objbase.h:
 
@@ -4810,6 +4864,10 @@ C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/quaternion.inl:
 C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/type_ptr.hpp:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/type_ptr.inl:
+
+C:/Users/Sam/Desktop/PlayThrough/include/glm/gtc/vec1.hpp:
+
+C:/Users/Sam/Desktop/PlayThrough/include/glm/integer.hpp:
 
 C:/Users/Sam/Desktop/PlayThrough/include/glm/mat2x2.hpp:
 
@@ -5029,10 +5087,6 @@ C:/MinGW/mingw64/x86_64-w64-mingw32/include/handleapi.h:
 
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/interlockedapi.h:
 
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/chrono.h:
-
-C:/MinGW/mingw64/x86_64-w64-mingw32/include/ioapiset.h:
-
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/winefs.h:
 
 C:/MinGW/mingw64/x86_64-w64-mingw32/include/joystickapi.h:
@@ -5161,8 +5215,6 @@ C:/MinGW/mingw64/x86_64-w64-mingw32/include/winver.h:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/chrono_io.h:
 
-C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/quoted_string.h:
-
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/this_thread_sleep.h:
 
 C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/chrono:
@@ -5172,6 +5224,12 @@ C:/MinGW/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/stop_token:
 C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_main.h:
 
 C:/Users/Sam/Desktop/PlayThrough/include/SDL3/SDL_main_impl.h:
+
+C:/Users/Sam/Desktop/PlayThrough/include/LuaJit/lauxlib.h:
+
+C:/Users/Sam/Desktop/PlayThrough/include/LuaJit/lua.h:
+
+C:/Users/Sam/Desktop/PlayThrough/include/LuaJit/lualib.h:
 
 C:/Users/Sam/Desktop/PlayThrough/src/objectGenerator.cpp:
 

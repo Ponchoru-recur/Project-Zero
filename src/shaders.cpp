@@ -3,8 +3,8 @@
 std::string Shader::LoadShaderFileSource(const std::string& filepath) {
     std::ifstream file(filepath);
 
-    if (!file.is_open()) {
-        std::cerr << "Failed to open shader file : " << filepath << "\n";
+    if (!file.is_open() || !std::filesystem::exists(filepath)) {
+        std::cerr << "[Warning] Failed to open shader file : " << filepath << "\n";
         return "";
     }
     std::stringstream buffer;

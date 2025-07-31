@@ -17,6 +17,8 @@ Window::Window(const char* name, int w, int h) : window_width(w), window_height(
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
+    SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
+
     window = SDL_CreateWindow(name, w, h, SDL_WINDOW_OPENGL);
 
     if (!window) {

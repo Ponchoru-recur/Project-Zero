@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <filesystem>
 
 namespace Shader {
 std::string LoadShaderFileSource(const std::string& filepath);

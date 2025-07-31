@@ -11,6 +11,7 @@
 #include <cmath>
 #include <memory>
 
+#include "window.hpp"
 #include "shaders.hpp"
 #include "camera.hpp"
 #include "shapeGenerator.hpp"
@@ -40,6 +41,7 @@ class App {
     // Shaders
     GLuint shaderProgram;
     GLuint opShaderProgram;
+    GLuint stencilShaderProgram;
     GLuint testShaders;
 
     // Class instances
@@ -47,10 +49,13 @@ class App {
     ShapeData ArrowShape = ShapeGenerator::makeArrow();
     ShapeData CubeShape = ShapeGenerator::makeCube();
 
-    // temporary variables
+    // Model Storage
+    std::vector<std::unique_ptr<AssimpObject>> modelObjects;
+
+    // FIXME: temporary variables
     float move_straight = -0.3f;
     GLfloat fov = 60;
 
-    // Model Storage
-    std::vector<std::unique_ptr<AssimpObject>> modelObjects;
+    GLuint fbo;  // or frame buffer object
+    GLuint texture;
 };
