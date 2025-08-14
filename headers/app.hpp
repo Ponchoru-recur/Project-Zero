@@ -57,5 +57,11 @@ class App {
     GLfloat fov = 60;
 
     GLuint fbo;  // or frame buffer object
+    GLuint rbo;  // Render Buffer object
     GLuint texture;
+
+    // For quad object test
+    GLuint quadVertexID;
+    GLuint quadBufferID;
+    GLuint quadElementID;
 };

@@ -12,51 +12,81 @@ Window::Window(const char* name, int w, int h) : window_width(w), window_height(
         SDL_Log("Failed to initialize VIDEO.\nError : %s", SDL_GetError());
         return;
     }
+
     // Setting opengl version
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
+    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
+
+    // Will make life miserable if disabled.
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
 
-    window = SDL_CreateWindow(name, w, h, SDL_WINDOW_OPENGL);
+    windowMainDisplay = SDL_CreateWindow(name, w, h, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+    // windowDrawingDisplay = SDL_CreateWindow("Drawing window", w, h, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 
-    if (!window) {
+    if (!windowMainDisplay /*|| !windowDrawingDisplay*/) {
         std::cerr << "window failed to init Error : " << SDL_GetError() << "\n";
-        SDL_DestroyWindow(window);
+        SDL_DestroyWindow(windowMainDisplay);
+        // SDL_DestroyWindow(windowDrawingDisplay);
         return;
     }
 
-    gl_context = SDL_GL_CreateContext(window);
-    if (!gl_context) {
+    glContextMain = SDL_GL_CreateContext(windowMainDisplay);
+
+    // glContextDrawing = SDL_GL_CreateContext(windowDrawingDisplay);
+
+    if (!glContextMain /*|| !glContextDrawing*/) {
         std::cerr << "Failed to create SDL_GL_CONTEXT : " << SDL_GetError() << "\n";
-        SDL_DestroyWindow(window);
+        SDL_DestroyWindow(windowMainDisplay);
+        // SDL_DestroyWindow(windowDrawingDisplay);
         SDL_Quit();
         return;
     }
 
     if (!gladLoaderLoadGL()) {
         std::cerr << "Failed to initialize GLAD\n";
-        SDL_GL_DestroyContext(gl_context);
-        SDL_DestroyWindow(window);
+        SDL_GL_DestroyContext(glContextMain);
+        // SDL_GL_DestroyContext(glContextDrawing);
+        SDL_DestroyWindow(windowMainDisplay);
+        // SDL_DestroyWindow(windowDrawingDisplay);
         SDL_Quit();
         return;
     }
 
     if (!GLAD_GL_ARB_bindless_texture) {
         std::cerr << "Bindless texture not supported on this hardware." << std::endl;
-        exit(1);
+        return;
     }
 }
 
 void Window::clean() {
-    SDL_GL_DestroyContext(gl_context);
-    SDL_DestroyWindow(window);
+    SDL_GL_DestroyContext(glContextMain);
+    // SDL_GL_DestroyContext(glContextDrawing);
+    SDL_DestroyWindow(windowMainDisplay);
+    // SDL_DestroyWindow(windowDrawingDisplay);
     SDL_Quit();
 }
 
-SDL_Window* Window::getWindow() {
-    return window;
+SDL_Window* Window::getWindowMain() {
+    return windowMainDisplay;
+}
+
+SDL_Window* Window::getWindowDrawing() {
+    return windowDrawingDisplay;
+}
+
+SDL_GLContext& Window::getContextMain() {
+    return glContextMain;
+}
+
+SDL_GLContext& Window::getContextDrawing() {
+    return glContextDrawing;
 }
 
 int Window::getWidth() {

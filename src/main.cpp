@@ -10,6 +10,8 @@
 #include <memory>
 #include <thread>
 #include <chrono>
+#include <set>
+
 
 // LUA
 extern "C" {
@@ -26,9 +28,10 @@ SDL_AppResult SDL_AppInit(void **appstate, int /*argc*/, char * /*argv*/[]) {
     glEnable(GL_CULL_FACE);
 
     glEnable(GL_STENCIL_TEST);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    // glEnable(GL_BLEND);
+    // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     std::unique_ptr<App>
         app = std::make_unique<App>();
@@ -76,14 +79,20 @@ const float TargetFPS = 144.0f;
 const float TargetFrameTIme = (1000.0f / TargetFPS);
 
 SDL_AppResult SDL_AppIterate(void *appstate) {
-    glViewport(0, 0, window.getWidth(), window.getHeight());
     auto StartFrame = std::chrono::steady_clock::now();
 
     // Logic
+    SDL_GL_MakeCurrent(window.getWindowMain(), window.getContextMain());
+    glViewport(0, 0, window.getWidth(), window.getHeight());
     static_cast<App *>(appstate)->update();
-
     static_cast<App *>(appstate)->render();
-    SDL_GL_SwapWindow(window.getWindow());
+    SDL_GL_SwapWindow(window.getWindowMain());
+
+    // SDL_GL_MakeCurrent(window.getWindowDrawing(), window.getContextDrawing());
+    // glViewport(0, 0, window.getWidth(), window.getHeight());
+    // glClear(GL_COLOR_BUFFER_BIT);
+    // glClearColor(1.0f, 0.5f, 0.2f, 1.0f);
+    // SDL_GL_SwapWindow(window.getWindowDrawing());
 
     auto EndFrame = std::chrono::steady_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(EndFrame - StartFrame);
