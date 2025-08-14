@@ -121,10 +121,10 @@ void App::init() {
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, window.getWidth(), window.getHeight());
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
 
-    // glBindRenderbuffer(GL_RENDERBUFFER, 0);
-
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE) {
         std::cout << "Frame Buffer is ready!" << "\n";
+    } else {
+        std::cerr << "[Error] Frame Buffer is incomplete!\n";
     }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
@@ -221,7 +221,8 @@ void App::update() {
 }
 
 void App::render() {
-    glBindFramebuffer(GL_FRAMEBUFFER, fbo);  // Activated custom-screen
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);    // Activated custom-screen
+    glBindRenderbuffer(GL_RENDERBUFFER, rbo);  // custom for Stencil, Dept, Color
     glViewport(0, 0, window.getWidth(), window.getHeight());
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     // New objects made
