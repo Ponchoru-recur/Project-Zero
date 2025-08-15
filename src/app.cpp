@@ -127,6 +127,7 @@ void App::init() {
         std::cerr << "[Error] Frame Buffer is incomplete!\n";
     }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
     // TODO: Remove if no longer using quad
 
@@ -283,6 +284,7 @@ void App::render() {
     glUniformMatrix4fv(getmodelToWorldTransformationMatrix, 1, GL_FALSE, glm::value_ptr(arrowToWorldMatrix));
     glDrawElements(GL_TRIANGLES, ArrowShape.num_indices, GL_UNSIGNED_SHORT, (void*)(CubeShape.getIndiceBufferSize()));
 
+    glBindRenderbuffer(GL_RENDERBUFFER, 0);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);  // Past this is the default buffer screen
 
     glViewport(0, 0, window.getWidth(), window.getHeight());

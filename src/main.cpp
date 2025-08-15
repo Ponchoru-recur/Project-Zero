@@ -10,8 +10,6 @@
 #include <memory>
 #include <thread>
 #include <chrono>
-#include <set>
-
 
 // LUA
 extern "C" {
